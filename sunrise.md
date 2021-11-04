@@ -1,8 +1,12 @@
-# Seattle Sunrise
+# City Sunrise Charts
+
+
+## Sunrise
 
 ~~~ line-chart
 dataURL: sunrise.csv
 
+title: Sunrise - Seattle WA
 width: 1024
 height: 480
 
@@ -24,11 +28,12 @@ yTickCount: 8
 ~~~
 
 
-# Seattle Daylight
+## Daylight
 
 ~~~ line-chart
 dataURL: sunrise.csv
 
+title: Daylight - Seattle WA
 width: 1024
 height: 480
 
@@ -47,11 +52,12 @@ yTickCount: 8
 ~~~
 
 
-# Seattle Daylight Change
+## Daylight Change
 
 ~~~ line-chart
 dataURL: sunrise.csv
 
+title: Daylight Change - Seattle WA
 width: 1024
 height: 480
 
@@ -74,11 +80,12 @@ yTickCount: 8
 ~~~
 
 
-# Seattle / San Diego / Juneau Comparison
+## Comparison
 
 ~~~ line-chart
 dataURL: sunrise.csv
 
+title: Comparison - Seattle WA
 width: 1024
 height: 480
 
