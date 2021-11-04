@@ -1,3 +1,3 @@
-# Sunrise / Sunset Chart
+# Sunrise Chart
 
-Click here to view the [Sunrise / Sunset Chart](https://craigahobbs.github.io/sunrise/).
+Click here to [open the Sunrise Chart](https://craigahobbs.github.io/sunrise/).
