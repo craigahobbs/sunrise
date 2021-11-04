@@ -67,8 +67,8 @@ def main():
         observer.lon = city['longitude']
 
         # For each day add one sunrise date row
-        date = datetime.datetime(START_YEAR, 1, 1, 12, tzinfo=city['tz'])
-        end_date = datetime.datetime(END_YEAR + 1, 1, 1, tzinfo=city['tz'])
+        date = datetime.datetime(START_YEAR, 1, 1)
+        end_date = datetime.datetime(END_YEAR + 1, 1, 1)
         daylight_yesterday = None
         while date < end_date:
 
@@ -82,11 +82,13 @@ def main():
 
             # Calculate civil twilight (horizon @ -6)
             observer.horizon = '-6'
-            ctbegin = local_time_hours(observer.previous_rising(ephem.Sun(), use_center=True).datetime(), city['tz'])
-            ctend = local_time_hours(observer.next_setting(ephem.Sun(), use_center=True).datetime(), city['tz'])
+            twilight_rise_dt = observer.previous_rising(ephem.Sun(), use_center=True).datetime()
+            twilight_set_dt = observer.next_setting(ephem.Sun(), use_center=True).datetime()
+            twilight_rise = local_time_hours(twilight_rise_dt, city['tz'])
+            twilight_set = local_time_hours(twilight_set_dt, city['tz'])
 
             # Compute daylight
-            daylight = ctend - ctbegin
+            daylight = (twilight_set_dt - twilight_rise_dt).total_seconds() / (60 * 60)
             daylight_change = (daylight - daylight_yesterday) * 60 if daylight_yesterday is not None else None
 
             # Create the sunrise data row
@@ -95,8 +97,8 @@ def main():
                 'Date': date.strftime('%Y-%m-%d'),
                 'Sunrise': round(sunrise, 3),
                 'Sunset': round(sunset, 3),
-                'TwilightRise': round(ctbegin, 3),
-                'TwilightSet': round(ctend, 3),
+                'TwilightRise': round(twilight_rise, 3),
+                'TwilightSet': round(twilight_set, 3),
                 'Daylight': round(daylight, 3),
                 'DaylightChange': round(daylight_change, 3) if daylight_change is not None else 'null'
             })
