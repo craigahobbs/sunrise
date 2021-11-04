@@ -14,10 +14,10 @@ filters.1.string.field: City
 filters.1.string.in.0: Seattle WA
 
 xField: Date
-yFields.0: CTEnd
+yFields.0: TwilightSet
 yFields.1: Sunset
 yFields.2: Sunrise
-yFields.3: CTBegin
+yFields.3: TwilightRise
 
 xTickCount: 5
 yTickCount: 8

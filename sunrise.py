@@ -95,8 +95,8 @@ def main():
                 'Date': date.strftime('%Y-%m-%d'),
                 'Sunrise': round(sunrise, 3),
                 'Sunset': round(sunset, 3),
-                'CTBegin': round(ctbegin, 3),
-                'CTEnd': round(ctend, 3),
+                'TwilightRise': round(ctbegin, 3),
+                'TwilightSet': round(ctend, 3),
                 'Daylight': round(daylight, 3),
                 'DaylightChange': round(daylight_change, 3) if daylight_change is not None else 'null'
             })
@@ -111,10 +111,10 @@ def main():
         writer = csv.DictWriter(csv_file, [
             'City',
             'Date',
-            'CTBegin',
             'Sunrise',
             'Sunset',
-            'CTEnd',
+            'TwilightRise',
+            'TwilightSet',
             'Daylight',
             'DaylightChange'
         ])
