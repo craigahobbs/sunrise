@@ -1,7 +1,7 @@
 # City Sunrise Charts
 
 
-## Sunrise
+## Sunrise / Sunset
 
 ~~~ line-chart
 title: Sunrise - Seattle WA
@@ -80,10 +80,37 @@ yTickCount: 8
 ~~~
 
 
-## Comparison
+## Daylight Comparison
 
 ~~~ line-chart
-title: Comparison - Seattle WA
+title: Daylight Comparison - Seattle WA
+width: 1024
+height: 480
+
+dataURL: sunrise.csv
+
+filters.0.datetime.field: Date
+filters.0.datetime.gte: 2021-01-01
+filters.0.datetime.lt: 2022-01-01
+
+filters.1.string.field: City
+filters.1.string.in.0: Seattle WA
+filters.1.string.in.1: Juneau AK
+filters.1.string.in.2: San Diego CA
+
+xField: Date
+yFields.0: Daylight
+colorFields.0: City
+
+xTickCount: 5
+yTickCount: 8
+~~~
+
+
+## Sunrise Comparison
+
+~~~ line-chart
+title: Sunrise Comparison - Seattle WA
 width: 1024
 height: 480
 
