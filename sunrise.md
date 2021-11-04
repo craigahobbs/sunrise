@@ -24,7 +24,7 @@ yTickCount: 8
 ~~~
 
 
-# 2021 Seattle and KC Sunrise / Sunset Chart
+# 2021 Seattle and KC Sunrise Chart
 
 ~~~ line-chart
 dataURL: sunrise.csv
