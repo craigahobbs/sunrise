@@ -126,8 +126,8 @@ filters.1.string.in.1: Juneau AK
 filters.1.string.in.2: San Diego CA
 
 xField: Date
-yFields.0: Sunrise
-yFields.1: Sunset
+yFields.0: Sunset
+yFields.1: Sunrise
 colorFields.0: City
 
 xTickCount: 5
