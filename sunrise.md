@@ -5,8 +5,8 @@
 
 ~~~ line-chart
 title: Sunrise - Seattle WA
-width: 1024
-height: 480
+width: 1000
+height: 450
 
 dataURL: sunrise.csv
 
@@ -32,8 +32,8 @@ yTickCount: 8
 
 ~~~ line-chart
 title: Daylight - Seattle WA
-width: 1024
-height: 480
+width: 875
+height: 450
 
 dataURL: sunrise.csv
 
@@ -56,8 +56,8 @@ yTickCount: 8
 
 ~~~ line-chart
 title: Daylight Change - Seattle WA
-width: 1024
-height: 480
+width: 875
+height: 450
 
 dataURL: sunrise.csv
 
@@ -84,8 +84,8 @@ yTickCount: 8
 
 ~~~ line-chart
 title: Daylight Comparison - Seattle WA
-width: 1024
-height: 480
+width: 1000
+height: 450
 
 dataURL: sunrise.csv
 
@@ -107,12 +107,12 @@ yTickCount: 8
 ~~~
 
 
-## Sunrise Comparison
+## Sunrise/Sunset Comparison
 
 ~~~ line-chart
-title: Sunrise Comparison - Seattle WA
-width: 1024
-height: 480
+title: Sunrise/Sunset Comparison - Seattle WA
+width: 1000
+height: 450
 
 dataURL: sunrise.csv
 
@@ -127,7 +127,7 @@ filters.1.string.in.2: San Diego CA
 
 xField: Date
 yFields.0: Sunrise
-#yFields.1: Sunset
+yFields.1: Sunset
 colorFields.0: City
 
 xTickCount: 5
