@@ -6,42 +6,17 @@ import pytz
 
 
 # The years for which to generate sunrise data
-START_YEAR = 2020
-END_YEAR = 2023
+START_YEAR = 2021
+N_YEARS = 1
 
 
 # The list of cities for which to generate sunrise data
 CITIES = [
-    {
-        'name': 'Colorado Springs CO',
-        'latitude': '38.8339',
-        'longitude': '-104.8214',
-        'tz': pytz.timezone('US/Mountain')
-    },
-    {
-        'name': 'Juneau AK',
-        'latitude': '58.3019',
-        'longitude': '-134.4197',
-        'tz': pytz.timezone('US/Alaska')
-    },
-    {
-        'name': 'Kansas City KS',
-        'latitude': '39.1155',
-        'longitude': '-94.6268',
-        'tz': pytz.timezone('US/Central')
-    },
-    {
-        'name': 'San Diego CA',
-        'latitude': '32.7157',
-        'longitude': '-117.1611',
-        'tz': pytz.timezone('US/Pacific')
-    },
-    {
-        'name': 'Seattle WA',
-        'latitude': '47.6062',
-        'longitude': '-122.3321',
-        'tz': pytz.timezone('US/Pacific')
-    }
+    {'name': 'Colorado Springs CO', 'lat': '38.8339', 'lon': '-104.8214', 'tz': pytz.timezone('US/Mountain')},
+    {'name': 'Juneau AK',           'lat': '58.3019', 'lon': '-134.4197', 'tz': pytz.timezone('US/Alaska')},
+    {'name': 'Kansas City KS',      'lat': '39.1155', 'lon': '-94.6268',  'tz': pytz.timezone('US/Central')},
+    {'name': 'San Diego CA',        'lat': '32.7157', 'lon': '-117.1611', 'tz': pytz.timezone('US/Pacific')},
+    {'name': 'Seattle WA',          'lat': '47.6062', 'lon': '-122.3321', 'tz': pytz.timezone('US/Pacific')}
 ]
 
 
@@ -63,12 +38,12 @@ def main():
     for city in CITIES:
 
         # Update the observer's location
-        observer.lat = city['latitude']
-        observer.lon = city['longitude']
+        observer.lat = city['lat']
+        observer.lon = city['lon']
 
         # For each day add one sunrise date row
-        date = datetime.datetime(START_YEAR, 1, 1)
-        end_date = datetime.datetime(END_YEAR + 1, 1, 1)
+        date = datetime.datetime(START_YEAR, 1, 1, 12, tzinfo=city['tz']).astimezone(datetime.timezone.utc).replace(tzinfo=None)
+        end_date = datetime.datetime(START_YEAR + N_YEARS, 1, 1, tzinfo=city['tz']).astimezone(datetime.timezone.utc).replace(tzinfo=None)
         daylight_yesterday = None
         while date < end_date:
 

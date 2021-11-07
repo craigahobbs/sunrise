@@ -1,21 +1,25 @@
-# City Sunrise Charts
+# US Cities Sunrise Charts
+
+[Colorado Springs CO](#variables.city.string=Colorado%20Springs%20CO) |
+[Juneau AK](#variables.city.string=Juneau%20AK) |
+[Kansas City KS](#variables.city.string=Kansas%20City%20KS) |
+[San Diego CA](#variables.city.string=San%20Diego%20CA) |
+[Seattle WA](#variables.city.string=Seattle%20WA)
 
 
-## Sunrise / Sunset
+### Sunrise / Sunset
 
 ~~~ line-chart
-title: Sunrise - Seattle WA
+title: Sunrise - {{city}}
 width: 1000
 height: 450
 
 dataURL: sunrise.csv
 
-filters.0.datetime.field: Date
-filters.0.datetime.gte: 2021-01-01
-filters.0.datetime.lt: 2022-01-01
+variables.city.string: Seattle WA
 
-filters.1.string.field: City
-filters.1.string.in.0: Seattle WA
+filters.0.string.field: City
+filters.0.string.vin.0: city
 
 xField: Date
 yFields.0: TwilightSet
@@ -23,113 +27,238 @@ yFields.1: Sunset
 yFields.2: Sunrise
 yFields.3: TwilightRise
 
-xTickCount: 5
-yTickCount: 8
+precision: 0
+
+xTickCount: 0
+xTicks.0.value.datetime: 2021-01-01
+xTicks.1.value.datetime: 2021-02-01
+xTicks.2.value.datetime: 2021-03-01
+xTicks.3.value.datetime: 2021-04-01
+xTicks.4.value.datetime: 2021-05-01
+xTicks.5.value.datetime: 2021-06-01
+xTicks.6.value.datetime: 2021-07-01
+xTicks.7.value.datetime: 2021-08-01
+xTicks.8.value.datetime: 2021-09-01
+xTicks.9.value.datetime: 2021-10-01
+xTicks.10.value.datetime: 2021-11-01
+xTicks.11.value.datetime: 2021-12-01
+xTicks.12.value.datetime: 2022-01-01
+
+# Hide even-month X-axis tick labels
+xTicks.1.label:
+xTicks.3.label:
+xTicks.5.label:
+xTicks.7.label:
+xTicks.9.label:
+xTicks.11.label:
+
+yTickCount: 0
+yTicks.0.value.number: 1
+yTicks.1.value.number: 2
+yTicks.2.value.number: 3
+yTicks.3.value.number: 4
+yTicks.4.value.number: 5
+yTicks.5.value.number: 6
+yTicks.6.value.number: 7
+yTicks.7.value.number: 8
+yTicks.8.value.number: 9
+yTicks.9.value.number: 10
+yTicks.10.value.number: 11
+yTicks.11.value.number: 12
+yTicks.12.value.number: 13
+yTicks.13.value.number: 14
+yTicks.14.value.number: 15
+yTicks.15.value.number: 16
+yTicks.16.value.number: 17
+yTicks.17.value.number: 18
+yTicks.18.value.number: 19
+yTicks.19.value.number: 20
+yTicks.20.value.number: 21
+yTicks.21.value.number: 22
+yTicks.22.value.number: 23
+yTicks.23.value.number: 24
+
+# Hide odd-hour Y-axis labels
+yTicks.0.label:
+yTicks.2.label:
+yTicks.4.label:
+yTicks.6.label:
+yTicks.8.label:
+yTicks.10.label:
+yTicks.12.label:
+yTicks.14.label:
+yTicks.16.label:
+yTicks.18.label:
+yTicks.20.label:
+yTicks.22.label:
 ~~~
 
 
-## Daylight
+### Daylight
 
 ~~~ line-chart
-title: Daylight - Seattle WA
+title: Daylight - {{city}}
 width: 875
 height: 450
 
 dataURL: sunrise.csv
 
-filters.0.datetime.field: Date
-filters.0.datetime.gte: 2021-01-01
-filters.0.datetime.lt: 2022-01-01
+variables.city.string: Seattle WA
 
-filters.1.string.field: City
-filters.1.string.in.0: Seattle WA
+filters.0.string.field: City
+filters.0.string.vin.0: city
 
 xField: Date
 yFields.0: Daylight
 
-xTickCount: 5
-yTickCount: 8
+precision: 0
+
+xTickCount: 0
+xTicks.0.value.datetime: 2021-01-01
+xTicks.1.value.datetime: 2021-03-01
+xTicks.2.value.datetime: 2021-05-01
+xTicks.3.value.datetime: 2021-07-01
+xTicks.4.value.datetime: 2021-09-01
+xTicks.5.value.datetime: 2021-11-01
+xTicks.6.value.datetime: 2022-01-01
+
+yTickCount: 0
+yTicks.0.value.number: 8
+yTicks.1.value.number: 10
+yTicks.2.value.number: 12
+yTicks.3.value.number: 14
+yTicks.4.value.number: 16
+yTicks.5.value.number: 18
+yTicks.6.value.number: 20
+yTicks.7.value.number: 22
 ~~~
 
 
-## Daylight Change
+### Daylight Change
 
 ~~~ line-chart
-title: Daylight Change - Seattle WA
+title: Daylight Change - {{city}}
 width: 875
 height: 450
 
 dataURL: sunrise.csv
 
-filters.0.datetime.field: Date
-filters.0.datetime.gte: 2021-01-01
-filters.0.datetime.lt: 2022-01-01
+variables.city.string: Seattle WA
 
-filters.1.string.field: City
-filters.1.string.in.0: Seattle WA
-
-filters.2.number.field: DaylightChange
-filters.2.number.lt: 50
-filters.2.number.gt: -50
+filters.0.string.field: City
+filters.0.string.vin.0: city
 
 xField: Date
 yFields.0: DaylightChange
 
-xTickCount: 5
-yTickCount: 8
+precision: 0
+
+xTickCount: 0
+xTicks.0.value.datetime: 2021-01-01
+xTicks.1.value.datetime: 2021-03-01
+xTicks.2.value.datetime: 2021-05-01
+xTicks.3.value.datetime: 2021-07-01
+xTicks.4.value.datetime: 2021-09-01
+xTicks.5.value.datetime: 2021-11-01
+xTicks.6.value.datetime: 2022-01-01
+
+yTickCount: 0
+yTicks.0.value.number: -6
+yTicks.1.value.number: -4
+yTicks.2.value.number: -2
+yTicks.3.value.number: 0
+yTicks.4.value.number: 2
+yTicks.5.value.number: 4
+yTicks.6.value.number: 6
 ~~~
 
 
-## Daylight Comparison
+### Daylight Comparison
 
 ~~~ line-chart
-title: Daylight Comparison - Seattle WA
+title: Daylight Comparison - {{city}}
 width: 1000
 height: 450
 
 dataURL: sunrise.csv
 
-filters.0.datetime.field: Date
-filters.0.datetime.gte: 2021-01-01
-filters.0.datetime.lt: 2022-01-01
+variables.city.string: Seattle WA
 
-filters.1.string.field: City
-filters.1.string.in.0: Seattle WA
-filters.1.string.in.1: Juneau AK
-filters.1.string.in.2: San Diego CA
+filters.0.string.field: City
+filters.0.string.in.0: Juneau AK
+filters.0.string.in.1: San Diego CA
+filters.0.string.vin.0: city
 
 xField: Date
 yFields.0: Daylight
 colorFields.0: City
 
-xTickCount: 5
-yTickCount: 8
+precision: 0
+
+xTickCount: 0
+xTicks.0.value.datetime: 2021-01-01
+xTicks.1.value.datetime: 2021-03-01
+xTicks.2.value.datetime: 2021-05-01
+xTicks.3.value.datetime: 2021-07-01
+xTicks.4.value.datetime: 2021-09-01
+xTicks.5.value.datetime: 2021-11-01
+xTicks.6.value.datetime: 2022-01-01
+
+yTickCount: 0
+yTicks.0.value.number: 8
+yTicks.1.value.number: 10
+yTicks.2.value.number: 12
+yTicks.3.value.number: 14
+yTicks.4.value.number: 16
+yTicks.5.value.number: 18
+yTicks.6.value.number: 20
+yTicks.7.value.number: 22
 ~~~
 
 
-## Sunrise/Sunset Comparison
+### Sunrise/Sunset Comparison
 
 ~~~ line-chart
-title: Sunrise/Sunset Comparison - Seattle WA
+title: Sunrise/Sunset Comparison - {{city}}
 width: 1000
 height: 450
 
 dataURL: sunrise.csv
 
-filters.0.datetime.field: Date
-filters.0.datetime.gte: 2021-01-01
-filters.0.datetime.lt: 2022-01-01
+variables.city.string: Seattle WA
 
-filters.1.string.field: City
-filters.1.string.in.0: Seattle WA
-filters.1.string.in.1: Juneau AK
-filters.1.string.in.2: San Diego CA
+filters.0.string.field: City
+filters.0.string.in.0: Juneau AK
+filters.0.string.in.1: San Diego CA
+filters.0.string.vin.0: city
 
 xField: Date
 yFields.0: Sunset
 yFields.1: Sunrise
 colorFields.0: City
 
-xTickCount: 5
-yTickCount: 8
+precision: 0
+
+xTickCount: 0
+xTicks.0.value.datetime: 2021-01-01
+xTicks.1.value.datetime: 2021-03-01
+xTicks.2.value.datetime: 2021-05-01
+xTicks.3.value.datetime: 2021-07-01
+xTicks.4.value.datetime: 2021-09-01
+xTicks.5.value.datetime: 2021-11-01
+xTicks.6.value.datetime: 2022-01-01
+
+yTickCount: 0
+yTicks.0.value.number: 2
+yTicks.1.value.number: 4
+yTicks.2.value.number: 6
+yTicks.3.value.number: 8
+yTicks.4.value.number: 10
+yTicks.5.value.number: 12
+yTicks.6.value.number: 14
+yTicks.7.value.number: 16
+yTicks.8.value.number: 18
+yTicks.9.value.number: 20
+yTicks.10.value.number: 22
+yTicks.11.value.number: 24
 ~~~
