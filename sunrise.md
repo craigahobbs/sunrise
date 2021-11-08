@@ -36,6 +36,7 @@ yFields.2: Sunrise
 yFields.3: TwilightRise
 
 precision: 0
+datetime: Day
 
 xTicks.auto.count: 13
 xTicks.auto.skip: 2
@@ -96,6 +97,7 @@ xField: Date
 yFields.0: Daylight
 
 precision: 0
+datetime: Day
 
 xTicks.auto.count: 13
 xTicks.auto.skip: 2
@@ -144,6 +146,7 @@ xField: Date
 yFields.0: DaylightChange
 
 precision: 0
+datetime: Day
 
 xTicks.auto.count: 13
 xTicks.auto.skip: 2
@@ -193,6 +196,7 @@ yFields.0: Daylight
 colorFields.0: City
 
 precision: 0
+datetime: Day
 
 xTicks.auto.count: 13
 xTicks.auto.skip: 2
@@ -245,6 +249,7 @@ yFields.1: Sunrise
 colorFields.0: City
 
 precision: 0
+datetime: Day
 
 xTicks.auto.count: 13
 xTicks.auto.skip: 2
