@@ -1,18 +1,18 @@
 # US Cities Sunrise Charts
 
-[Chicago](#variables.city.string=Chicago%20IL) |
-[Denver](#variables.city.string=Denver%20CO) |
-[Honolulu](#variables.city.string=Honolulu%20HI) |
-[Houston](#variables.city.string=Houston%20TX) |
-[Juneau](#variables.city.string=Juneau%20AK) |
-[Kansas City](#variables.city.string=Kansas%20City%20KS) |
-[Los Angeles](#variables.city.string=Los%20Angeles%20CA) |
-[Miami](#variables.city.string=Miami%20FL) |
-[New York](#variables.city.string=New%20York%20NY) |
-[Philadelphia](#variables.city.string=Philadelphia%20PA) |
-[Phoenix](#variables.city.string=Phoenix%20AZ) |
-[San Francisco](#variables.city.string=San%20Francisco%20CA) |
-[Seattle](#variables.city.string=Seattle%20WA)
+[Chicago](#variables.city.string=Chicago) |
+[Denver](#variables.city.string=Denver) |
+[Honolulu](#variables.city.string=Honolulu) |
+[Houston](#variables.city.string=Houston) |
+[Juneau](#variables.city.string=Juneau) |
+[Kansas City](#variables.city.string=Kansas%20City) |
+[Los Angeles](#variables.city.string=Los%20Angeles) |
+[Miami](#variables.city.string=Miami) |
+[New York](#variables.city.string=New%20York) |
+[Philadelphia](#variables.city.string=Philadelphia) |
+[Phoenix](#variables.city.string=Phoenix) |
+[San Francisco](#variables.city.string=San%20Francisco) |
+[Seattle](#variables.city.string=Seattle)
 
 
 ### Sunrise / Sunset
@@ -24,7 +24,7 @@ height: 450
 
 dataURL: sunrise.csv
 
-variables.city.string: Seattle WA
+variables.city.string: Seattle
 
 filters.0.string.field: City
 filters.0.string.vin.0: city
@@ -111,7 +111,7 @@ height: 450
 
 dataURL: sunrise.csv
 
-variables.city.string: Seattle WA
+variables.city.string: Seattle
 
 filters.0.string.field: City
 filters.0.string.vin.0: city
@@ -151,7 +151,7 @@ height: 450
 
 dataURL: sunrise.csv
 
-variables.city.string: Seattle WA
+variables.city.string: Seattle
 
 filters.0.string.field: City
 filters.0.string.vin.0: city
@@ -190,11 +190,11 @@ height: 450
 
 dataURL: sunrise.csv
 
-variables.city.string: Seattle WA
+variables.city.string: Seattle
 
 filters.0.string.field: City
-filters.0.string.in.0: Juneau AK
-filters.0.string.in.1: Honolulu HI
+filters.0.string.in.0: Juneau
+filters.0.string.in.1: Honolulu
 filters.0.string.vin.0: city
 
 xField: Date
@@ -233,11 +233,11 @@ height: 450
 
 dataURL: sunrise.csv
 
-variables.city.string: Seattle WA
+variables.city.string: Seattle
 
 filters.0.string.field: City
-filters.0.string.in.0: Juneau AK
-filters.0.string.in.1: Honolulu HI
+filters.0.string.in.0: Juneau
+filters.0.string.in.1: Honolulu
 filters.0.string.vin.0: city
 
 xField: Date
