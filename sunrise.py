@@ -29,7 +29,6 @@ CITIES = [
 
 
 def main():
-
     # Command line arguments
     parser = argparse.ArgumentParser(description='Generate sunrise data')
     parser.add_argument('year', type=int, nargs='?', default=datetime.datetime.now().year, help='The year to start generating sunrise data')
@@ -44,7 +43,6 @@ def main():
     data = []
     timedelta_day = datetime.timedelta(days=1)
     for city in CITIES:
-
         # Update the observer's location
         observer.lat = city['lat']
         observer.lon = city['lon']
@@ -92,7 +90,6 @@ def main():
             date = date + timedelta_day
             daylight_yesterday = daylight
 
-
     # Write the CSV
     writer = csv.DictWriter(sys.stdout, [
         'City',
@@ -109,7 +106,7 @@ def main():
         writer.writerow(row)
 
 
-# Compute the local time in hours (0-24)
+# Helper function to compute the local time in hours (0-24)
 def local_time_hours(naive_gmt_dt, local_tz):
     local_dt = naive_gmt_dt.replace(tzinfo=datetime.timezone.utc).astimezone(local_tz)
     return local_dt.hour + (local_dt.minute + (local_dt.second + local_dt.microsecond / 1000000) / 60) / 60
