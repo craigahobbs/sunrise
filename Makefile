@@ -35,7 +35,7 @@ commit: lint data
 
 .PHONY: data
 data: build/venv.build
-	build/venv/bin/python3 sunrise.py > sunrise.csv
+	build/venv/bin/python3 sunrise.py$(if $(YEAR), $(YEAR)$(if $(NYEARS), $(NYEARS))) > sunrise.csv
 
 
 .PHONY: lint
