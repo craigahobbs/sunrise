@@ -1,10 +1,18 @@
 # US Cities Sunrise Charts
 
-[Colorado Springs CO](#variables.city.string=Colorado%20Springs%20CO) |
-[Juneau AK](#variables.city.string=Juneau%20AK) |
-[Kansas City KS](#variables.city.string=Kansas%20City%20KS) |
-[San Diego CA](#variables.city.string=San%20Diego%20CA) |
-[Seattle WA](#variables.city.string=Seattle%20WA)
+[Chicago](#variables.city.string=Chicago%20IL) |
+[Denver](#variables.city.string=Denver%20CO) |
+[Honolulu](#variables.city.string=Honolulu%20HI) |
+[Houston](#variables.city.string=Houston%20TX) |
+[Juneau](#variables.city.string=Juneau%20AK) |
+[Kansas City](#variables.city.string=Kansas%20City%20KS) |
+[Los Angeles](#variables.city.string=Los%20Angeles%20CA) |
+[Miami](#variables.city.string=Miami%20FL) |
+[New York](#variables.city.string=New%20York%20NY) |
+[Philadelphia](#variables.city.string=Philadelphia%20PA) |
+[Phoenix](#variables.city.string=Phoenix%20AZ) |
+[San Francisco](#variables.city.string=San%20Francisco%20CA) |
+[Seattle](#variables.city.string=Seattle%20WA)
 
 
 ### Sunrise / Sunset
@@ -186,7 +194,7 @@ variables.city.string: Seattle WA
 
 filters.0.string.field: City
 filters.0.string.in.0: Juneau AK
-filters.0.string.in.1: San Diego CA
+filters.0.string.in.1: Honolulu HI
 filters.0.string.vin.0: city
 
 xField: Date
@@ -229,7 +237,7 @@ variables.city.string: Seattle WA
 
 filters.0.string.field: City
 filters.0.string.in.0: Juneau AK
-filters.0.string.in.1: San Diego CA
+filters.0.string.in.1: Honolulu HI
 filters.0.string.vin.0: city
 
 xField: Date

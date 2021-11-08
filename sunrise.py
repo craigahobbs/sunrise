@@ -12,11 +12,19 @@ N_YEARS = 1
 
 # The list of cities for which to generate sunrise data
 CITIES = [
-    {'name': 'Colorado Springs CO', 'lat': '38.8339', 'lon': '-104.8214', 'tz': pytz.timezone('US/Mountain')},
-    {'name': 'Juneau AK',           'lat': '58.3019', 'lon': '-134.4197', 'tz': pytz.timezone('US/Alaska')},
-    {'name': 'Kansas City KS',      'lat': '39.1155', 'lon': '-94.6268',  'tz': pytz.timezone('US/Central')},
-    {'name': 'San Diego CA',        'lat': '32.7157', 'lon': '-117.1611', 'tz': pytz.timezone('US/Pacific')},
-    {'name': 'Seattle WA',          'lat': '47.6062', 'lon': '-122.3321', 'tz': pytz.timezone('US/Pacific')}
+    {'name': 'Chicago IL',       'lat': '41.8781', 'lon': '-87.6298',  'tz': pytz.timezone('US/Central')},
+    {'name': 'Denver CO',        'lat': '39.7392', 'lon': '-104.9903', 'tz': pytz.timezone('US/Mountain')},
+    {'name': 'Honolulu HI',      'lat': '21.3069', 'lon': '-157.8583', 'tz': pytz.timezone('US/Hawaii')},
+    {'name': 'Houston TX',       'lat': '29.7604', 'lon': '-95.3698',  'tz': pytz.timezone('US/Central')},
+    {'name': 'Juneau AK',        'lat': '58.3019', 'lon': '-134.4197', 'tz': pytz.timezone('US/Alaska')},
+    {'name': 'Kansas City KS',   'lat': '39.1155', 'lon': '-94.6268',  'tz': pytz.timezone('US/Central')},
+    {'name': 'Los Angeles CA',   'lat': '34.0522', 'lon': '-118.2437', 'tz': pytz.timezone('US/Pacific')},
+    {'name': 'Miami FL',         'lat': '25.7617', 'lon': '-80.1918',  'tz': pytz.timezone('US/Eastern')},
+    {'name': 'New York NY',      'lat': '40.7128', 'lon': '-74.0060',  'tz': pytz.timezone('US/Eastern')},
+    {'name': 'Philadelphia PA',  'lat': '39.9526', 'lon': '-75.1652',  'tz': pytz.timezone('US/Eastern')},
+    {'name': 'Phoenix AZ',       'lat': '33.4484', 'lon': '-112.0740', 'tz': pytz.timezone('US/Mountain')},
+    {'name': 'San Francisco CA', 'lat': '37.7749', 'lon': '-122.4194', 'tz': pytz.timezone('US/Pacific')},
+    {'name': 'Seattle WA',       'lat': '47.6062', 'lon': '-122.3321', 'tz': pytz.timezone('US/Pacific')}
 ]
 
 
