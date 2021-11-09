@@ -26,8 +26,8 @@ dataURL: sunrise.csv
 
 variables.city.string: Seattle
 
-filters.0.string.field: City
-filters.0.string.vin.0: city
+filters.0.field: City
+filters.0.vin.0: city
 
 xField: Date
 yFields.0: TwilightSet
@@ -90,8 +90,8 @@ dataURL: sunrise.csv
 
 variables.city.string: Seattle
 
-filters.0.string.field: City
-filters.0.string.vin.0: city
+filters.0.field: City
+filters.0.vin.0: city
 
 xField: Date
 yFields.0: Daylight
@@ -139,8 +139,8 @@ dataURL: sunrise.csv
 
 variables.city.string: Seattle
 
-filters.0.string.field: City
-filters.0.string.vin.0: city
+filters.0.field: City
+filters.0.vin.0: city
 
 xField: Date
 yFields.0: DaylightChange
@@ -186,10 +186,10 @@ dataURL: sunrise.csv
 
 variables.city.string: Seattle
 
-filters.0.string.field: City
-filters.0.string.in.0: Juneau
-filters.0.string.in.1: Honolulu
-filters.0.string.vin.0: city
+filters.0.field: City
+filters.0.in.0.string: Juneau
+filters.0.in.1.string: Honolulu
+filters.0.vin.0: city
 
 xField: Date
 yFields.0: Daylight
@@ -238,10 +238,10 @@ dataURL: sunrise.csv
 
 variables.city.string: Seattle
 
-filters.0.string.field: City
-filters.0.string.in.0: Juneau
-filters.0.string.in.1: Honolulu
-filters.0.string.vin.0: city
+filters.0.field: City
+filters.0.in.0.string: Juneau
+filters.0.in.1.string: Honolulu
+filters.0.vin.0: city
 
 xField: Date
 yFields.0: Sunset
