@@ -1,4 +1,4 @@
-# US Cities Sunrise Charts
+# US Sunrise Charts
 
 [Chicago](#variables.city.string=Chicago) |
 [Denver](#variables.city.string=Denver) |
@@ -14,8 +14,6 @@
 [San Francisco](#variables.city.string=San%20Francisco) |
 [Seattle](#variables.city.string=Seattle)
 
-
-### Sunrise / Sunset
 
 ~~~ line-chart
 title: Sunrise - {{city}}
@@ -79,8 +77,6 @@ yTicks.values.21.label:
 ~~~
 
 
-### Daylight
-
 ~~~ line-chart
 title: Daylight - {{city}}
 width: 875
@@ -128,8 +124,6 @@ yTicks.values.13.label:
 ~~~
 
 
-### Daylight Change
-
 ~~~ line-chart
 title: Daylight Change - {{city}}
 width: 875
@@ -173,8 +167,6 @@ yTicks.values.9.label:
 yTicks.values.11.label:
 ~~~
 
-
-### Daylight Comparison
 
 ~~~ line-chart
 title: Daylight Comparison - {{city}}
@@ -225,8 +217,6 @@ yTicks.values.11.label:
 yTicks.values.13.label:
 ~~~
 
-
-### Sunrise/Sunset Comparison
 
 ~~~ line-chart
 title: Sunrise/Sunset Comparison - {{city}}
