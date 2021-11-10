@@ -151,7 +151,6 @@ datetime: Day
 xTicks.auto.count: 13
 xTicks.auto.skip: 2
 
-yTickCount: 0
 yTicks.values.0.value.number: -6
 yTicks.values.1.value.number: -5
 yTicks.values.2.value.number: -4
