@@ -15,6 +15,38 @@
 [Seattle](#variables.city.string=Seattle)
 
 
+~~~ data-table
+dataURL: sunrise.csv
+
+variables.city.string: Seattle
+
+filters.0.field: City
+filters.0.vin.0: city
+
+aggregation.categories.0.field: City
+aggregation.categories.1.field: Date
+aggregation.categories.1.by: Year
+aggregation.measures.0.field: Daylight
+aggregation.measures.0.function: Sum
+aggregation.measures.1.field: Daylight
+aggregation.measures.1.function: Average
+aggregation.measures.2.field: Daylight
+aggregation.measures.2.function: Max
+aggregation.measures.3.field: DaylightChange
+aggregation.measures.3.function: Max
+
+categoryFields.0: City
+categoryFields.1: YEAR(Date)
+measureFields.0: SUM(Daylight)
+measureFields.1: AVERAGE(Daylight)
+measureFields.2: MAX(Daylight)
+measureFields.3: MAX(DaylightChange)
+
+precision: 1
+datetime: Year
+~~~
+
+
 ~~~ line-chart
 title: Sunrise - {{city}}
 width: 1000
@@ -278,4 +310,40 @@ yTicks.values.15.label:
 yTicks.values.17.label:
 yTicks.values.19.label:
 yTicks.values.21.label:
+~~~
+
+
+~~~ data-table
+dataURL: sunrise.csv
+
+variables.city.string: Seattle
+
+filters.0.field: City
+filters.0.in.0.string: Juneau
+filters.0.in.1.string: Honolulu
+filters.0.vin.0: city
+
+aggregation.categories.0.field: City
+aggregation.categories.1.field: Date
+aggregation.categories.1.by: Year
+aggregation.measures.0.field: Daylight
+aggregation.measures.0.function: Sum
+aggregation.measures.1.field: Daylight
+aggregation.measures.1.function: Average
+aggregation.measures.2.field: Daylight
+aggregation.measures.2.function: Max
+aggregation.measures.3.field: DaylightChange
+aggregation.measures.3.function: Max
+
+categoryFields.0: City
+categoryFields.1: YEAR(Date)
+measureFields.0: SUM(Daylight)
+measureFields.1: AVERAGE(Daylight)
+measureFields.2: MAX(Daylight)
+measureFields.3: MAX(DaylightChange)
+sort.0.field: MAX(Daylight)
+sort.0.desc: true
+
+precision: 1
+datetime: Year
 ~~~
