@@ -141,15 +141,18 @@ aggregation.measures.1.field: Daylight
 aggregation.measures.1.function: Average
 aggregation.measures.2.field: Daylight
 aggregation.measures.2.function: Max
-aggregation.measures.3.field: DaylightChange
-aggregation.measures.3.function: Max
+aggregation.measures.3.field: Daylight
+aggregation.measures.3.function: Min
+aggregation.measures.4.field: DaylightChange
+aggregation.measures.4.function: Max
 
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
 measureFields.0: SUM(Daylight)
 measureFields.1: AVERAGE(Daylight)
-measureFields.2: MAX(Daylight)
-measureFields.3: MAX(DaylightChange)
+measureFields.2: MIN(Daylight)
+measureFields.3: MAX(Daylight)
+measureFields.4: MAX(DaylightChange)
 
 precision: 1
 datetime: Year
@@ -269,16 +272,19 @@ aggregation.measures.1.field: Daylight
 aggregation.measures.1.function: Average
 aggregation.measures.2.field: Daylight
 aggregation.measures.2.function: Max
-aggregation.measures.3.field: DaylightChange
-aggregation.measures.3.function: Max
+aggregation.measures.3.field: Daylight
+aggregation.measures.3.function: Min
+aggregation.measures.4.field: DaylightChange
+aggregation.measures.4.function: Max
 
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
 measureFields.0: SUM(Daylight)
 measureFields.1: AVERAGE(Daylight)
-measureFields.2: MAX(Daylight)
-measureFields.3: MAX(DaylightChange)
-sort.0.field: MAX(Daylight)
+measureFields.2: MIN(Daylight)
+measureFields.3: MAX(Daylight)
+measureFields.4: MAX(DaylightChange)
+sort.0.field: SUM(Daylight)
 sort.0.desc: true
 
 precision: 1
