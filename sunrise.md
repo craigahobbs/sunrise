@@ -1,4 +1,4 @@
-# US Sunrise Charts
+# US Sunrise
 
 [Chicago](#variables.city.string=Chicago) |
 [Denver](#variables.city.string=Denver) |

@@ -1,4 +1,4 @@
-# US Daylight Table
+# US Daylight
 
 The following table ranks U.S. cities by their total annual daylight hours.
 
@@ -33,7 +33,7 @@ datetime: Year
 ~~~
 
 
-## US Cities Daylight (Monthly)
+## US Daylight (Monthly)
 
 The table below ranks U.S. cities by their total monthly daylight hours.
 
