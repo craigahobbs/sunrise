@@ -22,17 +22,4 @@ generates the
 using the
 [PyEphem](https://pypi.org/project/ephem/) package.
 
-
-### Development
-
-To update the sunrise data for the current year:
-
-~~~
-make data
-~~~
-
-Before committing changes to the Python data generation script, sunrise.py:
-
-~~~
-make commit
-~~~
+Click here for [development instructions](#url=development.md).
