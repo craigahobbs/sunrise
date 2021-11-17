@@ -9,7 +9,7 @@ sunset, and daylight data for select U.S. cities.
 ### About
 
 The dashboard source code is
-[here](https://github.com/craigahobbs/sunrise#readme).
+[here](https://github.com/craigahobbs/sunrise).
 The dashboard is composed entirely of Markdown text documents and hosted using
 [markdown-up](https://github.com/craigahobbs/markdown-up#readme).
 It makes extensive use of markdown-up's markdown-charts, live-rendered charts specified using
