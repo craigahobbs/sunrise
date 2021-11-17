@@ -3,7 +3,7 @@
 The **Sunrise Dashboard** contains several live-rendered visualizations of the daily sunrise,
 sunset, and daylight data for select U.S. cities.
 
-[Open the Dashboard](#url=sunrise.md)
+[Open the Dashboard](https://craigahobbs.github.io/sunrise/#url=sunrise.md)
 
 
 ### About
