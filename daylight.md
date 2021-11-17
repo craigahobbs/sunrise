@@ -1,3 +1,5 @@
+[Back to US Sunrise Dashboards](https://craigahobbs.github.io/sunrise/)
+
 # US Daylight
 
 The following table ranks U.S. cities by their total annual daylight hours.
