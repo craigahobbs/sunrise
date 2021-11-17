@@ -1,9 +1,9 @@
-# US Cities With the Most Daylight
+# US Daylight Table
+
+The following table ranks U.S. cities by their total annual daylight hours.
 
 ~~~ data-table
 dataURL: sunrise.csv
-
-variables.city.string: Seattle
 
 aggregation.categories.0.field: City
 aggregation.categories.1.field: Date
@@ -33,12 +33,12 @@ datetime: Year
 ~~~
 
 
-## US Cities Daylight by Month
+## US Cities Daylight (Monthly)
+
+The table below ranks U.S. cities by their total monthly daylight hours.
 
 ~~~ data-table
 dataURL: sunrise.csv
-
-variables.city.string: Seattle
 
 aggregation.categories.0.field: City
 aggregation.categories.1.field: Date
