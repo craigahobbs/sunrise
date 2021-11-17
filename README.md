@@ -22,4 +22,4 @@ generates the
 using the
 [PyEphem](https://pypi.org/project/ephem/) package.
 
-Click here for [development instructions](#url=development.md).
+Click here for [development instructions](https://craigahobbs.github.io/sunrise/#url=development.md).
