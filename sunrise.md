@@ -1,7 +1,12 @@
-[Back to US Sunrise Dashboards](https://craigahobbs.github.io/sunrise/)
+[Home](#url=README.md) |
+Sunrise/Sunset |
+[Daylight](#url=daylight.md) |
+[Table](#url=daylight-table.md) |
+[Comparison](#url=compare.md) |
+[Rankings](#url=daylight-rank.md) |
+[Questions](#url=questions.md)
 
-# US Sunrise
-
+**Location:**
 [Chicago](#variables.city.string=Chicago) |
 [Denver](#variables.city.string=Denver) |
 [Honolulu](#variables.city.string=Honolulu) |
@@ -17,114 +22,9 @@
 [Seattle](#variables.city.string=Seattle)
 
 
-~~~ line-chart
-title: Sunrise - {{city}}
-width: 1000
-height: 550
+# Sunrise / Sunset
 
-dataURL: sunrise.csv
-
-variables.city.string: Seattle
-
-filters.0.field: City
-filters.0.vin.0: city
-
-xField: Date
-yFields.0: TwilightSet
-yFields.1: Sunset
-yFields.2: Sunrise
-yFields.3: TwilightRise
-
-precision: 0
-datetime: Day
-
-xTicks.auto.count: 13
-xTicks.auto.skip: 2
-
-yTicks.values.0.value.number: 2
-yTicks.values.1.value.number: 3
-yTicks.values.2.value.number: 4
-yTicks.values.3.value.number: 5
-yTicks.values.4.value.number: 6
-yTicks.values.5.value.number: 7
-yTicks.values.6.value.number: 8
-yTicks.values.7.value.number: 9
-yTicks.values.8.value.number: 10
-yTicks.values.9.value.number: 11
-yTicks.values.10.value.number: 12
-yTicks.values.11.value.number: 13
-yTicks.values.12.value.number: 14
-yTicks.values.13.value.number: 15
-yTicks.values.14.value.number: 16
-yTicks.values.15.value.number: 17
-yTicks.values.16.value.number: 18
-yTicks.values.17.value.number: 19
-yTicks.values.18.value.number: 20
-yTicks.values.19.value.number: 21
-yTicks.values.20.value.number: 22
-yTicks.values.21.value.number: 23
-yTicks.values.22.value.number: 24
-
-yTicks.values.1.label:
-yTicks.values.3.label:
-yTicks.values.5.label:
-yTicks.values.7.label:
-yTicks.values.9.label:
-yTicks.values.11.label:
-yTicks.values.13.label:
-yTicks.values.15.label:
-yTicks.values.17.label:
-yTicks.values.19.label:
-yTicks.values.21.label:
-~~~
-
-
-~~~ line-chart
-title: Daylight - {{city}}
-width: 875
-height: 350
-
-dataURL: sunrise.csv
-
-variables.city.string: Seattle
-
-filters.0.field: City
-filters.0.vin.0: city
-
-xField: Date
-yFields.0: Daylight
-
-precision: 0
-datetime: Day
-
-xTicks.auto.count: 13
-xTicks.auto.skip: 2
-
-yTicks.values.0.value.number: 8
-yTicks.values.1.value.number: 9
-yTicks.values.2.value.number: 10
-yTicks.values.3.value.number: 11
-yTicks.values.4.value.number: 12
-yTicks.values.5.value.number: 13
-yTicks.values.6.value.number: 14
-yTicks.values.7.value.number: 15
-yTicks.values.8.value.number: 16
-yTicks.values.9.value.number: 17
-yTicks.values.10.value.number: 18
-yTicks.values.11.value.number: 19
-yTicks.values.12.value.number: 20
-yTicks.values.13.value.number: 21
-yTicks.values.14.value.number: 22
-
-yTicks.values.1.label:
-yTicks.values.3.label:
-yTicks.values.5.label:
-yTicks.values.7.label:
-yTicks.values.9.label:
-yTicks.values.11.label:
-yTicks.values.13.label:
-~~~
-
+The following table shows the selected location's sunrise and sunset extremes.
 
 ~~~ data-table
 dataURL: sunrise.csv
@@ -137,165 +37,30 @@ filters.0.vin.0: city
 aggregation.categories.0.field: City
 aggregation.categories.1.field: Date
 aggregation.categories.1.by: Year
-aggregation.measures.0.field: Daylight
-aggregation.measures.0.function: Sum
-aggregation.measures.1.field: Daylight
-aggregation.measures.1.function: Average
-aggregation.measures.2.field: Daylight
-aggregation.measures.2.function: Max
-aggregation.measures.3.field: Daylight
-aggregation.measures.3.function: Min
-aggregation.measures.4.field: DaylightChange
-aggregation.measures.4.function: Max
+aggregation.measures.0.field: Sunrise
+aggregation.measures.0.function: Min
+aggregation.measures.1.field: Sunrise
+aggregation.measures.1.function: Max
+aggregation.measures.2.field: Sunset
+aggregation.measures.2.function: Min
+aggregation.measures.3.field: Sunset
+aggregation.measures.3.function: Max
 
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
-fields.0: SUM(Daylight)
-fields.1: AVERAGE(Daylight)
-fields.2: MIN(Daylight)
-fields.3: MAX(Daylight)
-fields.4: MAX(DaylightChange)
+fields.0: MIN(Sunrise)
+fields.1: MAX(Sunrise)
+fields.2: MIN(Sunset)
+fields.3: MAX(Sunset)
 
 precision: 1
 datetime: Year
 ~~~
 
+The sunrise/sunset chart shows sunrise time (in hours) and sunset time over time.
 
 ~~~ line-chart
-title: Daylight Change - {{city}}
-width: 875
-height: 350
-
-dataURL: sunrise.csv
-
-variables.city.string: Seattle
-
-filters.0.field: City
-filters.0.vin.0: city
-
-xField: Date
-yFields.0: DaylightChange
-
-precision: 0
-datetime: Day
-
-xTicks.auto.count: 13
-xTicks.auto.skip: 2
-
-yTicks.values.0.value.number: -6
-yTicks.values.1.value.number: -5
-yTicks.values.2.value.number: -4
-yTicks.values.3.value.number: -3
-yTicks.values.4.value.number: -2
-yTicks.values.5.value.number: -1
-yTicks.values.6.value.number: 0
-yTicks.values.7.value.number: 1
-yTicks.values.8.value.number: 2
-yTicks.values.9.value.number: 3
-yTicks.values.10.value.number: 4
-yTicks.values.11.value.number: 5
-yTicks.values.12.value.number: 6
-
-yTicks.values.1.label:
-yTicks.values.3.label:
-yTicks.values.5.label:
-yTicks.values.7.label:
-yTicks.values.9.label:
-yTicks.values.11.label:
-~~~
-
-
-~~~ line-chart
-title: Daylight Comparison - {{city}}
-width: 1000
-height: 350
-
-dataURL: sunrise.csv
-
-variables.city.string: Seattle
-
-filters.0.field: City
-filters.0.in.0.string: Juneau
-filters.0.in.1.string: Honolulu
-filters.0.vin.0: city
-
-xField: Date
-yFields.0: Daylight
-colorFields.0: City
-
-precision: 0
-datetime: Day
-
-xTicks.auto.count: 13
-xTicks.auto.skip: 2
-
-yTicks.values.0.value.number: 8
-yTicks.values.1.value.number: 9
-yTicks.values.2.value.number: 10
-yTicks.values.3.value.number: 11
-yTicks.values.4.value.number: 12
-yTicks.values.5.value.number: 13
-yTicks.values.6.value.number: 14
-yTicks.values.7.value.number: 15
-yTicks.values.8.value.number: 16
-yTicks.values.9.value.number: 17
-yTicks.values.10.value.number: 18
-yTicks.values.11.value.number: 19
-yTicks.values.12.value.number: 20
-yTicks.values.13.value.number: 21
-yTicks.values.14.value.number: 22
-
-yTicks.values.1.label:
-yTicks.values.3.label:
-yTicks.values.5.label:
-yTicks.values.7.label:
-yTicks.values.9.label:
-yTicks.values.11.label:
-yTicks.values.13.label:
-~~~
-
-
-~~~ data-table
-dataURL: sunrise.csv
-
-variables.city.string: Seattle
-
-filters.0.field: City
-filters.0.in.0.string: Juneau
-filters.0.in.1.string: Honolulu
-filters.0.vin.0: city
-
-aggregation.categories.0.field: City
-aggregation.categories.1.field: Date
-aggregation.categories.1.by: Year
-aggregation.measures.0.field: Daylight
-aggregation.measures.0.function: Sum
-aggregation.measures.1.field: Daylight
-aggregation.measures.1.function: Average
-aggregation.measures.2.field: Daylight
-aggregation.measures.2.function: Max
-aggregation.measures.3.field: Daylight
-aggregation.measures.3.function: Min
-aggregation.measures.4.field: DaylightChange
-aggregation.measures.4.function: Max
-
-categoryFields.0: City
-categoryFields.1: YEAR(Date)
-fields.0: SUM(Daylight)
-fields.1: AVERAGE(Daylight)
-fields.2: MIN(Daylight)
-fields.3: MAX(Daylight)
-fields.4: MAX(DaylightChange)
-sort.0.field: SUM(Daylight)
-sort.0.desc: true
-
-precision: 1
-datetime: Year
-~~~
-
-
-~~~ line-chart
-title: Sunrise/Sunset Comparison - {{city}}
+title: Sunrise / Sunset - {{city}}
 width: 1000
 height: 550
 
@@ -304,54 +69,20 @@ dataURL: sunrise.csv
 variables.city.string: Seattle
 
 filters.0.field: City
-filters.0.in.0.string: Juneau
-filters.0.in.1.string: Honolulu
 filters.0.vin.0: city
 
 xField: Date
 yFields.0: Sunset
 yFields.1: Sunrise
-colorFields.0: City
 
 precision: 0
 datetime: Day
 
-xTicks.auto.count: 13
-xTicks.auto.skip: 2
+xTicks.count: 13
+xTicks.skip: 2
 
-yTicks.values.0.value.number: 2
-yTicks.values.1.value.number: 3
-yTicks.values.2.value.number: 4
-yTicks.values.3.value.number: 5
-yTicks.values.4.value.number: 6
-yTicks.values.5.value.number: 7
-yTicks.values.6.value.number: 8
-yTicks.values.7.value.number: 9
-yTicks.values.8.value.number: 10
-yTicks.values.9.value.number: 11
-yTicks.values.10.value.number: 12
-yTicks.values.11.value.number: 13
-yTicks.values.12.value.number: 14
-yTicks.values.13.value.number: 15
-yTicks.values.14.value.number: 16
-yTicks.values.15.value.number: 17
-yTicks.values.16.value.number: 18
-yTicks.values.17.value.number: 19
-yTicks.values.18.value.number: 20
-yTicks.values.19.value.number: 21
-yTicks.values.20.value.number: 22
-yTicks.values.21.value.number: 23
-yTicks.values.22.value.number: 24
-
-yTicks.values.1.label:
-yTicks.values.3.label:
-yTicks.values.5.label:
-yTicks.values.7.label:
-yTicks.values.9.label:
-yTicks.values.11.label:
-yTicks.values.13.label:
-yTicks.values.15.label:
-yTicks.values.17.label:
-yTicks.values.19.label:
-yTicks.values.21.label:
+yTicks.count: 23
+yTicks.start.number: 2
+yTicks.end.number: 24
+yTicks.skip: 1
 ~~~
