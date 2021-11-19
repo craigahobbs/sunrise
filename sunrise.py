@@ -31,8 +31,8 @@ CITIES = [
 def main():
     # Command line arguments
     parser = argparse.ArgumentParser(description='Generate sunrise data')
-    parser.add_argument('year', type=int, nargs='?', default=datetime.now().year, help='The year to start generating sunrise data')
-    parser.add_argument('nyears', type=int, nargs='?', default=1, help='The number of years of sunrise data to generate')
+    parser.add_argument('-y', '--year', type=int, nargs='?', default=datetime.now().year, help='The year to start generating sunrise data')
+    parser.add_argument('-n', '--years', type=int, nargs='?', default=1, help='The number of years of sunrise data to generate')
     args = parser.parse_args()
 
     # Initialize the ephem observer
@@ -52,8 +52,8 @@ def main():
         # For each day add one sunrise date row
         noon_utc = datetime(args.year, 1, 1, 12, tzinfo=city_tz).astimezone(timezone.utc)
         date = noon_utc.replace(year=args.year, month=1, day=1, tzinfo=None)
-        end_utc = datetime(args.year + args.nyears, 1, 1, tzinfo=city_tz).astimezone(timezone.utc)
-        end_date = end_utc.replace(year=args.year + args.nyears, month=1, day=1, tzinfo=None)
+        end_utc = datetime(args.year + args.years, 1, 1, tzinfo=city_tz).astimezone(timezone.utc)
+        end_date = end_utc.replace(year=args.year + args.years, month=1, day=1, tzinfo=None)
         daylight_yesterday = None
         while date < end_date:
 

@@ -14,10 +14,17 @@ Questions
 ~~~ data-table
 dataURL: sunrise.csv
 
+variables.start.live.value: Year
+variables.end.live.value: Year
+variables.end.live.index: 1
+
 filters.0.field: City
-filters.0.in.0.string: Juneau
-filters.1.field: Daylight
-filters.1.gte.number: 17.3
+filters.0.include.0.string: Juneau
+filters.1.field: Date
+filters.1.gte.variable: start
+filters.1.lt.variable: end
+filters.2.field: Daylight
+filters.2.gte.number: 17.3
 
 aggregation.categories.0.field: City
 aggregation.categories.1.field: Date
@@ -38,10 +45,17 @@ datetime: Year
 ~~~ data-table
 dataURL: sunrise.csv
 
+variables.start.live.value: Year
+variables.end.live.value: Year
+variables.end.live.index: 1
+
 filters.0.field: City
-filters.0.in.0.string: Juneau
-filters.1.field: Daylight
-filters.1.lte.number: 9.6
+filters.0.include.0.string: Juneau
+filters.1.field: Date
+filters.1.gte.variable: start
+filters.1.lt.variable: end
+filters.2.field: Daylight
+filters.2.lte.number: 9.6
 
 aggregation.categories.0.field: City
 aggregation.categories.1.field: Date

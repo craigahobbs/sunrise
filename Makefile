@@ -15,6 +15,10 @@ WGET_CMD = if which wget; then wget -q -c $(1); else curl -f -Os $(1); fi
 $(eval $(call WGET, https://raw.githubusercontent.com/craigahobbs/python-build/main/pylintrc))
 
 
+# By default generate two years, this year and next year
+NYEARS ?= 2
+
+
 .PHONY: help
 help:
 	@echo "usage: make [clean|data|help|lint]"
@@ -35,7 +39,7 @@ commit: lint data
 
 .PHONY: data
 data: build/venv.build
-	build/venv/bin/python3 sunrise.py$(if $(YEAR), $(YEAR)$(if $(NYEARS), $(NYEARS))) > sunrise.csv
+	build/venv/bin/python3 sunrise.py$(if $(YEAR), -y $(YEAR))$(if $(NYEARS), -n $(NYEARS)) > sunrise.csv
 
 
 .PHONY: lint

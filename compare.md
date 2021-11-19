@@ -30,11 +30,17 @@ The following table compares the selected location's daylight statistics with ex
 dataURL: sunrise.csv
 
 variables.city.string: Seattle
+variables.start.live.value: Year
+variables.end.live.value: Year
+variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.in.0.string: Juneau
-filters.0.in.1.string: Honolulu
-filters.0.vin.0: city
+filters.0.include.0.variable: city
+filters.0.include.1.string: Juneau
+filters.0.include.2.string: Honolulu
+filters.1.field: Date
+filters.1.gte.variable: start
+filters.1.lt.variable: end
 
 aggregation.categories.0.field: City
 aggregation.categories.1.field: Date
@@ -74,11 +80,17 @@ height: 350
 dataURL: sunrise.csv
 
 variables.city.string: Seattle
+variables.start.live.value: Year
+variables.end.live.value: Year
+variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.in.0.string: Juneau
-filters.0.in.1.string: Honolulu
-filters.0.vin.0: city
+filters.0.include.0.variable: city
+filters.0.include.1.string: Juneau
+filters.0.include.2.string: Honolulu
+filters.1.field: Date
+filters.1.gte.variable: start
+filters.1.lt.variable: end
 
 xField: Date
 yFields.0: Daylight
@@ -107,11 +119,17 @@ height: 550
 dataURL: sunrise.csv
 
 variables.city.string: Seattle
+variables.start.live.value: Year
+variables.end.live.value: Year
+variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.in.0.string: Juneau
-filters.0.in.1.string: Honolulu
-filters.0.vin.0: city
+filters.0.include.0.variable: city
+filters.0.include.1.string: Juneau
+filters.0.include.2.string: Honolulu
+filters.1.field: Date
+filters.1.gte.variable: start
+filters.1.lt.variable: end
 
 xField: Date
 yFields.0: Sunset

@@ -14,6 +14,14 @@ The following table ranks U.S. cities by their total annual daylight hours.
 ~~~ data-table
 dataURL: sunrise.csv
 
+variables.start.live.value: Year
+variables.end.live.value: Year
+variables.end.live.index: 1
+
+filters.0.field: Date
+filters.0.gte.variable: start
+filters.0.lt.variable: end
+
 aggregation.categories.0.field: City
 aggregation.categories.1.field: Date
 aggregation.categories.1.by: Year
@@ -48,6 +56,14 @@ The table below ranks U.S. cities by their total monthly daylight hours.
 
 ~~~ data-table
 dataURL: sunrise.csv
+
+variables.start.live.value: Year
+variables.end.live.value: Year
+variables.end.live.index: 1
+
+filters.0.field: Date
+filters.0.gte.variable: start
+filters.0.lt.variable: end
 
 aggregation.categories.0.field: City
 aggregation.categories.1.field: Date
