@@ -68,7 +68,7 @@ The sunrise/sunset chart shows sunrise time (in hours) and sunset time over time
 ~~~ line-chart
 title: Sunrise / Sunset - {{city}}
 width: 1000
-height: 550
+height: 500
 
 dataURL: sunrise.csv
 
@@ -97,4 +97,6 @@ yTicks.count: 23
 yTicks.start.number: 2
 yTicks.end.number: 24
 yTicks.skip: 1
+
+xAnnotations.0.value.live.value: Today
 ~~~

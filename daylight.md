@@ -96,6 +96,8 @@ yTicks.count: 15
 yTicks.start.number: 8
 yTicks.end.number: 22
 yTicks.skip: 1
+
+xAnnotations.0.value.live.value: Today
 ~~~
 
 The daylight-change chart shows the day-to-day change in daylight over time.
@@ -131,4 +133,6 @@ yTicks.count: 13
 yTicks.start.number: -6
 yTicks.end.number: 6
 yTicks.skip: 1
+
+xAnnotations.0.value.live.value: Today
 ~~~

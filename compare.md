@@ -106,6 +106,8 @@ yTicks.count: 15
 yTicks.start.number: 8
 yTicks.end.number: 22
 yTicks.skip: 1
+
+xAnnotations.0.value.live.value: Today
 ~~~
 
 The sunrise/sunset comparison chart compares the locations' sunrise time (in hours) and sunset time
@@ -114,7 +116,7 @@ over time.
 ~~~ line-chart
 title: Sunrise/Sunset Comparison - {{city}}
 width: 1000
-height: 550
+height: 500
 
 dataURL: sunrise.csv
 
@@ -146,4 +148,6 @@ yTicks.count: 23
 yTicks.start.number: 2
 yTicks.end.number: 24
 yTicks.skip: 1
+
+xAnnotations.0.value.live.value: Today
 ~~~
