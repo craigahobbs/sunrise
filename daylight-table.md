@@ -51,12 +51,12 @@ aggregation.measures.1.function: Average
 aggregation.measures.2.field: TwilightSet
 aggregation.measures.2.function: Average
 
+precision: 1
+datetime: Month
+
 categoryFields.0: City
 categoryFields.1: MONTH(Date)
 fields.0: AVERAGE(Daylight)
 fields.1: AVERAGE(TwilightRise)
 fields.2: AVERAGE(TwilightSet)
-
-precision: 1
-datetime: Month
 ~~~

@@ -56,6 +56,12 @@ aggregation.measures.3.function: Max
 aggregation.measures.4.field: DaylightChange
 aggregation.measures.4.function: Max
 
+sort.0.field: SUM(Daylight)
+sort.0.desc: true
+
+precision: 1
+datetime: Year
+
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
 fields.0: SUM(Daylight)
@@ -63,11 +69,6 @@ fields.1: AVERAGE(Daylight)
 fields.2: MIN(Daylight)
 fields.3: MAX(Daylight)
 fields.4: MAX(DaylightChange)
-sort.0.field: SUM(Daylight)
-sort.0.desc: true
-
-precision: 1
-datetime: Year
 ~~~
 
 The daylight comparison chart compares the locations' daylight (in hours) over time.
@@ -92,12 +93,12 @@ filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
 
+precision: 0
+datetime: Day
+
 xField: Date
 yFields.0: Daylight
 colorFields.0: City
-
-precision: 0
-datetime: Day
 
 xTicks.count: 13
 xTicks.skip: 2
@@ -133,13 +134,13 @@ filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
 
+precision: 0
+datetime: Day
+
 xField: Date
 yFields.0: Sunset
 yFields.1: Sunrise
 colorFields.0: City
-
-precision: 0
-datetime: Day
 
 xTicks.count: 13
 xTicks.skip: 2

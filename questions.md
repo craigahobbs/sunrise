@@ -32,12 +32,12 @@ aggregation.categories.1.by: Year
 aggregation.measures.0.field: Daylight
 aggregation.measures.0.function: Count
 
+precision: 0
+datetime: Year
+
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
 fields.0: COUNT(Daylight)
-
-precision: 0
-datetime: Year
 ~~~
 
 **Question:** Seattle's shortest day is 9.6 hours. How many days in Juneau are at least that short?
@@ -63,10 +63,10 @@ aggregation.categories.1.by: Year
 aggregation.measures.0.field: Daylight
 aggregation.measures.0.function: Count
 
+precision: 0
+datetime: Year
+
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
 fields.0: COUNT(Daylight)
-
-precision: 0
-datetime: Year
 ~~~

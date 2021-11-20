@@ -52,15 +52,15 @@ aggregation.measures.2.function: Max
 aggregation.measures.3.field: DaylightChange
 aggregation.measures.3.function: Max
 
+precision: 1
+datetime: Year
+
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
 fields.0: AVERAGE(Daylight)
 fields.1: MIN(Daylight)
 fields.2: MAX(Daylight)
 fields.3: MAX(DaylightChange)
-
-precision: 1
-datetime: Year
 ~~~
 
 The daylight chart shows daily daylight (in hours) over time.
@@ -83,11 +83,11 @@ filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
 
-xField: Date
-yFields.0: Daylight
-
 precision: 0
 datetime: Day
+
+xField: Date
+yFields.0: Daylight
 
 xTicks.count: 13
 xTicks.skip: 2
@@ -120,11 +120,11 @@ filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
 
-xField: Date
-yFields.0: DaylightChange
-
 precision: 0
 datetime: Day
+
+xField: Date
+yFields.0: DaylightChange
 
 xTicks.count: 13
 xTicks.skip: 2

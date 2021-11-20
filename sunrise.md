@@ -52,15 +52,15 @@ aggregation.measures.2.function: Min
 aggregation.measures.3.field: Sunset
 aggregation.measures.3.function: Max
 
+precision: 1
+datetime: Year
+
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
 fields.0: MIN(Sunrise)
 fields.1: MAX(Sunrise)
 fields.2: MIN(Sunset)
 fields.3: MAX(Sunset)
-
-precision: 1
-datetime: Year
 ~~~
 
 The sunrise/sunset chart shows sunrise time (in hours) and sunset time over time.
@@ -83,12 +83,12 @@ filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
 
+precision: 0
+datetime: Day
+
 xField: Date
 yFields.0: Sunset
 yFields.1: Sunrise
-
-precision: 0
-datetime: Day
 
 xTicks.count: 13
 xTicks.skip: 2
