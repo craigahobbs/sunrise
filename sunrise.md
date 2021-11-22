@@ -57,10 +57,6 @@ datetime: Year
 
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
-fields.0: MIN(Sunrise)
-fields.1: MAX(Sunrise)
-fields.2: MIN(Sunset)
-fields.3: MAX(Sunset)
 ~~~
 
 The sunrise/sunset chart shows sunrise time (in hours) and sunset time over time.

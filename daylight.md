@@ -57,10 +57,6 @@ datetime: Year
 
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
-fields.0: AVERAGE(Daylight)
-fields.1: MIN(Daylight)
-fields.2: MAX(Daylight)
-fields.3: MAX(DaylightChange)
 ~~~
 
 The daylight chart shows daily daylight (in hours) over time.

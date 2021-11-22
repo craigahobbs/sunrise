@@ -56,7 +56,4 @@ datetime: Month
 
 categoryFields.0: City
 categoryFields.1: MONTH(Date)
-fields.0: AVERAGE(Daylight)
-fields.1: AVERAGE(TwilightRise)
-fields.2: AVERAGE(TwilightSet)
 ~~~

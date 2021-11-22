@@ -43,10 +43,6 @@ datetime: Year
 
 categoryFields.0: YEAR(Date)
 categoryFields.1: City
-fields.0: SUM(Daylight)
-fields.1: AVERAGE(Daylight)
-fields.2: MIN(Daylight)
-fields.3: MAX(Daylight)
 ~~~
 
 
@@ -87,7 +83,4 @@ datetime: Month
 
 categoryFields.0: MONTH(Date)
 categoryFields.1: City
-fields.0: AVERAGE(Daylight)
-fields.1: AVERAGE(TwilightRise)
-fields.2: AVERAGE(TwilightSet)
 ~~~

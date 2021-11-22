@@ -64,11 +64,6 @@ datetime: Year
 
 categoryFields.0: City
 categoryFields.1: YEAR(Date)
-fields.0: SUM(Daylight)
-fields.1: AVERAGE(Daylight)
-fields.2: MIN(Daylight)
-fields.3: MAX(Daylight)
-fields.4: MAX(DaylightChange)
 ~~~
 
 The daylight comparison chart compares the locations' daylight (in hours) over time.
