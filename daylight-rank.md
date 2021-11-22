@@ -52,7 +52,7 @@ fields.3: MAX(Daylight)
 
 ## US Daylight (Monthly)
 
-The table below ranks U.S. cities by their total monthly daylight hours.
+The table below ranks the top 10 U.S. cities by their total monthly daylight hours.
 
 ~~~ data-table
 dataURL: sunrise.csv
@@ -78,6 +78,9 @@ aggregation.measures.2.function: Average
 sort.0.field: MONTH(Date)
 sort.1.field: AVERAGE(Daylight)
 sort.1.desc: true
+
+top.count: 10
+top.categoryFields.0: MONTH(Date)
 
 precision: 1
 datetime: Month
