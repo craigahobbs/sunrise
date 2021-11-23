@@ -28,7 +28,7 @@ The following table lists the selected location's monthly average daylight (in h
 civil-twilight-begin time (in hours), and civil-twilight-end time (in hours).
 
 ~~~ data-table
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.city.string: Seattle
 variables.start.live.value: Year
@@ -36,7 +36,7 @@ variables.end.live.value: Year
 variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.include.0.variable: city
+filters.0.includes.0.variable: city
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end

@@ -12,7 +12,7 @@ Rankings |
 The following table ranks U.S. cities by their total annual daylight hours.
 
 ~~~ data-table
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.start.live.value: Year
 variables.end.live.value: Year
@@ -34,9 +34,9 @@ aggregation.measures.2.function: Min
 aggregation.measures.3.field: Daylight
 aggregation.measures.3.function: Max
 
-sort.0.field: YEAR(Date)
-sort.1.field: AVERAGE(Daylight)
-sort.1.desc: true
+sorts.0.field: YEAR(Date)
+sorts.1.field: AVERAGE(Daylight)
+sorts.1.desc: true
 
 precision: 1
 datetime: Year
@@ -51,7 +51,7 @@ categoryFields.1: City
 The table below ranks the top 10 U.S. cities by their total monthly daylight hours.
 
 ~~~ data-table
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.start.live.value: Year
 variables.end.live.value: Year
@@ -71,9 +71,9 @@ aggregation.measures.1.function: Average
 aggregation.measures.2.field: TwilightSet
 aggregation.measures.2.function: Average
 
-sort.0.field: MONTH(Date)
-sort.1.field: AVERAGE(Daylight)
-sort.1.desc: true
+sorts.0.field: MONTH(Date)
+sorts.1.field: AVERAGE(Daylight)
+sorts.1.desc: true
 
 top.count: 10
 top.categoryFields.0: MONTH(Date)

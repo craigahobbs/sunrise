@@ -27,7 +27,7 @@ Sunrise/Sunset |
 The following table shows the selected location's sunrise and sunset extremes.
 
 ~~~ data-table
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.city.string: Seattle
 variables.start.live.value: Year
@@ -35,7 +35,7 @@ variables.end.live.value: Year
 variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.include.0.variable: city
+filters.0.includes.0.variable: city
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
@@ -66,7 +66,7 @@ title: Sunrise / Sunset - {{city}}
 width: 1000
 height: 500
 
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.city.string: Seattle
 variables.start.live.value: Year
@@ -74,7 +74,7 @@ variables.end.live.value: Year
 variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.include.0.variable: city
+filters.0.includes.0.variable: city
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end

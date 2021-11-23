@@ -12,14 +12,14 @@ Questions
 **Question:** Seattle's longest day is 17.3 hours. How many days in Juneau are at least that long?
 
 ~~~ data-table
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.start.live.value: Year
 variables.end.live.value: Year
 variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.include.0.string: Juneau
+filters.0.includes.0.string: Juneau
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
@@ -42,14 +42,14 @@ categoryFields.1: YEAR(Date)
 **Question:** Seattle's shortest day is 9.6 hours. How many days in Juneau are at least that short?
 
 ~~~ data-table
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.start.live.value: Year
 variables.end.live.value: Year
 variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.include.0.string: Juneau
+filters.0.includes.0.string: Juneau
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end

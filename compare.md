@@ -27,7 +27,7 @@ Comparison |
 The following table compares the selected location's daylight statistics with extreme latitudes.
 
 ~~~ data-table
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.city.string: Seattle
 variables.start.live.value: Year
@@ -35,9 +35,9 @@ variables.end.live.value: Year
 variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.include.0.variable: city
-filters.0.include.1.string: Juneau
-filters.0.include.2.string: Honolulu
+filters.0.includes.0.variable: city
+filters.0.includes.1.string: Juneau
+filters.0.includes.2.string: Honolulu
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
@@ -56,8 +56,8 @@ aggregation.measures.3.function: Max
 aggregation.measures.4.field: DaylightChange
 aggregation.measures.4.function: Max
 
-sort.0.field: SUM(Daylight)
-sort.0.desc: true
+sorts.0.field: SUM(Daylight)
+sorts.0.desc: true
 
 precision: 1
 datetime: Year
@@ -73,7 +73,7 @@ title: Daylight Comparison - {{city}}
 width: 1000
 height: 350
 
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.city.string: Seattle
 variables.start.live.value: Year
@@ -81,9 +81,9 @@ variables.end.live.value: Year
 variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.include.0.variable: city
-filters.0.include.1.string: Juneau
-filters.0.include.2.string: Honolulu
+filters.0.includes.0.variable: city
+filters.0.includes.1.string: Juneau
+filters.0.includes.2.string: Honolulu
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
@@ -114,7 +114,7 @@ title: Sunrise/Sunset Comparison - {{city}}
 width: 1000
 height: 500
 
-dataURL: sunrise.csv
+data.url: sunrise.csv
 
 variables.city.string: Seattle
 variables.start.live.value: Year
@@ -122,9 +122,9 @@ variables.end.live.value: Year
 variables.end.live.index: 1
 
 filters.0.field: City
-filters.0.include.0.variable: city
-filters.0.include.1.string: Juneau
-filters.0.include.2.string: Honolulu
+filters.0.includes.0.variable: city
+filters.0.includes.1.string: Juneau
+filters.0.includes.2.string: Honolulu
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
