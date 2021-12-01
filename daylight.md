@@ -131,4 +131,7 @@ yTicks.end.number: 6
 yTicks.skip: 1
 
 xAnnotations.0.value.live.value: Today
+
+yAnnotations.0.value.number: 0
+yAnnotations.0.label:
 ~~~
