@@ -35,15 +35,17 @@ variables.start.live.value: Year
 variables.end.live.value: Year
 variables.end.live.index: 1
 
+calculatedFields.0.name: Month
+calculatedFields.0.expression: date(year([Date]), month([Date]), 1)
+
 filters.0.field: City
 filters.0.includes.0.variable: city
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
 
-aggregation.categories.0.field: City
-aggregation.categories.1.field: Date
-aggregation.categories.1.by: Month
+aggregation.categoryFields.0: City
+aggregation.categoryFields.1: Month
 aggregation.measures.0.field: Daylight
 aggregation.measures.0.function: Average
 aggregation.measures.1.field: TwilightRise
@@ -55,5 +57,5 @@ precision: 1
 datetime: Month
 
 categoryFields.0: City
-categoryFields.1: MONTH(Date)
+categoryFields.1: Month
 ~~~

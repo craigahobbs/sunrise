@@ -34,15 +34,17 @@ variables.start.live.value: Year
 variables.end.live.value: Year
 variables.end.live.index: 1
 
+calculatedFields.0.name: Year
+calculatedFields.0.expression: date(year([Date]), 1, 1)
+
 filters.0.field: City
 filters.0.includes.0.variable: city
 filters.1.field: Date
 filters.1.gte.variable: start
 filters.1.lt.variable: end
 
-aggregation.categories.0.field: City
-aggregation.categories.1.field: Date
-aggregation.categories.1.by: Year
+aggregation.categoryFields.0: City
+aggregation.categoryFields.1: Year
 aggregation.measures.0.field: Daylight
 aggregation.measures.0.function: Average
 aggregation.measures.1.field: Daylight
@@ -56,7 +58,7 @@ precision: 1
 datetime: Year
 
 categoryFields.0: City
-categoryFields.1: YEAR(Date)
+categoryFields.1: Year
 ~~~
 
 The daylight chart shows daily daylight (in hours) over time.
