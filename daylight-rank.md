@@ -14,16 +14,13 @@ The following table ranks U.S. cities by their total annual daylight hours.
 ~~~ data-table
 data.url: sunrise.csv
 
-variables.start.live.value: Year
-variables.end.live.value: Year
-variables.end.live.index: 1
+variables.start: date(year(now()), 1, 1)
+variables.end: date(year(now()) + 1, 1, 1)
 
 calculatedFields.0.name: Year
 calculatedFields.0.expression: date(year([Date]), 1, 1)
 
-filters.0.field: Date
-filters.0.gte.variable: start
-filters.0.lt.variable: end
+filters.0: (Date >= start) && (Date < end)
 
 aggregation.categoryFields.0: City
 aggregation.categoryFields.1: Year
@@ -55,16 +52,13 @@ The table below ranks the top 10 U.S. cities by their total monthly daylight hou
 ~~~ data-table
 data.url: sunrise.csv
 
-variables.start.live.value: Year
-variables.end.live.value: Year
-variables.end.live.index: 1
+variables.start: date(year(now()), 1, 1)
+variables.end: date(year(now()) + 1, 1, 1)
 
 calculatedFields.0.name: Month
 calculatedFields.0.expression: date(year([Date]), month([Date]), 1)
 
-filters.0.field: Date
-filters.0.gte.variable: start
-filters.0.lt.variable: end
+filters.0: (Date >= start) && (Date < end)
 
 aggregation.categoryFields.0: City
 aggregation.categoryFields.1: Month

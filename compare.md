@@ -7,19 +7,19 @@ Comparison |
 [Questions](#url=questions.md)
 
 **Location:**
-[Chicago](#variables.city.string=Chicago) |
-[Denver](#variables.city.string=Denver) |
-[Honolulu](#variables.city.string=Honolulu) |
-[Houston](#variables.city.string=Houston) |
-[Juneau](#variables.city.string=Juneau) |
-[Kansas City](#variables.city.string=Kansas%20City) |
-[Los Angeles](#variables.city.string=Los%20Angeles) |
-[Miami](#variables.city.string=Miami) |
-[New York](#variables.city.string=New%20York) |
-[Philadelphia](#variables.city.string=Philadelphia) |
-[Phoenix](#variables.city.string=Phoenix) |
-[San Francisco](#variables.city.string=San%20Francisco) |
-[Seattle](#variables.city.string=Seattle)
+[Chicago](#var.city='Chicago') |
+[Denver](#var.city='Denver') |
+[Honolulu](#var.city='Honolulu') |
+[Houston](#var.city='Houston') |
+[Juneau](#var.city='Juneau') |
+[Kansas City](#var.city='Kansas%20City') |
+[Los Angeles](#var.city='Los%20Angeles') |
+[Miami](#var.city='Miami') |
+[New York](#var.city='New%20York') |
+[Philadelphia](#var.city='Philadelphia') |
+[Phoenix](#var.city='Phoenix') |
+[San Francisco](#var.city='San%20Francisco') |
+[Seattle](#var.city='Seattle')
 
 
 # Daylight Comparison
@@ -29,21 +29,15 @@ The following table compares the selected location's daylight statistics with ex
 ~~~ data-table
 data.url: sunrise.csv
 
-variables.city.string: Seattle
-variables.start.live.value: Year
-variables.end.live.value: Year
-variables.end.live.index: 1
+variables.city: 'Seattle'
+variables.start: date(year(now()), 1, 1)
+variables.end: date(year(now()) + 1, 1, 1)
 
 calculatedFields.0.name: Year
 calculatedFields.0.expression: date(year([Date]), 1, 1)
 
-filters.0.field: City
-filters.0.includes.0.variable: city
-filters.0.includes.1.string: Juneau
-filters.0.includes.2.string: Honolulu
-filters.1.field: Date
-filters.1.gte.variable: start
-filters.1.lt.variable: end
+filters.0: (City == city) || (City == 'Juneau') || (City == 'Honolulu')
+filters.1: (Date >= start) && (Date < end)
 
 aggregation.categoryFields.0: City
 aggregation.categoryFields.1: Year
@@ -77,18 +71,12 @@ height: 350
 
 data.url: sunrise.csv
 
-variables.city.string: Seattle
-variables.start.live.value: Year
-variables.end.live.value: Year
-variables.end.live.index: 1
+variables.city: 'Seattle'
+variables.start: date(year(now()), 1, 1)
+variables.end: date(year(now()) + 1, 1, 1)
 
-filters.0.field: City
-filters.0.includes.0.variable: city
-filters.0.includes.1.string: Juneau
-filters.0.includes.2.string: Honolulu
-filters.1.field: Date
-filters.1.gte.variable: start
-filters.1.lt.variable: end
+filters.0: (City == city) || (City == 'Juneau') || (City == 'Honolulu')
+filters.1: (Date >= start) && (Date < end)
 
 precision: 0
 datetime: Day
@@ -101,11 +89,11 @@ xTicks.count: 13
 xTicks.skip: 2
 
 yTicks.count: 15
-yTicks.start.number: 8
-yTicks.end.number: 22
+yTicks.start: 8
+yTicks.end: 22
 yTicks.skip: 1
 
-xAnnotations.0.value.live.value: Today
+xAnnotations.0.value: today()
 ~~~
 
 The sunrise/sunset comparison chart compares the locations' sunrise time (in hours) and sunset time
@@ -118,18 +106,12 @@ height: 500
 
 data.url: sunrise.csv
 
-variables.city.string: Seattle
-variables.start.live.value: Year
-variables.end.live.value: Year
-variables.end.live.index: 1
+variables.city: 'Seattle'
+variables.start: date(year(now()), 1, 1)
+variables.end: date(year(now()) + 1, 1, 1)
 
-filters.0.field: City
-filters.0.includes.0.variable: city
-filters.0.includes.1.string: Juneau
-filters.0.includes.2.string: Honolulu
-filters.1.field: Date
-filters.1.gte.variable: start
-filters.1.lt.variable: end
+filters.0: (City == city) || (City == 'Juneau') || (City == 'Honolulu')
+filters.1: (Date >= start) && (Date < end)
 
 precision: 0
 datetime: Day
@@ -143,9 +125,9 @@ xTicks.count: 13
 xTicks.skip: 2
 
 yTicks.count: 23
-yTicks.start.number: 2
-yTicks.end.number: 24
+yTicks.start: 2
+yTicks.end: 24
 yTicks.skip: 1
 
-xAnnotations.0.value.live.value: Today
+xAnnotations.0.value: today()
 ~~~
