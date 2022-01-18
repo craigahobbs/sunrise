@@ -60,7 +60,7 @@ categoryFields.1: Year
 The daylight chart shows daily daylight (in hours) over time.
 
 ~~~ line-chart
-title: Daylight - {{city}}
+title: 'Daylight - ' + city
 width: 875
 height: 350
 
@@ -93,7 +93,7 @@ xAnnotations.0.value: today()
 The daylight-change chart shows the day-to-day change in daylight over time.
 
 ~~~ line-chart
-title: Daylight Change - {{city}}
+title: 'Daylight Change - ' + city
 width: 875
 height: 350
 

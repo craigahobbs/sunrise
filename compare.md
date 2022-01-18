@@ -65,7 +65,7 @@ categoryFields.1: Year
 The daylight comparison chart compares the locations' daylight (in hours) over time.
 
 ~~~ line-chart
-title: Daylight Comparison - {{city}}
+title: 'Daylight Comparison - ' + city
 width: 1000
 height: 350
 
@@ -100,7 +100,7 @@ The sunrise/sunset comparison chart compares the locations' sunrise time (in hou
 over time.
 
 ~~~ line-chart
-title: Sunrise/Sunset Comparison - {{city}}
+title: 'Sunrise/Sunset Comparison - ' + city
 width: 1000
 height: 500
 

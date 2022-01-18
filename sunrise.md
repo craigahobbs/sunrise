@@ -60,7 +60,7 @@ categoryFields.1: Year
 The sunrise/sunset chart shows sunrise time (in hours) and sunset time over time.
 
 ~~~ line-chart
-title: Sunrise / Sunset - {{city}}
+title: 'Sunrise / Sunset - ' + city
 width: 1000
 height: 500
 
