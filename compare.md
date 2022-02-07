@@ -36,23 +36,27 @@ variables.end: date(year(now()) + 1, 1, 1)
 calculatedFields.0.name: Year
 calculatedFields.0.expression: date(year([Date]), 1, 1)
 
-filters.0: (City == city) || (City == 'Juneau') || (City == 'Honolulu')
-filters.1: (Date >= start) && (Date < end)
+filter: (City == city || City == 'Juneau' || City == 'Honolulu') && Date >= start && Date < end
 
 aggregation.categoryFields.0: City
 aggregation.categoryFields.1: Year
+aggregation.measures.0.name: Total Daylight
 aggregation.measures.0.field: Daylight
 aggregation.measures.0.function: Sum
+aggregation.measures.1.name: Avg Daylight
 aggregation.measures.1.field: Daylight
 aggregation.measures.1.function: Average
+aggregation.measures.2.name: Min Daylight
 aggregation.measures.2.field: Daylight
 aggregation.measures.2.function: Min
+aggregation.measures.3.name: Max Daylight
 aggregation.measures.3.field: Daylight
 aggregation.measures.3.function: Max
+aggregation.measures.4.name: Max DaylightChange
 aggregation.measures.4.field: DaylightChange
 aggregation.measures.4.function: Max
 
-sorts.0.field: SUM(Daylight)
+sorts.0.field: Total Daylight
 sorts.0.desc: true
 
 precision: 1
@@ -75,15 +79,14 @@ variables.city: 'Seattle'
 variables.start: date(year(now()), 1, 1)
 variables.end: date(year(now()) + 1, 1, 1)
 
-filters.0: (City == city) || (City == 'Juneau') || (City == 'Honolulu')
-filters.1: (Date >= start) && (Date < end)
+filter: (City == city || City == 'Juneau' || City == 'Honolulu') && Date >= start && Date < end
 
 precision: 0
 datetime: Day
 
 xField: Date
 yFields.0: Daylight
-colorFields.0: City
+colorField: City
 
 xTicks.count: 13
 xTicks.skip: 2
@@ -110,8 +113,7 @@ variables.city: 'Seattle'
 variables.start: date(year(now()), 1, 1)
 variables.end: date(year(now()) + 1, 1, 1)
 
-filters.0: (City == city) || (City == 'Juneau') || (City == 'Honolulu')
-filters.1: (Date >= start) && (Date < end)
+filter: (City == city || City == 'Juneau' || City == 'Honolulu') && Date >= start && Date < end
 
 precision: 0
 datetime: Day
@@ -119,7 +121,7 @@ datetime: Day
 xField: Date
 yFields.0: Sunset
 yFields.1: Sunrise
-colorFields.0: City
+colorField: City
 
 xTicks.count: 13
 xTicks.skip: 2

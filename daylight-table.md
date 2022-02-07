@@ -37,15 +37,17 @@ variables.end: date(year(now()) + 1, 1, 1)
 calculatedFields.0.name: Month
 calculatedFields.0.expression: date(year([Date]), month([Date]), 1)
 
-filters.0: City == city
-filters.1: (Date >= start) && (Date < end)
+filter: City == city && Date >= start && Date < end
 
 aggregation.categoryFields.0: City
 aggregation.categoryFields.1: Month
+aggregation.measures.0.name: Avg Daylight
 aggregation.measures.0.field: Daylight
 aggregation.measures.0.function: Average
+aggregation.measures.1.name: Avg TwilightRise
 aggregation.measures.1.field: TwilightRise
 aggregation.measures.1.function: Average
+aggregation.measures.2.name: Avg TwilightSet
 aggregation.measures.2.field: TwilightSet
 aggregation.measures.2.function: Average
 

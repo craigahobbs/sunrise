@@ -36,17 +36,20 @@ variables.end: date(year(now()) + 1, 1, 1)
 calculatedFields.0.name: Year
 calculatedFields.0.expression: date(year([Date]), 1, 1)
 
-filters.0: City == city
-filters.1: (Date >= start) && (Date < end)
+filter: City == city && Date >= start && Date < end
 
 aggregation.categoryFields.0: City
 aggregation.categoryFields.1: Year
+aggregation.measures.0.name: Min Sunrise
 aggregation.measures.0.field: Sunrise
 aggregation.measures.0.function: Min
+aggregation.measures.1.name: Max Sunrise
 aggregation.measures.1.field: Sunrise
 aggregation.measures.1.function: Max
+aggregation.measures.2.name: Min Sunset
 aggregation.measures.2.field: Sunset
 aggregation.measures.2.function: Min
+aggregation.measures.3.name: Max Sunset
 aggregation.measures.3.field: Sunset
 aggregation.measures.3.function: Max
 
@@ -70,8 +73,7 @@ variables.city: 'Seattle'
 variables.start: date(year(now()), 1, 1)
 variables.end: date(year(now()) + 1, 1, 1)
 
-filters.0: City == city
-filters.1: (Date >= start) && (Date < end)
+filter: City == city && Date >= start && Date < end
 
 precision: 0
 datetime: Day
