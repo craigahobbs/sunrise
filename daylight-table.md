@@ -6,20 +6,12 @@ Table |
 [Rankings](#url=daylight-rank.md) |
 [Questions](#url=questions.md)
 
-**Location:**
-[Chicago](#var.vCity='Chicago') |
-[Denver](#var.vCity='Denver') |
-[Honolulu](#var.vCity='Honolulu') |
-[Houston](#var.vCity='Houston') |
-[Juneau](#var.vCity='Juneau') |
-[Kansas City](#var.vCity='Kansas%20City') |
-[Los Angeles](#var.vCity='Los%20Angeles') |
-[Miami](#var.vCity='Miami') |
-[New York](#var.vCity='New%20York') |
-[Philadelphia](#var.vCity='Philadelphia') |
-[Phoenix](#var.vCity='Phoenix') |
-[San Francisco](#var.vCity='San%20Francisco') |
-[Seattle](#var.vCity='Seattle')
+~~~ markdown-script
+markdownPrint( \
+    '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
+    "([Change](#url=city-select.md&var.vURL='daylight-table.md'))" \
+)
+~~~
 
 
 # Daylight Table
