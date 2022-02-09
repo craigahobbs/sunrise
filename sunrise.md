@@ -9,7 +9,7 @@ Sunrise/Sunset |
 ~~~ markdown-script
 markdownPrint( \
     '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
-    "([Change](#url=city-select.md&var.vURL='sunrise.md'))" \
+    "([Change](#url=cities.md&var.vURL='sunrise.md'))" \
 )
 ~~~
 

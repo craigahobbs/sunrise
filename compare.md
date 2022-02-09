@@ -9,7 +9,7 @@ Comparison |
 ~~~ markdown-script
 markdownPrint( \
     '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
-    "([Change](#url=city-select.md&var.vURL='compare.md'))" \
+    "([Change](#url=cities.md&var.vURL='compare.md'))" \
 )
 ~~~
 

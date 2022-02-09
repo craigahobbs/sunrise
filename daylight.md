@@ -9,7 +9,7 @@ Daylight |
 ~~~ markdown-script
 markdownPrint( \
     '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
-    "([Change](#url=city-select.md&var.vURL='daylight.md'))" \
+    "([Change](#url=cities.md&var.vURL='daylight.md'))" \
 )
 ~~~
 
