@@ -7,19 +7,19 @@ Table |
 [Questions](#url=questions.md)
 
 **Location:**
-[Chicago](#var.city='Chicago') |
-[Denver](#var.city='Denver') |
-[Honolulu](#var.city='Honolulu') |
-[Houston](#var.city='Houston') |
-[Juneau](#var.city='Juneau') |
-[Kansas City](#var.city='Kansas%20City') |
-[Los Angeles](#var.city='Los%20Angeles') |
-[Miami](#var.city='Miami') |
-[New York](#var.city='New%20York') |
-[Philadelphia](#var.city='Philadelphia') |
-[Phoenix](#var.city='Phoenix') |
-[San Francisco](#var.city='San%20Francisco') |
-[Seattle](#var.city='Seattle')
+[Chicago](#var.vCity='Chicago') |
+[Denver](#var.vCity='Denver') |
+[Honolulu](#var.vCity='Honolulu') |
+[Houston](#var.vCity='Houston') |
+[Juneau](#var.vCity='Juneau') |
+[Kansas City](#var.vCity='Kansas%20City') |
+[Los Angeles](#var.vCity='Los%20Angeles') |
+[Miami](#var.vCity='Miami') |
+[New York](#var.vCity='New%20York') |
+[Philadelphia](#var.vCity='Philadelphia') |
+[Phoenix](#var.vCity='Phoenix') |
+[San Francisco](#var.vCity='San%20Francisco') |
+[Seattle](#var.vCity='Seattle')
 
 
 # Daylight Table
@@ -30,30 +30,30 @@ civil-twilight-begin time (in hours), and civil-twilight-end time (in hours).
 ~~~ data-table
 data.url: sunrise.csv
 
-variables.city: 'Seattle'
-variables.start: date(year(now()), 1, 1)
-variables.end: date(year(now()) + 1, 1, 1)
+var.vCity: 'Seattle'
+var.vStart: date(year(now()), 1, 1)
+var.vEnd: date(year(now()) + 1, 1, 1)
 
-calculatedFields.0.name: Month
-calculatedFields.0.expression: date(year([Date]), month([Date]), 1)
+calc.0.name: Month
+calc.0.expr: date(year([Date]), month([Date]), 1)
 
-filter: City == city && Date >= start && Date < end
+filter: City == vCity && Date >= vStart && Date < vEnd
 
-aggregation.categoryFields.0: City
-aggregation.categoryFields.1: Month
-aggregation.measures.0.name: Avg Daylight
-aggregation.measures.0.field: Daylight
-aggregation.measures.0.function: Average
-aggregation.measures.1.name: Avg TwilightRise
-aggregation.measures.1.field: TwilightRise
-aggregation.measures.1.function: Average
-aggregation.measures.2.name: Avg TwilightSet
-aggregation.measures.2.field: TwilightSet
-aggregation.measures.2.function: Average
+agg.category.0: City
+agg.category.1: Month
+agg.measure.0.name: Avg Daylight
+agg.measure.0.field: Daylight
+agg.measure.0.func: Average
+agg.measure.1.name: Avg TwilightRise
+agg.measure.1.field: TwilightRise
+agg.measure.1.func: Average
+agg.measure.2.name: Avg TwilightSet
+agg.measure.2.field: TwilightSet
+agg.measure.2.func: Average
 
 precision: 1
 datetime: Month
 
-categoryFields.0: City
-categoryFields.1: Month
+category.0: City
+category.1: Month
 ~~~

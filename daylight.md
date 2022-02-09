@@ -7,19 +7,19 @@ Daylight |
 [Questions](#url=questions.md)
 
 **Location:**
-[Chicago](#var.city='Chicago') |
-[Denver](#var.city='Denver') |
-[Honolulu](#var.city='Honolulu') |
-[Houston](#var.city='Houston') |
-[Juneau](#var.city='Juneau') |
-[Kansas City](#var.city='Kansas%20City') |
-[Los Angeles](#var.city='Los%20Angeles') |
-[Miami](#var.city='Miami') |
-[New York](#var.city='New%20York') |
-[Philadelphia](#var.city='Philadelphia') |
-[Phoenix](#var.city='Phoenix') |
-[San Francisco](#var.city='San%20Francisco') |
-[Seattle](#var.city='Seattle')
+[Chicago](#var.vCity='Chicago') |
+[Denver](#var.vCity='Denver') |
+[Honolulu](#var.vCity='Honolulu') |
+[Houston](#var.vCity='Houston') |
+[Juneau](#var.vCity='Juneau') |
+[Kansas City](#var.vCity='Kansas%20City') |
+[Los Angeles](#var.vCity='Los%20Angeles') |
+[Miami](#var.vCity='Miami') |
+[New York](#var.vCity='New%20York') |
+[Philadelphia](#var.vCity='Philadelphia') |
+[Phoenix](#var.vCity='Phoenix') |
+[San Francisco](#var.vCity='San%20Francisco') |
+[Seattle](#var.vCity='Seattle')
 
 
 # Daylight
@@ -29,100 +29,100 @@ The following table displays the daylight statistics for the selected location.
 ~~~ data-table
 data.url: sunrise.csv
 
-variables.city: 'Seattle'
-variables.start: date(year(now()), 1, 1)
-variables.end: date(year(now()) + 1, 1, 1)
+var.vCity: 'Seattle'
+var.vStart: date(year(now()), 1, 1)
+var.vEnd: date(year(now()) + 1, 1, 1)
 
-calculatedFields.0.name: Year
-calculatedFields.0.expression: date(year([Date]), 1, 1)
+calc.0.name: Year
+calc.0.expr: date(year([Date]), 1, 1)
 
-filter: City == city && Date >= start && Date < end
+filter: City == vCity && Date >= vStart && Date < vEnd
 
-aggregation.categoryFields.0: City
-aggregation.categoryFields.1: Year
-aggregation.measures.0.name: Avg Daylight
-aggregation.measures.0.field: Daylight
-aggregation.measures.0.function: Average
-aggregation.measures.1.name: Min Daylight
-aggregation.measures.1.field: Daylight
-aggregation.measures.1.function: Min
-aggregation.measures.2.name: Max Daylight
-aggregation.measures.2.field: Daylight
-aggregation.measures.2.function: Max
-aggregation.measures.3.name: Max DaylightChange
-aggregation.measures.3.field: DaylightChange
-aggregation.measures.3.function: Max
+agg.category.0: City
+agg.category.1: Year
+agg.measure.0.name: Avg Daylight
+agg.measure.0.field: Daylight
+agg.measure.0.func: Average
+agg.measure.1.name: Min Daylight
+agg.measure.1.field: Daylight
+agg.measure.1.func: Min
+agg.measure.2.name: Max Daylight
+agg.measure.2.field: Daylight
+agg.measure.2.func: Max
+agg.measure.3.name: Max DaylightChange
+agg.measure.3.field: DaylightChange
+agg.measure.3.func: Max
 
 precision: 1
 datetime: Year
 
-categoryFields.0: City
-categoryFields.1: Year
+category.0: City
+category.1: Year
 ~~~
 
 The daylight chart shows daily daylight (in hours) over time.
 
 ~~~ line-chart
-title: 'Daylight - ' + city
+title: 'Daylight - ' + vCity
 width: 875
 height: 350
 
 data.url: sunrise.csv
 
-variables.city: 'Seattle'
-variables.start: date(year(now()), 1, 1)
-variables.end: date(year(now()) + 1, 1, 1)
+var.vCity: 'Seattle'
+var.vStart: date(year(now()), 1, 1)
+var.vEnd: date(year(now()) + 1, 1, 1)
 
-filter: City == city && Date >= start && Date < end
+filter: City == vCity && Date >= vStart && Date < vEnd
 
 precision: 0
 datetime: Day
 
-xField: Date
-yFields.0: Daylight
+x: Date
+y.0: Daylight
 
-xTicks.count: 13
-xTicks.skip: 2
+xtick.count: 13
+xtick.skip: 2
 
-yTicks.count: 15
-yTicks.start: 8
-yTicks.end: 22
-yTicks.skip: 1
+ytick.count: 15
+ytick.start: 8
+ytick.end: 22
+ytick.skip: 1
 
-xAnnotations.0.value: today()
+xline.0.value: today()
 ~~~
 
 The daylight-change chart shows the day-to-day change in daylight over time.
 
 ~~~ line-chart
-title: 'Daylight Change - ' + city
+title: 'Daylight Change - ' + vCity
 width: 875
 height: 350
 
 data.url: sunrise.csv
 
-variables.city: 'Seattle'
-variables.start: date(year(now()), 1, 1)
-variables.end: date(year(now()) + 1, 1, 1)
+var.vCity: 'Seattle'
+var.vStart: date(year(now()), 1, 1)
+var.vEnd: date(year(now()) + 1, 1, 1)
 
-filter: City == city && Date >= start && Date < end
+filter: City == vCity && Date >= vStart && Date < vEnd
 
 precision: 0
 datetime: Day
 
-xField: Date
-yFields.0: DaylightChange
+x: Date
+y.0: DaylightChange
 
-xTicks.count: 13
-xTicks.skip: 2
+xtick.count: 13
+xtick.skip: 2
 
-yTicks.count: 13
-yTicks.start: -6
-yTicks.end: 6
-yTicks.skip: 1
+ytick.count: 13
+ytick.start: -6
+ytick.end: 6
+ytick.skip: 1
 
-xAnnotations.0.value: today()
+xline.0.value: today()
 
-yAnnotations.0.value: 0
-yAnnotations.0.label: ''
+yline.0.value: 0
+yline.0.label: ''
 ~~~

@@ -14,38 +14,38 @@ The following table ranks U.S. cities by their total annual daylight hours.
 ~~~ data-table
 data.url: sunrise.csv
 
-variables.start: date(year(now()), 1, 1)
-variables.end: date(year(now()) + 1, 1, 1)
+var.vStart: date(year(now()), 1, 1)
+var.vEnd: date(year(now()) + 1, 1, 1)
 
-calculatedFields.0.name: Year
-calculatedFields.0.expression: date(year([Date]), 1, 1)
+calc.0.name: Year
+calc.0.expr: date(year([Date]), 1, 1)
 
-filter: Date >= start && Date < end
+filter: Date >= vStart && Date < vEnd
 
-aggregation.categoryFields.0: City
-aggregation.categoryFields.1: Year
-aggregation.measures.0.name: Total Daylight
-aggregation.measures.0.field: Daylight
-aggregation.measures.0.function: Sum
-aggregation.measures.1.name: Avg Daylight
-aggregation.measures.1.field: Daylight
-aggregation.measures.1.function: Average
-aggregation.measures.2.name: Min Daylight
-aggregation.measures.2.field: Daylight
-aggregation.measures.2.function: Min
-aggregation.measures.3.name: Max Daylight
-aggregation.measures.3.field: Daylight
-aggregation.measures.3.function: Max
+agg.category.0: City
+agg.category.1: Year
+agg.measure.0.name: Total Daylight
+agg.measure.0.field: Daylight
+agg.measure.0.func: Sum
+agg.measure.1.name: Avg Daylight
+agg.measure.1.field: Daylight
+agg.measure.1.func: Average
+agg.measure.2.name: Min Daylight
+agg.measure.2.field: Daylight
+agg.measure.2.func: Min
+agg.measure.3.name: Max Daylight
+agg.measure.3.field: Daylight
+agg.measure.3.func: Max
 
-sorts.0.field: Year
-sorts.1.field: Avg Daylight
-sorts.1.desc: true
+sort.0.field: Year
+sort.1.field: Avg Daylight
+sort.1.desc: true
+
+category.0: Year
+category.1: City
 
 precision: 1
 datetime: Year
-
-categoryFields.0: Year
-categoryFields.1: City
 ~~~
 
 
@@ -56,36 +56,36 @@ The table below ranks the top 10 U.S. cities by their total monthly daylight hou
 ~~~ data-table
 data.url: sunrise.csv
 
-variables.start: date(year(now()), 1, 1)
-variables.end: date(year(now()) + 1, 1, 1)
+var.vStart: date(year(now()), 1, 1)
+var.vEnd: date(year(now()) + 1, 1, 1)
 
-calculatedFields.0.name: Month
-calculatedFields.0.expression: date(year([Date]), month([Date]), 1)
+calc.0.name: Month
+calc.0.expr: date(year([Date]), month([Date]), 1)
 
-filter: Date >= start && Date < end
+filter: Date >= vStart && Date < vEnd
 
-aggregation.categoryFields.0: City
-aggregation.categoryFields.1: Month
-aggregation.measures.0.name: Avg Daylight
-aggregation.measures.0.field: Daylight
-aggregation.measures.0.function: Average
-aggregation.measures.1.name: Avg TwilightRise
-aggregation.measures.1.field: TwilightRise
-aggregation.measures.1.function: Average
-aggregation.measures.2.name: Avg TwilightSet
-aggregation.measures.2.field: TwilightSet
-aggregation.measures.2.function: Average
+agg.category.0: City
+agg.category.1: Month
+agg.measure.0.name: Avg Daylight
+agg.measure.0.field: Daylight
+agg.measure.0.func: Average
+agg.measure.1.name: Avg TwilightRise
+agg.measure.1.field: TwilightRise
+agg.measure.1.func: Average
+agg.measure.2.name: Avg TwilightSet
+agg.measure.2.field: TwilightSet
+agg.measure.2.func: Average
 
-sorts.0.field: Month
-sorts.1.field: Avg Daylight
-sorts.1.desc: true
+sort.0.field: Month
+sort.1.field: Avg Daylight
+sort.1.desc: true
 
 top.count: 10
-top.categoryFields.0: Month
+top.category.0: Month
+
+category.0: Month
+category.1: City
 
 precision: 1
 datetime: Month
-
-categoryFields.0: Month
-categoryFields.1: City
 ~~~

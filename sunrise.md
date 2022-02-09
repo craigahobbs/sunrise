@@ -7,19 +7,19 @@ Sunrise/Sunset |
 [Questions](#url=questions.md)
 
 **Location:**
-[Chicago](#var.city='Chicago') |
-[Denver](#var.city='Denver') |
-[Honolulu](#var.city='Honolulu') |
-[Houston](#var.city='Houston') |
-[Juneau](#var.city='Juneau') |
-[Kansas City](#var.city='Kansas%20City') |
-[Los Angeles](#var.city='Los%20Angeles') |
-[Miami](#var.city='Miami') |
-[New York](#var.city='New%20York') |
-[Philadelphia](#var.city='Philadelphia') |
-[Phoenix](#var.city='Phoenix') |
-[San Francisco](#var.city='San%20Francisco') |
-[Seattle](#var.city='Seattle')
+[Chicago](#var.vCity='Chicago') |
+[Denver](#var.vCity='Denver') |
+[Honolulu](#var.vCity='Honolulu') |
+[Houston](#var.vCity='Houston') |
+[Juneau](#var.vCity='Juneau') |
+[Kansas City](#var.vCity='Kansas%20City') |
+[Los Angeles](#var.vCity='Los%20Angeles') |
+[Miami](#var.vCity='Miami') |
+[New York](#var.vCity='New%20York') |
+[Philadelphia](#var.vCity='Philadelphia') |
+[Phoenix](#var.vCity='Phoenix') |
+[San Francisco](#var.vCity='San%20Francisco') |
+[Seattle](#var.vCity='Seattle')
 
 
 # Sunrise / Sunset
@@ -29,66 +29,66 @@ The following table shows the selected location's sunrise and sunset extremes.
 ~~~ data-table
 data.url: sunrise.csv
 
-variables.city: 'Seattle'
-variables.start: date(year(now()), 1, 1)
-variables.end: date(year(now()) + 1, 1, 1)
+var.vCity: 'Seattle'
+var.vStart: date(year(now()), 1, 1)
+var.vEnd: date(year(now()) + 1, 1, 1)
 
-calculatedFields.0.name: Year
-calculatedFields.0.expression: date(year([Date]), 1, 1)
+calc.0.name: Year
+calc.0.expr: date(year([Date]), 1, 1)
 
-filter: City == city && Date >= start && Date < end
+filter: City == vCity && Date >= vStart && Date < vEnd
 
-aggregation.categoryFields.0: City
-aggregation.categoryFields.1: Year
-aggregation.measures.0.name: Min Sunrise
-aggregation.measures.0.field: Sunrise
-aggregation.measures.0.function: Min
-aggregation.measures.1.name: Max Sunrise
-aggregation.measures.1.field: Sunrise
-aggregation.measures.1.function: Max
-aggregation.measures.2.name: Min Sunset
-aggregation.measures.2.field: Sunset
-aggregation.measures.2.function: Min
-aggregation.measures.3.name: Max Sunset
-aggregation.measures.3.field: Sunset
-aggregation.measures.3.function: Max
+agg.category.0: City
+agg.category.1: Year
+agg.measure.0.name: Min Sunrise
+agg.measure.0.field: Sunrise
+agg.measure.0.func: Min
+agg.measure.1.name: Max Sunrise
+agg.measure.1.field: Sunrise
+agg.measure.1.func: Max
+agg.measure.2.name: Min Sunset
+agg.measure.2.field: Sunset
+agg.measure.2.func: Min
+agg.measure.3.name: Max Sunset
+agg.measure.3.field: Sunset
+agg.measure.3.func: Max
 
 precision: 1
 datetime: Year
 
-categoryFields.0: City
-categoryFields.1: Year
+category.0: City
+category.1: Year
 ~~~
 
 The sunrise/sunset chart shows sunrise time (in hours) and sunset time over time.
 
 ~~~ line-chart
-title: 'Sunrise / Sunset - ' + city
+title: 'Sunrise / Sunset - ' + vCity
 width: 1000
 height: 500
 
 data.url: sunrise.csv
 
-variables.city: 'Seattle'
-variables.start: date(year(now()), 1, 1)
-variables.end: date(year(now()) + 1, 1, 1)
+var.vCity: 'Seattle'
+var.vStart: date(year(now()), 1, 1)
+var.vEnd: date(year(now()) + 1, 1, 1)
 
-filter: City == city && Date >= start && Date < end
+filter: City == vCity && Date >= vStart && Date < vEnd
+
+x: Date
+y.0: Sunset
+y.1: Sunrise
+
+xtick.count: 13
+xtick.skip: 2
+
+ytick.count: 23
+ytick.start: 2
+ytick.end: 24
+ytick.skip: 1
+
+xline.0.value: today()
 
 precision: 0
 datetime: Day
-
-xField: Date
-yFields.0: Sunset
-yFields.1: Sunrise
-
-xTicks.count: 13
-xTicks.skip: 2
-
-yTicks.count: 23
-yTicks.start: 2
-yTicks.end: 24
-yTicks.skip: 1
-
-xAnnotations.0.value: today()
 ~~~
