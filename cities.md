@@ -13,7 +13,7 @@ agg.measure.0.func: Count
 sort.0.field: City
 
 aggcalc.0.name: City
-aggcalc.0.expr: '[' + City + '](#url=' + encodeURL(vURL) + '&var.vCity=' + encodeURL("'" + City + "'") + ')'
+aggcalc.0.expr: '[' + City + '](#url=' + vURL + "&var.vCity='" + replace(City, ' ', '%20') + "')"
 
 field.0: City
 
