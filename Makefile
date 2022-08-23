@@ -15,8 +15,16 @@ WGET_CMD = if which wget; then wget -q -c $(1); else curl -f -Os $(1); fi
 $(eval $(call WGET, https://raw.githubusercontent.com/craigahobbs/python-build/main/pylintrc))
 
 
+# Python image
+PYTHON_IMAGE ?= python:3
+ifeq '$(NO_DOCKER)' ''
+PYTHON_RUN := docker run -i --rm -u `id -g`:`id -g` -v `pwd`:`pwd` -w `pwd` $(PYTHON_IMAGE)
+endif
+PYTHON_ENV := $(PYTHON_RUN) build/venv/bin/python3
+
+
 # By default generate two years, this year and next year
-NYEARS ?= 2
+NYEARS ?= 1
 
 
 .PHONY: help
@@ -39,17 +47,17 @@ commit: lint data
 
 .PHONY: data
 data: build/venv.build
-	build/venv/bin/python3 sunrise.py$(if $(YEAR), -y $(YEAR))$(if $(NYEARS), -n $(NYEARS)) > sunrise.csv
+	$(PYTHON_ENV) sunrise.py$(if $(YEAR), -y $(YEAR))$(if $(NYEARS), -n $(NYEARS)) > sunrise.csv
 
 
 .PHONY: lint
 lint: build/venv.build
-	build/venv/bin/python3 -m pylint --disable='missing-function-docstring, missing-module-docstring' sunrise.py
+	$(PYTHON_ENV) -m pylint --disable='missing-function-docstring, missing-module-docstring' sunrise.py
 
 
 build/venv.build:
 	mkdir -p build
-	python3 -m venv build/venv
-	build/venv/bin/pip install -U pip setuptools
-	build/venv/bin/pip install ephem pylint pytz
+	$(PYTHON_RUN) python3 -m venv build/venv
+	$(PYTHON_ENV) -m pip install -U pip setuptools
+	$(PYTHON_ENV) -m pip install ephem pylint pytz
 	touch $@
