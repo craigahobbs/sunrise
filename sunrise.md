@@ -23,7 +23,8 @@ async function sunriseMain()
         pageHidden = objectGet(page, 'hidden')
         isCurPage = (vPage == null && ixPage == 0) || vPage == pageName
         curPage = if(isCurPage, page, curPage)
-        if(!pageHidden, markdownPrint('| ' + if(isCurPage, pageName, '[' + pageName + "](#var.vPage='" + pageName + "')")))
+        pageURL = "#var.vPage='" + pageName + "'" + if(vCity != null, "&var.vCity='" + encodeURIComponent(vCity) + "'", '')
+        if(!pageHidden, markdownPrint('| ' + if(isCurPage, pageName, '[' + pageName + '](' + pageURL + ')')))
         ixPage = ixPage + 1
     jumpif (ixPage < arrayLength(pages)) pageLoop
 
