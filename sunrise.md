@@ -41,7 +41,7 @@ endfunction
 function sunriseCityMenu(pageName)
     markdownPrint( \
         '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
-        "([Change](#var.vPage='Cities'&var.vReturnURL='" + encodeURIComponent(pageName) + "'))", \
+        "([Change](#var.vPage='Cities'&var.vReturnPage='" + encodeURIComponent(pageName) + "'))", \
         '' \
     )
 endfunction
@@ -60,10 +60,11 @@ async function sunriseCities()
     ))
 
     # Add the city link field
+    pagePart = if(vReturnPage == null, '#', '#var.vPage=\'' + encodeURIComponent(vReturnPage) + '\'&')
     dataCalculatedField( \
         dataCities, \
-        'City', "'[' + City + '](#var.vPage=\'' + encodeURIComponent(returnPage) + '\'&var.vCity=\'' + encodeURIComponent(City) + '\')'", \
-        objectNew('returnPage', if(vReturnPage != null, vReturnPage, 'Sunrise')) \
+        'City', "'[' + City + '](' + pagePart + 'var.vCity=\'' + encodeURIComponent(City) + '\')'", \
+        objectNew('pagePart', pagePart) \
     )
 
     # Render the city link list
@@ -87,8 +88,8 @@ async function sunriseSunrise(pageName)
 
     # Render the current sunrise/sunset
     today = datetimeToday()
-    dataCurrent = dataFilter(dataCity, 'year(Date) == YEAR && month(Date) == MONTH && day(Date) == DAY', \
-        objectNew('YEAR', datetimeYear(today), 'MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
+    dataCurrent = dataFilter(dataCity, 'month(Date) == MONTH && day(Date) == DAY', \
+        objectNew('MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
     dataTable(dataCurrent, objectNew(\
         'fields', arrayNew( \
             'Date', \
