@@ -75,13 +75,23 @@ async function sunriseCities()
 endfunction
 
 
-async function sunriseSunrise(pageName)
+async function sunriseLoadData()
     # Load the sunrise data
     data = dataParseCSV(fetch('sunrise.csv', null, true))
 
     # Filter to the selected city
-    city = if(vCity != null, vCity, 'Seattle')
-    dataCity = dataFilter(data, 'City == CITY', objectNew('CITY', city))
+    cityName = if(vCity != null, vCity, 'Seattle')
+    dataCity = dataFilter(data, 'City == CITY', objectNew('CITY', cityName))
+
+    return objectNew('dataCity', dataCity, 'cityName', cityName)
+endfunction
+
+
+async function sunriseSunrise(pageName)
+    # Load the city's sunrise data
+    sunriseData = sunriseLoadData()
+    dataCity = objectGet(sunriseData, 'dataCity')
+    cityName = objectGet(sunriseData, 'cityName')
 
     # Render the city menu
     sunriseCityMenu(pageName)
@@ -90,14 +100,14 @@ async function sunriseSunrise(pageName)
     today = datetimeToday()
     dataCurrent = dataFilter(dataCity, 'month(Date) == MONTH && day(Date) == DAY', \
         objectNew('MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
+    today = objectGet(arrayGet(dataCurrent, 0), 'Date')
     dataTable(dataCurrent, objectNew(\
         'fields', arrayNew( \
             'Date', \
             'TwilightRise', \
             'Sunrise', \
             'Sunset', \
-            'TwilightSet', \
-            'Daylight' \
+            'TwilightSet' \
         ), \
         'precision', 1, \
         'datetime', 'day' \
@@ -109,16 +119,14 @@ async function sunriseSunrise(pageName)
             objectNew('name', 'Min Sunrise', 'field', 'Sunrise', 'function', 'min'), \
             objectNew('name', 'Max Sunrise', 'field', 'Sunrise', 'function', 'max'), \
             objectNew('name', 'Min Sunset', 'field', 'Sunset', 'function', 'min'), \
-            objectNew('name', 'Max Sunset', 'field', 'Sunset', 'function', 'max'), \
-            objectNew('name', 'Min Daylight', 'field', 'Daylight', 'function', 'min'), \
-            objectNew('name', 'Max Daylight', 'field', 'Daylight', 'function', 'max') \
+            objectNew('name', 'Max Sunset', 'field', 'Sunset', 'function', 'max') \
         ) \
     ))
     dataTable(dataMinMax, objectNew('precision', 1))
 
     # Draw the sunrise/sunset line chart
     dataLineChart(dataCity, objectNew( \
-        'title', 'Sunrise / Sunset - ' + city, \
+        'title', 'Sunrise / Sunset - ' + cityName, \
         'width', 1000, \
         'height', 500, \
         'x', 'Date', \
@@ -142,7 +150,99 @@ async function sunriseSunrise(pageName)
 endfunction
 
 
-async function sunriseDaylight()
+async function sunriseDaylight(pageName)
+    # Load the city's sunrise data
+    sunriseData = sunriseLoadData()
+    dataCity = objectGet(sunriseData, 'dataCity')
+    cityName = objectGet(sunriseData, 'cityName')
+
+    # Render the city menu
+    sunriseCityMenu(pageName)
+
+    # Render the current daylight
+    today = datetimeToday()
+    dataCurrent = dataFilter(dataCity, 'month(Date) == MONTH && day(Date) == DAY', \
+        objectNew('MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
+    today = objectGet(arrayGet(dataCurrent, 0), 'Date')
+    dataTable(dataCurrent, objectNew(\
+        'fields', arrayNew( \
+            'Date', \
+            'Daylight', \
+            'DaylightChange' \
+        ), \
+        'precision', 1, \
+        'datetime', 'day' \
+    ))
+
+    # Render the daylight stats table
+    dataStats = dataAggregate(dataCity, objectNew( \
+        'measures', arrayNew( \
+            objectNew('name', 'Avg Daylight', 'field', 'Daylight', 'function', 'average'), \
+            objectNew('name', 'Min Daylight', 'field', 'Daylight', 'function', 'min'), \
+            objectNew('name', 'Max Daylight', 'field', 'Daylight', 'function', 'max'), \
+            objectNew('name', 'Max Daylight Change', 'field', 'DaylightChange', 'function', 'max') \
+        ) \
+    ))
+    dataTable(dataStats, objectNew( \
+        'fields', arrayNew( \
+            'Avg Daylight', \
+            'Min Daylight', \
+            'Max Daylight', \
+            'Max Daylight Change' \
+        ), \
+        'precision', 1 \
+    ))
+
+    # Draw the daylight line chart
+    dataLineChart(dataCity, objectNew( \
+        'title', 'Daylight - ' + cityName, \
+        'width', 875, \
+        'height', 350, \
+        'x', 'Date', \
+        'y', arrayNew('Daylight'), \
+        'xTicks', objectNew( \
+            'count', 13, \
+            'skip', 2 \
+        ), \
+        'yTicks', objectNew( \
+            'count', 15, \
+            'start', 8, \
+            'end', 22, \
+            'skip', 1 \
+        ), \
+        'xLines', arrayNew( \
+            objectNew('value', today) \
+        ), \
+        'precision', 1, \
+        'datetime', 'day' \
+    ))
+
+    # Draw the daylight change line chart
+    dataLineChart(dataCity, objectNew( \
+        'title', 'Daylight Change - ' + cityName, \
+        'width', 875, \
+        'height', 350, \
+        'x', 'Date', \
+        'y', arrayNew('DaylightChange'), \
+        'xTicks', objectNew( \
+            'count', 13, \
+            'skip', 2 \
+        ), \
+        'yTicks', objectNew( \
+            'count', 13, \
+            'start', -6, \
+            'end', 6, \
+            'skip', 1 \
+        ), \
+        'xLines', arrayNew( \
+            objectNew('value', today) \
+        ), \
+        'yLines', arrayNew( \
+            objectNew('value', 0, 'label', '') \
+        ), \
+        'precision', 1, \
+        'datetime', 'day' \
+    ))
 endfunction
 
 
