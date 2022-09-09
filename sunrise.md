@@ -9,7 +9,7 @@ async function sunriseMain()
     pages = arrayNew( \
         objectNew('fn', sunriseSunrise, 'name', 'Sunrise', 'title', 'Sunrise / Sunset'), \
         objectNew('fn', sunriseDaylight, 'name', 'Daylight', 'title', 'Daylight'), \
-        objectNew('fn', sunriseTable, 'name', 'Table', 'title', 'Daylight Table'), \
+        objectNew('fn', sunriseDaylightTable, 'name', 'Daylight Table', 'title', 'Daylight Table'), \
         objectNew('fn', sunriseComparison, 'name', 'Comparison', 'title', 'Daylight Comparison'), \
         objectNew('fn', sunriseRankings, 'name', 'Rankings', 'title', 'Daylight Rankings'), \
         objectNew('fn', sunriseQuestions, 'name', 'Questions', 'title', 'Questions'), \
@@ -23,7 +23,8 @@ async function sunriseMain()
         pageHidden = objectGet(page, 'hidden')
         isCurPage = (vPage == null && ixPage == 0) || vPage == pageName
         curPage = if(isCurPage, page, curPage)
-        pageURL = "#var.vPage='" + pageName + "'" + if(vCity != null, "&var.vCity='" + encodeURIComponent(vCity) + "'", '')
+        pageURL = "#var.vPage='" + encodeURIComponent(pageName) + "'" + \
+            if(vCity != null, "&var.vCity='" + encodeURIComponent(vCity) + "'", '')
         if(!pageHidden, markdownPrint('| ' + if(isCurPage, pageName, '[' + pageName + '](' + pageURL + ')')))
         ixPage = ixPage + 1
     jumpif (ixPage < arrayLength(pages)) pageLoop
@@ -84,6 +85,10 @@ async function sunriseLoadData()
     cityName = if(vCity != null, vCity, 'Seattle')
     dataCity = dataFilter(data, 'City == CITY', objectNew('CITY', cityName))
 
+    # Add calculated fields
+    dataCalculatedField(dataCity, 'Month', 'month(Date)')
+    dataCalculatedField(dataCity, 'Day', 'day(Date)')
+
     return objectNew('dataCity', dataCity, 'cityName', cityName)
 endfunction
 
@@ -99,7 +104,7 @@ async function sunriseSunrise(pageName)
 
     # Render the current sunrise/sunset
     today = datetimeToday()
-    dataCurrent = dataFilter(dataCity, 'month(Date) == MONTH && day(Date) == DAY', \
+    dataCurrent = dataFilter(dataCity, 'Month == MONTH && Day == DAY', \
         objectNew('MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
     today = objectGet(arrayGet(dataCurrent, 0), 'Date')
     dataTable(dataCurrent, objectNew(\
@@ -162,7 +167,7 @@ async function sunriseDaylight(pageName)
 
     # Render the current daylight
     today = datetimeToday()
-    dataCurrent = dataFilter(dataCity, 'month(Date) == MONTH && day(Date) == DAY', \
+    dataCurrent = dataFilter(dataCity, 'Month == MONTH && Day == DAY', \
         objectNew('MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
     today = objectGet(arrayGet(dataCurrent, 0), 'Date')
     dataTable(dataCurrent, objectNew(\
@@ -247,7 +252,32 @@ async function sunriseDaylight(pageName)
 endfunction
 
 
-async function sunriseTable()
+async function sunriseDaylightTable(pageName)
+    # Load the city's sunrise data
+    sunriseData = sunriseLoadData()
+    dataCity = objectGet(sunriseData, 'dataCity')
+
+    # Render the city menu
+    sunriseCityMenu(pageName)
+
+    # Render the monthly daylight average table
+    dataStats = dataAggregate(dataCity, objectNew( \
+        'categories', arrayNew('Month'), \
+        'measures', arrayNew( \
+            objectNew('name', 'Avg Daylight', 'field', 'Daylight', 'function', 'average'), \
+            objectNew('name', 'Avg TwilightRise', 'field', 'TwilightRise', 'function', 'average'), \
+            objectNew('name', 'Avg TwilightSet', 'field', 'TwilightSet', 'function', 'average') \
+        ) \
+    ))
+    dataTable(dataStats, objectNew( \
+        'categories', arrayNew('Month'), \
+        'fields', arrayNew( \
+            'Avg Daylight', \
+            'Avg TwilightRise', \
+            'Avg TwilightSet' \
+        ), \
+        'precision', 1 \
+    ))
 endfunction
 
 
