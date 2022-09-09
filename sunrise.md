@@ -1,86 +1,142 @@
-[Home](#url=README.md) |
-Sunrise/Sunset |
-[Daylight](#url=daylight.md) |
-[Table](#url=daylight-table.md) |
-[Comparison](#url=compare.md) |
-[Rankings](#url=daylight-rank.md) |
-[Questions](#url=questions.md)
-
 ~~~ markdown-script
-markdownPrint( \
-    '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
-    "([Change](#url=cities.md&var.vURL='sunrise.md'))" \
-)
-~~~
+# Licensed under the MIT License
+# https://github.com/craigahobbs/sunrise/blob/main/LICENSE
 
 
-# Sunrise / Sunset
+async function sunriseMain()
+    # Render the menu
+    markdownPrint('[Home](#url=README.md&var=)')
+    pages = arrayNew( \
+        objectNew('fn', sunriseSunrise, 'menu', 'Sunrise', 'title', 'Sunrise / Sunset'), \
+        objectNew('fn', sunriseDaylight, 'menu', 'Daylight', 'title', 'Daylight'), \
+        objectNew('fn', sunriseTable, 'menu', 'Table', 'title', 'Daylight Table'), \
+        objectNew('fn', sunriseComparison, 'menu', 'Comparison', 'title', 'Daylight Comparison'), \
+        objectNew('fn', sunriseRankings, 'menu', 'Rankings', 'title', 'Daylight Rankings'), \
+        objectNew('fn', sunriseQuestions, 'menu', 'Questions', 'title', 'Questions'), \
+        objectNew('fn', sunriseCities, 'menu', 'Cities', 'title', 'Select a City', 'hidden', true) \
+    )
+    ixPage = 0
+    curPage = null
+    pageLoop:
+        page = arrayGet(pages, ixPage)
+        pageMenu = objectGet(page, 'menu')
+        pageHidden = objectGet(page, 'hidden')
+        isCurPage = (vPage == null && ixPage == 0) || vPage == pageMenu
+        curPage = if(isCurPage, page, curPage)
+        if(!pageHidden, markdownPrint('| ' + if(isCurPage, pageMenu, '[' + pageMenu + "](#var.vPage='" + pageMenu + "')")))
+        ixPage = ixPage + 1
+    jumpif (ixPage < arrayLength(pages)) pageLoop
 
-The following table shows the selected location's sunrise and sunset extremes.
+    # Set the title
+    curPageTitle = objectGet(curPage, 'title')
+    markdownPrint('', '# ' + curPageTitle, '')
+    setDocumentTitle(curPageTitle)
 
-~~~ data-table
-data.url: sunrise.csv
+    # Render the page
+    curPageFn = objectGet(curPage, 'fn')
+    curPageFn()
+endfunction
 
-var.vCity: 'Seattle'
-var.vStart: date(year(now()), 1, 1)
-var.vEnd: date(year(now()) + 1, 1, 1)
 
-calc.0.name: Year
-calc.0.expr: date(year([Date]), 1, 1)
+function sunriseCityMenu()
+    markdownPrint( \
+        '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
+        "([Change](#var.vPage='Cities'))", \
+        '' \
+    )
+endfunction
 
-filter: City == vCity && Date >= vStart && Date < vEnd
 
-agg.category.0: City
-agg.category.1: Year
-agg.measure.0.name: Min Sunrise
-agg.measure.0.field: Sunrise
-agg.measure.0.func: Min
-agg.measure.1.name: Max Sunrise
-agg.measure.1.field: Sunrise
-agg.measure.1.func: Max
-agg.measure.2.name: Min Sunset
-agg.measure.2.field: Sunset
-agg.measure.2.func: Min
-agg.measure.3.name: Max Sunset
-agg.measure.3.field: Sunset
-agg.measure.3.func: Max
+async function sunriseCities()
+endfunction
 
-precision: 1
-datetime: Year
 
-category.0: City
-category.1: Year
-~~~
+async function sunriseSunrise()
+    # Render the city menu
+    sunriseCityMenu()
 
-The sunrise/sunset chart shows sunrise time (in hours) and sunset time over time.
+    # Load the sunrise data
+    data = dataParseCSV(fetch('sunrise.csv', null, true))
 
-~~~ line-chart
-title: 'Sunrise / Sunset - ' + vCity
-width: 1000
-height: 500
+    # Filter to the selected city
+    city = if(vCity != null, vCity, 'Seattle')
+    dataCity = dataFilter(data, 'City == CITY', objectNew('CITY', city))
 
-data.url: sunrise.csv
+    # Render the current sunrise/sunset
+    today = datetimeToday()
+    dataCurrent = dataFilter(dataCity, 'year(Date) == YEAR && month(Date) == MONTH && day(Date) == DAY', \
+        objectNew('YEAR', datetimeYear(today), 'MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
+    dataTable(dataCurrent, objectNew(\
+        'fields', arrayNew( \
+            'Date', \
+            'TwilightRise', \
+            'Sunrise', \
+            'Sunset', \
+            'TwilightSet', \
+            'Daylight' \
+        ), \
+        'precision', 1, \
+        'datetime', 'day' \
+    ))
 
-var.vCity: 'Seattle'
-var.vStart: date(year(now()), 1, 1)
-var.vEnd: date(year(now()) + 1, 1, 1)
+    # Render the sunrise/sunset min/max table
+    dataMinMax = dataAggregate(dataCity, objectNew( \
+        'measures', arrayNew( \
+            objectNew('name', 'Min Sunrise', 'field', 'Sunrise', 'function', 'min'), \
+            objectNew('name', 'Max Sunrise', 'field', 'Sunrise', 'function', 'max'), \
+            objectNew('name', 'Min Sunset', 'field', 'Sunset', 'function', 'min'), \
+            objectNew('name', 'Max Sunset', 'field', 'Sunset', 'function', 'max'), \
+            objectNew('name', 'Min Daylight', 'field', 'Daylight', 'function', 'min'), \
+            objectNew('name', 'Max Daylight', 'field', 'Daylight', 'function', 'max') \
+        ) \
+    ))
+    dataTable(dataMinMax, objectNew('precision', 1))
 
-filter: City == vCity && Date >= vStart && Date < vEnd
+    # Draw the sunrise/sunset line chart
+    dataLineChart(dataCity, objectNew( \
+        'title', 'Sunrise / Sunset - ' + city, \
+        'width', 1000, \
+        'height', 500, \
+        'x', 'Date', \
+        'y', arrayNew('Sunset', 'Sunrise'), \
+        'xTicks', objectNew( \
+            'count', 13, \
+            'skip', 2 \
+        ), \
+        'yTicks', objectNew( \
+            'count', 23, \
+            'start', 0, \
+            'end', 24, \
+            'skip', 1 \
+        ), \
+        'xLines', arrayNew( \
+            objectNew('value', today) \
+        ), \
+        'precision', 1, \
+        'datetime', 'day' \
+    ))
+endfunction
 
-x: Date
-y.0: Sunset
-y.1: Sunrise
 
-xtick.count: 13
-xtick.skip: 2
+async function sunriseDaylight()
+endfunction
 
-ytick.count: 23
-ytick.start: 2
-ytick.end: 24
-ytick.skip: 1
 
-xline.0.value: today()
+async function sunriseTable()
+endfunction
 
-precision: 0
-datetime: Day
+
+async function sunriseComparison()
+endfunction
+
+
+async function sunriseRankings()
+endfunction
+
+
+async function sunriseQuestions()
+endfunction
+
+
+sunriseMain()
 ~~~
