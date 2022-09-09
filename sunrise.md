@@ -270,7 +270,7 @@ async function sunriseComparison(pageName)
     # Render the city menu
     sunriseCityMenu(pageName)
 
-    # Render the comparison stats table
+    # Render the daylight comparison stats table
     dataStats = dataAggregate(dataCity, objectNew( \
         'categories', arrayNew('City'), \
         'measures', arrayNew( \
@@ -347,6 +347,32 @@ endfunction
 
 
 async function sunriseRankings()
+    # Load the sunrise data
+    data = dataParseCSV(fetch('sunrise.csv', null, true))
+
+    # Render the daylight comparison stats table
+    dataStats = dataAggregate(data, objectNew( \
+        'categories', arrayNew('City'), \
+        'measures', arrayNew( \
+            objectNew('name', 'Total Daylight', 'field', 'Daylight', 'function', 'sum'), \
+            objectNew('name', 'Avg Daylight', 'field', 'Daylight', 'function', 'average'), \
+            objectNew('name', 'Min Daylight', 'field', 'Daylight', 'function', 'min'), \
+            objectNew('name', 'Max Daylight', 'field', 'Daylight', 'function', 'max'), \
+            objectNew('name', 'Max Daylight Change', 'field', 'DaylightChange', 'function', 'max') \
+        ) \
+    ))
+    dataSort(dataStats, arrayNew(arrayNew('Total Daylight', true)))
+    dataTable(dataStats, objectNew( \
+        'categories', arrayNew('City'), \
+        'fields', arrayNew( \
+            'Total Daylight', \
+            'Avg Daylight', \
+            'Min Daylight', \
+            'Max Daylight', \
+            'Max Daylight Change' \
+        ), \
+        'precision', 1 \
+    ))
 endfunction
 
 
