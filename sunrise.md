@@ -40,13 +40,11 @@ async function sunriseMain()
 endfunction
 
 
-function sunriseCityMenu(pageName)
-    markdownPrint( \
-        '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
-        "([Change](#var.vPage='Cities'&var.vReturnPage='" + encodeURIComponent(pageName) + "'))", \
-        '' \
-    )
-endfunction
+# Chart size constants
+sunriseChartWidth = 875
+sunriseChartWidthWide = 1000
+sunriseChartHeight = 350
+sunriseChartHeightTall = 500
 
 
 async function sunriseCities()
@@ -86,7 +84,7 @@ async function sunriseSunrise(pageName)
     today = objectGet(sunriseData, 'today')
 
     # Render the city menu
-    sunriseCityMenu(pageName)
+    sunriseCityMenu(pageName, cityName)
 
     # Render the current sunrise/sunset
     dataTable(dataToday, objectNew(\
@@ -115,8 +113,8 @@ async function sunriseSunrise(pageName)
     # Draw the sunrise/sunset line chart
     dataLineChart(dataCity, objectNew( \
         'title', 'Sunrise / Sunset - ' + cityName, \
-        'width', 1000, \
-        'height', 500, \
+        'width', sunriseChartWidthWide, \
+        'height', sunriseChartHeightTall, \
         'x', 'Date', \
         'y', arrayNew('Sunset', 'Sunrise'), \
         'xTicks', objectNew( \
@@ -142,14 +140,15 @@ async function sunriseDaylight(pageName)
     # Load the city's sunrise data
     sunriseData = sunriseLoadData()
     dataCity = objectGet(sunriseData, 'dataCity')
+    dataToday = objectGet(sunriseData, 'dataToday')
     cityName = objectGet(sunriseData, 'cityName')
     today = objectGet(sunriseData, 'today')
 
     # Render the city menu
-    sunriseCityMenu(pageName)
+    sunriseCityMenu(pageName, cityName)
 
     # Render the current daylight
-    dataTable(dataCurrent, objectNew(\
+    dataTable(dataToday, objectNew(\
         'fields', arrayNew( \
             'Date', \
             'Daylight', \
@@ -181,8 +180,8 @@ async function sunriseDaylight(pageName)
     # Draw the daylight line chart
     dataLineChart(dataCity, objectNew( \
         'title', 'Daylight - ' + cityName, \
-        'width', 875, \
-        'height', 350, \
+        'width', sunriseChartWidth, \
+        'height', sunriseChartHeight, \
         'x', 'Date', \
         'y', arrayNew('Daylight'), \
         'xTicks', objectNew( \
@@ -205,8 +204,8 @@ async function sunriseDaylight(pageName)
     # Draw the daylight change line chart
     dataLineChart(dataCity, objectNew( \
         'title', 'Daylight Change - ' + cityName, \
-        'width', 875, \
-        'height', 350, \
+        'width', sunriseChartWidth, \
+        'height', sunriseChartHeight, \
         'x', 'Date', \
         'y', arrayNew('DaylightChange'), \
         'xTicks', objectNew( \
@@ -235,9 +234,10 @@ async function sunriseDaylightTable(pageName)
     # Load the city's sunrise data
     sunriseData = sunriseLoadData()
     dataCity = objectGet(sunriseData, 'dataCity')
+    cityName = objectGet(sunriseData, 'cityName')
 
     # Render the city menu
-    sunriseCityMenu(pageName)
+    sunriseCityMenu(pageName, cityName)
 
     # Render the monthly daylight average table
     dataStats = dataAggregate(dataCity, objectNew( \
@@ -268,7 +268,7 @@ async function sunriseComparison(pageName)
     today = objectGet(sunriseData, 'today')
 
     # Render the city menu
-    sunriseCityMenu(pageName)
+    sunriseCityMenu(pageName, cityName)
 
     # Render the daylight comparison stats table
     dataStats = dataAggregate(dataCity, objectNew( \
@@ -297,8 +297,8 @@ async function sunriseComparison(pageName)
     # Draw the daylight comparison line chart
     dataLineChart(dataCity, objectNew( \
         'title', 'Daylight Comparison - ' + cityName, \
-        'width', 1000, \
-        'height', 350, \
+        'width', sunriseChartWidthWide, \
+        'height', sunriseChartHeight, \
         'x', 'Date', \
         'y', arrayNew('Daylight'), \
         'color', 'City', \
@@ -322,8 +322,8 @@ async function sunriseComparison(pageName)
     # Draw the sunrise/sunset comparison line chart
     dataLineChart(dataCity, objectNew( \
         'title', 'Sunrise/Sunset Comparison - ' + cityName, \
-        'width', 1000, \
-        'height', 500, \
+        'width', sunriseChartWidthWide, \
+        'height', sunriseChartHeightTall, \
         'x', 'Date', \
         'y', arrayNew('Sunrise', 'Sunset'), \
         'color', 'City', \
@@ -384,7 +384,7 @@ async function sunriseQuestions(pageName)
     cityName = objectGet(sunriseData, 'cityName')
 
     # Render the city menu
-    sunriseCityMenu(pageName)
+    sunriseCityMenu(pageName, cityName)
 
     # Compute this city's longest and shortest days
     dataMinMax = dataAggregate( \
@@ -403,7 +403,7 @@ async function sunriseQuestions(pageName)
     daysLonger = arrayLength(dataFilter(dataCity, 'City == otherName && Daylight > daylightMax', \
         objectNew('otherName', otherName, 'daylightMax', daylightMax)))
     markdownPrint( \
-        '', '**Question:** The longest day in ' + cityName + ' is ' + numberToFixed(daylightMax, 1) + ' hours.', \
+        '', '**Question:** The longest day in ' + cityName + ' is ' + numberToFixed(daylightMax, 1, true) + ' hours.', \
         'How many days in ' + otherName + ' are at least that long?  ', \
         '**Answer**: ' + daysLonger + ' days' \
     )
@@ -412,11 +412,19 @@ async function sunriseQuestions(pageName)
     daysShorter = arrayLength(dataFilter(dataCity, 'City == otherName && Daylight < daylightMin', \
         objectNew('otherName', otherName, 'daylightMin', daylightMin)))
     markdownPrint( \
-        '', '**Question:** The shortest day in ' + cityName + ' is ' + numberToFixed(daylightMin, 1) + ' hours.', \
+        '', '**Question:** The shortest day in ' + cityName + ' is ' + numberToFixed(daylightMin, 1, true) + ' hours.', \
         'How many days in ' + otherName + ' are at least that short?  ', \
         '**Answer**: ' + daysShorter + ' days' \
     )
 
+endfunction
+
+
+function sunriseCityMenu(pageName, cityName)
+    markdownPrint( \
+        '', '**Location:** ' + cityName, \
+        "([Change](#var.vPage='Cities'&var.vReturnPage='" + encodeURIComponent(pageName) + "'))" \
+    )
 endfunction
 
 
