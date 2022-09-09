@@ -376,7 +376,47 @@ async function sunriseRankings()
 endfunction
 
 
-async function sunriseQuestions()
+async function sunriseQuestions(pageName)
+    # Load the city's sunrise data
+    otherName = 'Juneau'
+    sunriseData = sunriseLoadData(otherName)
+    dataCity = objectGet(sunriseData, 'dataCity')
+    cityName = objectGet(sunriseData, 'cityName')
+
+    # Render the city menu
+    sunriseCityMenu(pageName)
+
+    # Compute this city's longest and shortest days
+    dataMinMax = dataAggregate( \
+        dataFilter(dataCity, 'City == cityName', objectNew('cityName', cityName)), \
+        objectNew( \
+            'measures', arrayNew( \
+                objectNew('name', 'DaylightMax', 'field', 'Daylight', 'function', 'max'), \
+                objectNew('name', 'DaylightMin', 'field', 'Daylight', 'function', 'min') \
+            ) \
+        ) \
+    )
+    daylightMax = objectGet(arrayGet(dataMinMax, 0), 'DaylightMax')
+    daylightMin = objectGet(arrayGet(dataMinMax, 0), 'DaylightMin')
+
+    # How many days longer than this city's longest day?
+    daysLonger = arrayLength(dataFilter(dataCity, 'City == otherName && Daylight > daylightMax', \
+        objectNew('otherName', otherName, 'daylightMax', daylightMax)))
+    markdownPrint( \
+        '', '**Question:** The longest day in ' + cityName + ' is ' + numberToFixed(daylightMax, 1) + ' hours.', \
+        'How many days in ' + otherName + ' are at least that long?  ', \
+        '**Answer**: ' + daysLonger + ' days' \
+    )
+
+    # How many days shorter than this city's shortest day?
+    daysShorter = arrayLength(dataFilter(dataCity, 'City == otherName && Daylight < daylightMin', \
+        objectNew('otherName', otherName, 'daylightMin', daylightMin)))
+    markdownPrint( \
+        '', '**Question:** The shortest day in ' + cityName + ' is ' + numberToFixed(daylightMin, 1) + ' hours.', \
+        'How many days in ' + otherName + ' are at least that short?  ', \
+        '**Answer**: ' + daysShorter + ' days' \
+    )
+
 endfunction
 
 
