@@ -7,23 +7,23 @@ async function sunriseMain()
     # Render the menu
     markdownPrint('[Home](#url=README.md&var=)')
     pages = arrayNew( \
-        objectNew('fn', sunriseSunrise, 'menu', 'Sunrise', 'title', 'Sunrise / Sunset'), \
-        objectNew('fn', sunriseDaylight, 'menu', 'Daylight', 'title', 'Daylight'), \
-        objectNew('fn', sunriseTable, 'menu', 'Table', 'title', 'Daylight Table'), \
-        objectNew('fn', sunriseComparison, 'menu', 'Comparison', 'title', 'Daylight Comparison'), \
-        objectNew('fn', sunriseRankings, 'menu', 'Rankings', 'title', 'Daylight Rankings'), \
-        objectNew('fn', sunriseQuestions, 'menu', 'Questions', 'title', 'Questions'), \
-        objectNew('fn', sunriseCities, 'menu', 'Cities', 'title', 'Select a City', 'hidden', true) \
+        objectNew('fn', sunriseSunrise, 'name', 'Sunrise', 'title', 'Sunrise / Sunset'), \
+        objectNew('fn', sunriseDaylight, 'name', 'Daylight', 'title', 'Daylight'), \
+        objectNew('fn', sunriseTable, 'name', 'Table', 'title', 'Daylight Table'), \
+        objectNew('fn', sunriseComparison, 'name', 'Comparison', 'title', 'Daylight Comparison'), \
+        objectNew('fn', sunriseRankings, 'name', 'Rankings', 'title', 'Daylight Rankings'), \
+        objectNew('fn', sunriseQuestions, 'name', 'Questions', 'title', 'Questions'), \
+        objectNew('fn', sunriseCities, 'name', 'Cities', 'title', 'Select a City', 'hidden', true) \
     )
     ixPage = 0
     curPage = null
     pageLoop:
         page = arrayGet(pages, ixPage)
-        pageMenu = objectGet(page, 'menu')
+        pageName = objectGet(page, 'name')
         pageHidden = objectGet(page, 'hidden')
-        isCurPage = (vPage == null && ixPage == 0) || vPage == pageMenu
+        isCurPage = (vPage == null && ixPage == 0) || vPage == pageName
         curPage = if(isCurPage, page, curPage)
-        if(!pageHidden, markdownPrint('| ' + if(isCurPage, pageMenu, '[' + pageMenu + "](#var.vPage='" + pageMenu + "')")))
+        if(!pageHidden, markdownPrint('| ' + if(isCurPage, pageName, '[' + pageName + "](#var.vPage='" + pageName + "')")))
         ixPage = ixPage + 1
     jumpif (ixPage < arrayLength(pages)) pageLoop
 
@@ -34,33 +34,56 @@ async function sunriseMain()
 
     # Render the page
     curPageFn = objectGet(curPage, 'fn')
-    curPageFn()
+    curPageFn(objectGet(curPage, 'name'))
 endfunction
 
 
-function sunriseCityMenu()
+function sunriseCityMenu(pageName)
     markdownPrint( \
         '**Location:** ' + if(vCity != null, vCity, 'Seattle'), \
-        "([Change](#var.vPage='Cities'))", \
+        "([Change](#var.vPage='Cities'&var.vReturnURL='" + encodeURIComponent(pageName) + "'))", \
         '' \
     )
 endfunction
 
 
 async function sunriseCities()
+    # Load the sunrise data
+    data = dataParseCSV(fetch('sunrise.csv', null, true))
+
+    # Aggregate by city to get the city list
+    dataCities = dataAggregate(data, objectNew( \
+        'categories', arrayNew('City'), \
+        'measures', arrayNew( \
+            objectNew('field', 'Date', 'function', 'count') \
+        ) \
+    ))
+
+    # Add the city link field
+    dataCalculatedField( \
+        dataCities, \
+        'City', "'[' + City + '](#var.vPage=\'' + encodeURIComponent(returnPage) + '\'&var.vCity=\'' + encodeURIComponent(City) + '\')'", \
+        objectNew('returnPage', if(vReturnPage != null, vReturnPage, 'Sunrise')) \
+    )
+
+    # Render the city link list
+    dataTable(dataCities, objectNew( \
+        'fields', arrayNew('City'), \
+        'markdown', arrayNew('City') \
+    ))
 endfunction
 
 
-async function sunriseSunrise()
-    # Render the city menu
-    sunriseCityMenu()
-
+async function sunriseSunrise(pageName)
     # Load the sunrise data
     data = dataParseCSV(fetch('sunrise.csv', null, true))
 
     # Filter to the selected city
     city = if(vCity != null, vCity, 'Seattle')
     dataCity = dataFilter(data, 'City == CITY', objectNew('CITY', city))
+
+    # Render the city menu
+    sunriseCityMenu(pageName)
 
     # Render the current sunrise/sunset
     today = datetimeToday()
