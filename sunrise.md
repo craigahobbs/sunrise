@@ -122,7 +122,7 @@ async function sunriseSunrise(pageName)
             'skip', 2 \
         ), \
         'yTicks', objectNew( \
-            'count', 23, \
+            'count', 25, \
             'start', 0, \
             'end', 24, \
             'skip', 1 \
@@ -274,18 +274,16 @@ async function sunriseComparison(pageName)
     dataStats = dataAggregate(dataCity, objectNew( \
         'categories', arrayNew('City'), \
         'measures', arrayNew( \
-            objectNew('name', 'Total Daylight', 'field', 'Daylight', 'function', 'sum'), \
             objectNew('name', 'Avg Daylight', 'field', 'Daylight', 'function', 'average'), \
             objectNew('name', 'Min Daylight', 'field', 'Daylight', 'function', 'min'), \
             objectNew('name', 'Max Daylight', 'field', 'Daylight', 'function', 'max'), \
             objectNew('name', 'Max Daylight Change', 'field', 'DaylightChange', 'function', 'max') \
         ) \
     ))
-    dataSort(dataStats, arrayNew(arrayNew('Total Daylight', true)))
+    dataSort(dataStats, arrayNew(arrayNew('Avg Daylight', true)))
     dataTable(dataStats, objectNew( \
         'categories', arrayNew('City'), \
         'fields', arrayNew( \
-            'Total Daylight', \
             'Avg Daylight', \
             'Min Daylight', \
             'Max Daylight', \
@@ -354,18 +352,16 @@ async function sunriseRankings()
     dataStats = dataAggregate(data, objectNew( \
         'categories', arrayNew('City'), \
         'measures', arrayNew( \
-            objectNew('name', 'Total Daylight', 'field', 'Daylight', 'function', 'sum'), \
             objectNew('name', 'Avg Daylight', 'field', 'Daylight', 'function', 'average'), \
             objectNew('name', 'Min Daylight', 'field', 'Daylight', 'function', 'min'), \
             objectNew('name', 'Max Daylight', 'field', 'Daylight', 'function', 'max'), \
             objectNew('name', 'Max Daylight Change', 'field', 'DaylightChange', 'function', 'max') \
         ) \
     ))
-    dataSort(dataStats, arrayNew(arrayNew('Total Daylight', true)))
+    dataSort(dataStats, arrayNew(arrayNew('Avg Daylight', true)))
     dataTable(dataStats, objectNew( \
         'categories', arrayNew('City'), \
         'fields', arrayNew( \
-            'Total Daylight', \
             'Avg Daylight', \
             'Min Daylight', \
             'Max Daylight', \
@@ -390,18 +386,21 @@ async function sunriseQuestions(pageName)
     dataMinMax = dataAggregate( \
         dataFilter(dataCity, 'City == cityName', objectNew('cityName', cityName)), \
         objectNew( \
+            'categories', arrayNew('Year'), \
             'measures', arrayNew( \
                 objectNew('name', 'DaylightMax', 'field', 'Daylight', 'function', 'max'), \
                 objectNew('name', 'DaylightMin', 'field', 'Daylight', 'function', 'min') \
             ) \
         ) \
     )
+    dataSort(dataMinMax, arrayNew(arrayNew('Year', true)))
+    daylightYear = objectGet(arrayGet(dataMinMax, 0), 'Year')
     daylightMax = objectGet(arrayGet(dataMinMax, 0), 'DaylightMax')
     daylightMin = objectGet(arrayGet(dataMinMax, 0), 'DaylightMin')
 
     # How many days longer than this city's longest day?
-    daysLonger = arrayLength(dataFilter(dataCity, 'City == otherName && Daylight > daylightMax', \
-        objectNew('otherName', otherName, 'daylightMax', daylightMax)))
+    daysLonger = arrayLength(dataFilter(dataCity, 'City == otherName && Year == daylightYear && Daylight > daylightMax', \
+        objectNew('otherName', otherName, 'daylightYear', daylightYear, 'daylightMax', daylightMax)))
     markdownPrint( \
         '', '**Question:** The longest day in ' + cityName + ' is ' + numberToFixed(daylightMax, 1, true) + ' hours.', \
         'How many days in ' + otherName + ' are at least that long?  ', \
@@ -409,8 +408,8 @@ async function sunriseQuestions(pageName)
     )
 
     # How many days shorter than this city's shortest day?
-    daysShorter = arrayLength(dataFilter(dataCity, 'City == otherName && Daylight < daylightMin', \
-        objectNew('otherName', otherName, 'daylightMin', daylightMin)))
+    daysShorter = arrayLength(dataFilter(dataCity, 'City == otherName && Year == daylightYear && Daylight < daylightMin', \
+        objectNew('otherName', otherName, 'daylightYear', daylightYear, 'daylightMin', daylightMin)))
     markdownPrint( \
         '', '**Question:** The shortest day in ' + cityName + ' is ' + numberToFixed(daylightMin, 1, true) + ' hours.', \
         'How many days in ' + otherName + ' are at least that short?  ', \
@@ -438,18 +437,33 @@ async function sunriseLoadData(cityName2, cityName3)
         objectNew('CITY', cityName, 'CITY2', cityName2, 'CITY3', cityName3))
 
     # Add calculated fields
+    dataCalculatedField(dataCity, 'Year', 'year(Date)')
     dataCalculatedField(dataCity, 'Month', 'month(Date)')
 
     # Filter to today
     today = datetimeToday()
     dataToday = dataFilter(dataCity, 'Month == MONTH && day(Date) == DAY', \
         objectNew('MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
+    dataSort(dataToday, arrayNew(arrayNew('Year', true)))
+    dataToday = arraySlice(dataToday, 0, 1)
+
+    # Compute a today within the data bounds
+    dataYearMinMax = dataAggregate(dataCity, objectNew( \
+        'measures', arrayNew( \
+            objectNew('name', 'YearMax', 'field', 'Year', 'function', 'max'), \
+            objectNew('name', 'YearMin', 'field', 'Year', 'function', 'min') \
+        ) \
+    ))
+    yearMax = objectGet(arrayGet(dataYearMinMax, 0), 'YearMax')
+    yearMin = objectGet(arrayGet(dataYearMinMax, 0), 'YearMin')
+    year = datetimeYear(today)
+    today = if(year >= yearMin && year <= yearMax, today, datetimeNew(yearMax, datetimeMonth(today), datetimeDay(today)))
 
     return objectNew( \
         'dataCity', dataCity, \
         'dataToday', dataToday, \
         'cityName', cityName, \
-        'today', objectGet(arrayGet(dataToday, 0), 'Date') \
+        'today', today \
     )
 endfunction
 
