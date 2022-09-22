@@ -131,7 +131,7 @@ async function sunriseSunrise(pageName)
             objectNew('value', today) \
         ), \
         'precision', 1, \
-        'datetime', 'day' \
+        'datetime', 'month' \
     ))
 endfunction
 
@@ -198,7 +198,7 @@ async function sunriseDaylight(pageName)
             objectNew('value', today) \
         ), \
         'precision', 1, \
-        'datetime', 'day' \
+        'datetime', 'month' \
     ))
 
     # Draw the daylight change line chart
@@ -225,7 +225,7 @@ async function sunriseDaylight(pageName)
             objectNew('value', 0, 'label', '') \
         ), \
         'precision', 1, \
-        'datetime', 'day' \
+        'datetime', 'month' \
     ))
 endfunction
 
@@ -314,7 +314,7 @@ async function sunriseComparison(pageName)
             objectNew('value', today) \
         ), \
         'precision', 1, \
-        'datetime', 'day' \
+        'datetime', 'month' \
     ))
 
     # Draw the sunrise/sunset comparison line chart
@@ -339,7 +339,7 @@ async function sunriseComparison(pageName)
             objectNew('value', today) \
         ), \
         'precision', 1, \
-        'datetime', 'day' \
+        'datetime', 'month' \
     ))
 endfunction
 
