@@ -128,7 +128,7 @@ async function sunriseSunrise(pageName)
             'skip', 1 \
         ), \
         'xLines', arrayNew( \
-            objectNew('value', today) \
+            objectNew('value', today, 'label', datetimeISOFormat(today, true)) \
         ), \
         'precision', 1, \
         'datetime', 'month' \
@@ -195,7 +195,7 @@ async function sunriseDaylight(pageName)
             'skip', 1 \
         ), \
         'xLines', arrayNew( \
-            objectNew('value', today) \
+            objectNew('value', today, 'label', datetimeISOFormat(today, true)) \
         ), \
         'precision', 1, \
         'datetime', 'month' \
@@ -219,7 +219,7 @@ async function sunriseDaylight(pageName)
             'skip', 1 \
         ), \
         'xLines', arrayNew( \
-            objectNew('value', today) \
+            objectNew('value', today, 'label', datetimeISOFormat(today, true)) \
         ), \
         'yLines', arrayNew( \
             objectNew('value', 0, 'label', '') \
@@ -311,7 +311,7 @@ async function sunriseComparison(pageName)
             'skip', 1 \
         ), \
         'xLines', arrayNew( \
-            objectNew('value', today) \
+            objectNew('value', today, 'label', datetimeISOFormat(today, true)) \
         ), \
         'precision', 1, \
         'datetime', 'month' \
@@ -336,7 +336,7 @@ async function sunriseComparison(pageName)
             'skip', 1 \
         ), \
         'xLines', arrayNew( \
-            objectNew('value', today) \
+            objectNew('value', today, 'label', datetimeISOFormat(today, true)) \
         ), \
         'precision', 1, \
         'datetime', 'month' \
