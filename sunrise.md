@@ -87,6 +87,10 @@ async function sunriseSunrise(pageName)
     sunriseCityMenu(pageName, cityName)
 
     # Render the current sunrise/sunset
+    dataCalculatedField(dataToday, 'TwilightRise', 'sunriseTime(TwilightRise)', sunriseTimeFunctions)
+    dataCalculatedField(dataToday, 'Sunrise', 'sunriseTime(Sunrise)', sunriseTimeFunctions)
+    dataCalculatedField(dataToday, 'Sunset', 'sunriseTime(Sunset)', sunriseTimeFunctions)
+    dataCalculatedField(dataToday, 'TwilightSet', 'sunriseTime(TwilightSet)', sunriseTimeFunctions)
     dataTable(dataToday, objectNew(\
         'fields', arrayNew( \
             'Date', \
@@ -108,7 +112,19 @@ async function sunriseSunrise(pageName)
             objectNew('name', 'Max Sunset', 'field', 'Sunset', 'function', 'max') \
         ) \
     ))
-    dataTable(dataMinMax, objectNew('precision', 1))
+    dataCalculatedField(dataMinMax, 'Min Sunrise', 'sunriseTime([Min Sunrise])', sunriseTimeFunctions)
+    dataCalculatedField(dataMinMax, 'Max Sunrise', 'sunriseTime([Max Sunrise])', sunriseTimeFunctions)
+    dataCalculatedField(dataMinMax, 'Min Sunset', 'sunriseTime([Min Sunset])', sunriseTimeFunctions)
+    dataCalculatedField(dataMinMax, 'Max Sunset', 'sunriseTime([Max Sunset])', sunriseTimeFunctions)
+    dataTable(dataMinMax, objectNew(\
+        'fields', arrayNew( \
+            'Min Sunrise', \
+            'Max Sunrise', \
+            'Min Sunset', \
+            'Max Sunset' \
+        ), \
+        'precision', 1 \
+    ))
 
     # Draw the sunrise/sunset line chart
     dataLineChart(dataCity, objectNew( \
@@ -248,6 +264,8 @@ async function sunriseDaylightTable(pageName)
             objectNew('name', 'Avg TwilightSet', 'field', 'TwilightSet', 'function', 'average') \
         ) \
     ))
+    dataCalculatedField(dataStats, 'Avg TwilightRise', 'sunriseTime([Avg TwilightRise])', sunriseTimeFunctions)
+    dataCalculatedField(dataStats, 'Avg TwilightSet', 'sunriseTime([Avg TwilightSet])', sunriseTimeFunctions)
     dataTable(dataStats, objectNew( \
         'categories', arrayNew('Month'), \
         'fields', arrayNew( \
@@ -445,7 +463,7 @@ async function sunriseLoadData(cityName2, cityName3)
     dataToday = dataFilter(dataCity, 'Month == MONTH && day(Date) == DAY', \
         objectNew('MONTH', datetimeMonth(today), 'DAY', datetimeDay(today)))
     dataSort(dataToday, arrayNew(arrayNew('Year', true)))
-    dataToday = arraySlice(dataToday, 0, 1)
+    dataToday = arrayNew(objectCopy(arrayGet(dataToday, 0)))
 
     # Compute a today within the data bounds
     dataYearMinMax = dataAggregate(dataCity, objectNew( \
@@ -466,6 +484,17 @@ async function sunriseLoadData(cityName2, cityName3)
         'today', today \
     )
 endfunction
+
+
+function sunriseTime(time)
+    hour = mathFloor(time, 0)
+    minuteRatio = time - hour
+    minute = mathFloor(minuteRatio * 60, 0)
+    return if(hour < 12, hour, hour - 12) + ':' + if(minute < 10, '0', '') + minute + if(hour < 12, ' am', ' pm')
+endfunction
+
+
+sunriseTimeFunctions = objectNew('sunriseTime', sunriseTime, 'mathFloor', mathFloor)
 
 
 sunriseMain()
