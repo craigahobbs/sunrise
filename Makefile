@@ -29,7 +29,7 @@ NYEARS ?= 1
 
 .PHONY: help
 help:
-	@echo "usage: make [clean|data|help|lint]"
+	@echo "usage: make [clean|data|help|lint|superclean]"
 
 
 .PHONY: clean
@@ -39,6 +39,9 @@ clean:
 
 .PHONY: superclean
 superclean: clean
+ifeq '$(NO_DOCKER)' ''
+	-docker rmi -f $(PYTHON_IMAGE)
+endif
 
 
 .PHONY: commit
