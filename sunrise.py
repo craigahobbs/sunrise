@@ -51,7 +51,7 @@ def main():
 
         # For each day add one sunrise date row
         noon_utc = datetime(args.year, 1, 1, 12, tzinfo=city_tz).astimezone(timezone.utc)
-        date = noon_utc.replace(year=args.year, month=1, day=1, tzinfo=None)
+        date = noon_utc.replace(year=args.year, month=1, day=1, tzinfo=None) - timedelta_day
         end_utc = datetime(args.year + args.years, 1, 1, tzinfo=city_tz).astimezone(timezone.utc)
         end_date = end_utc.replace(year=args.year + args.years, month=1, day=1, tzinfo=None)
         daylight_yesterday = None
@@ -77,16 +77,17 @@ def main():
             daylight_change = (daylight - daylight_yesterday) * 60 if daylight_yesterday is not None else None
 
             # Create the sunrise data row
-            data.append({
-                'City': city['name'],
-                'Date': date.strftime('%Y-%m-%d'),
-                'Sunrise': round(sunrise, 3),
-                'Sunset': round(sunset, 3),
-                'TwilightRise': round(twilight_rise, 3),
-                'TwilightSet': round(twilight_set, 3),
-                'Daylight': round(daylight, 3),
-                'DaylightChange': round(daylight_change, 3) if daylight_change is not None else 'null'
-            })
+            if daylight_change is not None:
+                data.append({
+                    'City': city['name'],
+                    'Date': date.strftime('%Y-%m-%d'),
+                    'Sunrise': round(sunrise, 3),
+                    'Sunset': round(sunset, 3),
+                    'TwilightRise': round(twilight_rise, 3),
+                    'TwilightSet': round(twilight_set, 3),
+                    'Daylight': round(daylight, 3),
+                    'DaylightChange': round(daylight_change, 3) if daylight_change is not None else 'null'
+                })
 
             # Next day
             date = date + timedelta_day

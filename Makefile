@@ -29,7 +29,7 @@ NYEARS ?= 1
 
 .PHONY: help
 help:
-	@echo "usage: make [clean|data|help|lint|superclean]"
+	@echo "usage: make [clean|commit|data|lint|superclean]"
 
 
 .PHONY: clean
