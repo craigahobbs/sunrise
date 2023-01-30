@@ -433,7 +433,6 @@ async function sunriseQuestions(pageName)
         'How many days in ' + otherName + ' are at least that short?  ', \
         '**Answer**: ' + daysShorter + ' days' \
     )
-
 endfunction
 
 
