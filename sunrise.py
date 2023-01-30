@@ -1,6 +1,8 @@
 # Licensed under the MIT License
 # https://github.com/craigahobbs/sunrise/blob/main/LICENSE
 
+# pylint: disable=no-member
+
 import argparse
 import csv
 from datetime import datetime, timedelta, timezone
@@ -56,19 +58,18 @@ def main():
         end_date = end_utc.replace(year=args.year + args.years, month=1, day=1, tzinfo=None)
         daylight_yesterday = None
         while date < end_date:
-
             # Update the observer's date
             observer.date = date
 
             # Calculate sunrise, sunset (horizon '-0:34')
             observer.horizon = '-0:34'
-            sunrise = local_time_hours(observer.previous_rising(ephem.Sun()).datetime(), city_tz) # pylint: disable=no-member
-            sunset = local_time_hours(observer.next_setting(ephem.Sun()).datetime(), city_tz) # pylint: disable=no-member
+            sunrise = local_time_hours(observer.previous_rising(ephem.Sun()).datetime(), city_tz)
+            sunset = local_time_hours(observer.next_setting(ephem.Sun()).datetime(), city_tz)
 
             # Calculate civil twilight (horizon @ -6)
             observer.horizon = '-6'
-            twilight_rise_dt = observer.previous_rising(ephem.Sun(), use_center=True).datetime() # pylint: disable=no-member
-            twilight_set_dt = observer.next_setting(ephem.Sun(), use_center=True).datetime() # pylint: disable=no-member
+            twilight_rise_dt = observer.previous_rising(ephem.Sun(), use_center=True).datetime()
+            twilight_set_dt = observer.next_setting(ephem.Sun(), use_center=True).datetime()
             twilight_rise = local_time_hours(twilight_rise_dt, city_tz)
             twilight_set = local_time_hours(twilight_set_dt, city_tz)
 
