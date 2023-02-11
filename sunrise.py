@@ -68,13 +68,11 @@ def main():
 
             # Calculate civil twilight (horizon @ -6)
             observer.horizon = '-6'
-            twilight_rise_dt = observer.previous_rising(ephem.Sun(), use_center=True).datetime()
-            twilight_set_dt = observer.next_setting(ephem.Sun(), use_center=True).datetime()
-            twilight_rise = local_time_hours(twilight_rise_dt, city_tz)
-            twilight_set = local_time_hours(twilight_set_dt, city_tz)
+            twilight_rise = local_time_hours(observer.previous_rising(ephem.Sun(), use_center=True).datetime(), city_tz)
+            twilight_set = local_time_hours(observer.next_setting(ephem.Sun(), use_center=True).datetime(), city_tz)
 
             # Compute daylight
-            daylight = (twilight_set_dt - twilight_rise_dt).total_seconds() / (60 * 60)
+            daylight = sunset - sunrise
             daylight_change = (daylight - daylight_yesterday) * 60 if daylight_yesterday is not None else None
 
             # Create the sunrise data row
