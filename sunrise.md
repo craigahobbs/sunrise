@@ -6,7 +6,7 @@
 async function sunriseMain()
     # Render the menu
     markdownPrint('[Home](#url=README.md&var=)')
-    pages = arrayNew( \
+    foreach page, ixPage in arrayNew( \
         objectNew('fn', sunriseSunrise, 'name', 'Sunrise', 'title', 'Sunrise / Sunset'), \
         objectNew('fn', sunriseDaylight, 'name', 'Daylight', 'title', 'Daylight'), \
         objectNew('fn', sunriseDaylightTable, 'name', 'Daylight Table', 'title', 'Daylight Table'), \
@@ -14,20 +14,22 @@ async function sunriseMain()
         objectNew('fn', sunriseRankings, 'name', 'Rankings', 'title', 'Daylight Rankings'), \
         objectNew('fn', sunriseQuestions, 'name', 'Questions', 'title', 'Questions'), \
         objectNew('fn', sunriseCities, 'name', 'Cities', 'title', 'Select a City', 'hidden', true) \
-    )
-    ixPage = 0
-    curPage = null
-    pageLoop:
-        page = arrayGet(pages, ixPage)
+    ) do
         pageName = objectGet(page, 'name')
         pageHidden = objectGet(page, 'hidden')
-        isCurPage = (vPage == null && ixPage == 0) || vPage == pageName
-        curPage = if(isCurPage, page, curPage)
         pageURL = "#var.vPage='" + encodeURIComponent(pageName) + "'" + \
             if(vCity != null, "&var.vCity='" + encodeURIComponent(vCity) + "'", '')
-        if(!pageHidden, markdownPrint('| ' + if(isCurPage, pageName, '[' + pageName + '](' + pageURL + ')')))
-        ixPage = ixPage + 1
-    jumpif (ixPage < arrayLength(pages)) pageLoop
+        if vPage == pageName || (vPage == null && ixPage == 0) then
+            curPage = page
+            if !pageHidden then
+                markdownPrint('| ' + markdownEscape(pageName))
+            endif
+        else then
+            if !pageHidden then
+                markdownPrint('| [' + markdownEscape(pageName) + '](' + pageURL + ')')
+            endif
+        endif
+    endforeach
 
     # Set the title
     curPageTitle = objectGet(curPage, 'title')
