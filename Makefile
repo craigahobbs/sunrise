@@ -48,6 +48,10 @@ endif
 commit: lint data
 
 
+.PHONY: gh-pages
+gh-pages:
+
+
 .PHONY: data
 data: build/venv.build
 	$(PYTHON_ENV) sunrise.py$(if $(YEAR), -y $(YEAR))$(if $(NYEARS), -n $(NYEARS)) > sunrise.csv
