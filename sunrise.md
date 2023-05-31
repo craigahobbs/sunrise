@@ -208,7 +208,7 @@ async function sunriseDaylight(pageName)
         ), \
         'yTicks', objectNew( \
             'count', 15, \
-            'start', 8, \
+            'start', 6, \
             'end', 20, \
             'skip', 1 \
         ), \
@@ -326,7 +326,7 @@ async function sunriseComparison(pageName)
         ), \
         'yTicks', objectNew( \
             'count', 15, \
-            'start', 8, \
+            'start', 6, \
             'end', 20, \
             'skip', 1 \
         ), \
