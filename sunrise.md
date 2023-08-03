@@ -6,7 +6,7 @@
 async function sunriseMain()
     # Render the menu
     markdownPrint('[Home](#url=README.md&var=)')
-    foreach page, ixPage in arrayNew( \
+    for page, ixPage in arrayNew( \
         objectNew('fn', sunriseSunrise, 'name', 'Sunrise', 'title', 'Sunrise / Sunset'), \
         objectNew('fn', sunriseDaylight, 'name', 'Daylight', 'title', 'Daylight'), \
         objectNew('fn', sunriseDaylightTable, 'name', 'Daylight Table', 'title', 'Daylight Table'), \
@@ -14,27 +14,27 @@ async function sunriseMain()
         objectNew('fn', sunriseRankings, 'name', 'Rankings', 'title', 'Daylight Rankings'), \
         objectNew('fn', sunriseQuestions, 'name', 'Questions', 'title', 'Questions'), \
         objectNew('fn', sunriseCities, 'name', 'Cities', 'title', 'Select a City', 'hidden', true) \
-    ) do
+    ):
         pageName = objectGet(page, 'name')
         pageHidden = objectGet(page, 'hidden')
-        pageURL = "#var.vPage='" + encodeURIComponent(pageName) + "'" + \
-            if(vCity != null, "&var.vCity='" + encodeURIComponent(vCity) + "'", '')
-        if vPage == pageName || (vPage == null && ixPage == 0) then
+        pageURL = "#var.vPage='" + urlEncodeComponent(pageName) + "'" + \
+            if(vCity != null, "&var.vCity='" + urlEncodeComponent(vCity) + "'", '')
+        if vPage == pageName || (vPage == null && ixPage == 0):
             curPage = page
-            if !pageHidden then
+            if !pageHidden:
                 markdownPrint('| ' + markdownEscape(pageName))
             endif
-        else then
-            if !pageHidden then
+        else:
+            if !pageHidden:
                 markdownPrint('| [' + markdownEscape(pageName) + '](' + pageURL + ')')
             endif
         endif
-    endforeach
+    endfor
 
     # Set the title
     curPageTitle = objectGet(curPage, 'title')
     markdownPrint('', '# ' + curPageTitle, '')
-    setDocumentTitle(curPageTitle)
+    documentSetTitle(curPageTitle)
 
     # Render the page
     curPageFn = objectGet(curPage, 'fn')
@@ -51,7 +51,7 @@ sunriseChartHeightTall = 500
 
 async function sunriseCities()
     # Load the sunrise data
-    data = dataParseCSV(fetch('sunrise.csv', null, true))
+    data = dataParseCSV(httpFetch('sunrise.csv', null, true))
 
     # Aggregate by city to get the city list
     dataCities = dataAggregate(data, objectNew( \
@@ -62,10 +62,10 @@ async function sunriseCities()
     ))
 
     # Add the city link field
-    pagePart = if(vReturnPage == null, '#', '#var.vPage=\'' + encodeURIComponent(vReturnPage) + '\'&')
+    pagePart = if(vReturnPage == null, '#', '#var.vPage=\'' + urlEncodeComponent(vReturnPage) + '\'&')
     dataCalculatedField( \
         dataCities, \
-        'City', "'[' + City + '](' + pagePart + 'var.vCity=\'' + encodeURIComponent(City) + '\')'", \
+        'City', "'[' + City + '](' + pagePart + 'var.vCity=\'' + urlEncodeComponent(City) + '\')'", \
         objectNew('pagePart', pagePart) \
     )
 
@@ -366,7 +366,7 @@ endfunction
 
 async function sunriseRankings()
     # Load the sunrise data
-    data = dataParseCSV(fetch('sunrise.csv', null, true))
+    data = dataParseCSV(httpFetch('sunrise.csv', null, true))
 
     # Render the daylight comparison stats table
     dataStats = dataAggregate(data, objectNew( \
@@ -441,14 +441,14 @@ endfunction
 function sunriseCityMenu(pageName, cityName)
     markdownPrint( \
         '', '**Location:** ' + cityName, \
-        "([Change](#var.vPage='Cities'&var.vReturnPage='" + encodeURIComponent(pageName) + "'))" \
+        "([Change](#var.vPage='Cities'&var.vReturnPage='" + urlEncodeComponent(pageName) + "'))" \
     )
 endfunction
 
 
 async function sunriseLoadData(cityName2, cityName3)
     # Load the sunrise data
-    data = dataParseCSV(fetch('sunrise.csv', null, true))
+    data = dataParseCSV(httpFetch('sunrise.csv', null, true))
 
     # Filter to the selected city
     cityName = if(vCity != null, vCity, 'Seattle')
