@@ -72,7 +72,9 @@ async function sunriseCities()
     # Render the city link list
     dataTable(dataCities, objectNew( \
         'fields', arrayNew('City'), \
-        'markdown', arrayNew('City') \
+        'formats', objectNew( \
+            'City', objectNew('markdown', true) \
+        ) \
     ))
 endfunction
 
