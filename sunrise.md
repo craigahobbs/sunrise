@@ -3,7 +3,7 @@
 # https://github.com/craigahobbs/sunrise/blob/main/LICENSE
 
 
-async function sunriseMain()
+async function sunriseMain():
     # Render the menu
     markdownPrint('[Home](#url=README.md&var=)')
     for page, ixPage in arrayNew( \
@@ -49,7 +49,7 @@ sunriseChartHeight = 350
 sunriseChartHeightTall = 500
 
 
-async function sunriseCities()
+async function sunriseCities():
     # Load the sunrise data
     data = dataParseCSV(systemFetch('sunrise.csv', null, true))
 
@@ -79,7 +79,7 @@ async function sunriseCities()
 endfunction
 
 
-async function sunriseSunrise(pageName)
+async function sunriseSunrise(pageName):
     # Load the city's sunrise data
     sunriseData = sunriseLoadData()
     dataCity = objectGet(sunriseData, 'dataCity')
@@ -156,7 +156,7 @@ async function sunriseSunrise(pageName)
 endfunction
 
 
-async function sunriseDaylight(pageName)
+async function sunriseDaylight(pageName):
     # Load the city's sunrise data
     sunriseData = sunriseLoadData()
     dataCity = objectGet(sunriseData, 'dataCity')
@@ -250,7 +250,7 @@ async function sunriseDaylight(pageName)
 endfunction
 
 
-async function sunriseDaylightTable(pageName)
+async function sunriseDaylightTable(pageName):
     # Load the city's sunrise data
     sunriseData = sunriseLoadData()
     dataCity = objectGet(sunriseData, 'dataCity')
@@ -282,7 +282,7 @@ async function sunriseDaylightTable(pageName)
 endfunction
 
 
-async function sunriseComparison(pageName)
+async function sunriseComparison(pageName):
     # Load the city's sunrise data
     sunriseData = sunriseLoadData('Honolulu', 'Juneau')
     dataCity = objectGet(sunriseData, 'dataCity')
@@ -366,7 +366,7 @@ async function sunriseComparison(pageName)
 endfunction
 
 
-async function sunriseRankings()
+async function sunriseRankings():
     # Load the sunrise data
     data = dataParseCSV(systemFetch('sunrise.csv', null, true))
 
@@ -394,7 +394,7 @@ async function sunriseRankings()
 endfunction
 
 
-async function sunriseQuestions(pageName)
+async function sunriseQuestions(pageName):
     # Load the city's sunrise data
     otherName = 'Juneau'
     sunriseData = sunriseLoadData(otherName)
@@ -440,7 +440,7 @@ async function sunriseQuestions(pageName)
 endfunction
 
 
-function sunriseCityMenu(pageName, cityName)
+function sunriseCityMenu(pageName, cityName):
     markdownPrint( \
         '', '**Location:** ' + cityName, \
         "([Change](#var.vPage='Cities'&var.vReturnPage='" + urlEncodeComponent(pageName) + "'))" \
@@ -448,7 +448,7 @@ function sunriseCityMenu(pageName, cityName)
 endfunction
 
 
-async function sunriseLoadData(cityName2, cityName3)
+async function sunriseLoadData(cityName2, cityName3):
     # Load the sunrise data
     data = dataParseCSV(systemFetch('sunrise.csv', null, true))
 
@@ -489,7 +489,7 @@ async function sunriseLoadData(cityName2, cityName3)
 endfunction
 
 
-function sunriseTime(time)
+function sunriseTime(time):
     hour = mathFloor(time, 0)
     minuteRatio = time - hour
     minute = mathFloor(minuteRatio * 60, 0)
