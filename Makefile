@@ -16,7 +16,7 @@ $(eval $(call WGET, https://raw.githubusercontent.com/craigahobbs/python-build/m
 
 
 # Python image
-PYTHON_IMAGE ?= python:3.11
+PYTHON_IMAGE ?= python:3
 ifeq '$(NO_DOCKER)' ''
 PYTHON_RUN := docker run -i --rm -u `id -g`:`id -g` -v `pwd`:`pwd` -w `pwd` $(PYTHON_IMAGE)
 endif
