@@ -2,11 +2,17 @@
 # Licensed under the MIT License
 # https://github.com/craigahobbs/sunrise/blob/main/LICENSE
 
+include <args.mds>
+
 
 async function sunriseMain():
+    # Parse arguments
+    args = argsParse(sunriseArguments)
+    curPageName = objectGet(args, 'page')
+
     # Render the menu
     markdownPrint('[Home](#url=README.md&var=)')
-    for page, ixPage in arrayNew( \
+    pages = arrayNew( \
         objectNew('fn', sunriseSunrise, 'name', 'Sunrise', 'title', 'Sunrise / Sunset'), \
         objectNew('fn', sunriseDaylight, 'name', 'Daylight', 'title', 'Daylight'), \
         objectNew('fn', sunriseDaylightTable, 'name', 'Daylight Table', 'title', 'Daylight Table'), \
@@ -14,22 +20,25 @@ async function sunriseMain():
         objectNew('fn', sunriseRankings, 'name', 'Rankings', 'title', 'Daylight Rankings'), \
         objectNew('fn', sunriseQuestions, 'name', 'Questions', 'title', 'Questions'), \
         objectNew('fn', sunriseCities, 'name', 'Cities', 'title', 'Select a City', 'hidden', true) \
-    ):
+    )
+    curPage = null
+    for page, ixPage in pages:
         pageName = objectGet(page, 'name')
         pageHidden = objectGet(page, 'hidden')
-        pageURL = "#var.vPage='" + urlEncodeComponent(pageName) + "'" + \
-            if(vCity != null, "&var.vCity='" + urlEncodeComponent(vCity) + "'", '')
-        if vPage == pageName || (vPage == null && ixPage == 0):
+        if pageName == curPageName:
             curPage = page
             if !pageHidden:
                 markdownPrint('| ' + markdownEscape(pageName))
             endif
         else:
             if !pageHidden:
-                markdownPrint('| [' + markdownEscape(pageName) + '](' + pageURL + ')')
+                markdownPrint('| ' + argsLink(sunriseArguments, pageName, objectNew('page', pageName)))
             endif
         endif
     endfor
+    if curPage == null:
+        curPage = arrayGet(pages, 0)
+    endif
 
     # Set the title
     curPageTitle = objectGet(curPage, 'title')
@@ -38,8 +47,16 @@ async function sunriseMain():
 
     # Render the page
     curPageFn = objectGet(curPage, 'fn')
-    curPageFn(objectGet(curPage, 'name'))
+    curPageFn(args)
 endfunction
+
+
+# The Sunrise application arguments
+sunriseArguments = argsValidate(arrayNew( \
+    objectNew('name', 'page', 'default', 'Sunrise'), \
+    objectNew('name', 'returnPage', 'explicit', true), \
+    objectNew('name', 'city', 'default', 'Seattle') \
+))
 
 
 # Chart size constants
@@ -49,7 +66,7 @@ sunriseChartHeight = 350
 sunriseChartHeightTall = 500
 
 
-async function sunriseCities():
+async function sunriseCities(args):
     # Load the sunrise data
     data = dataParseCSV(systemFetch('sunrise.csv', null, true))
 
@@ -61,12 +78,12 @@ async function sunriseCities():
         ) \
     ))
 
+
     # Add the city link field
-    pagePart = if(vReturnPage == null, '#', '#var.vPage=\'' + urlEncodeComponent(vReturnPage) + '\'&')
     dataCalculatedField( \
         dataCities, \
-        'City', "'[' + City + '](' + pagePart + 'var.vCity=\'' + urlEncodeComponent(City) + '\')'", \
-        objectNew('pagePart', pagePart) \
+        'City', "argsLink(sunriseArguments, [City], objectNew('page', returnPage, 'city', [City]))", \
+        objectNew('returnPage', objectGet(args, 'returnPage')) \
     )
 
     # Render the city link list
@@ -79,16 +96,16 @@ async function sunriseCities():
 endfunction
 
 
-async function sunriseSunrise(pageName):
+async function sunriseSunrise(args):
     # Load the city's sunrise data
-    sunriseData = sunriseLoadData()
+    sunriseData = sunriseLoadData(args)
     dataCity = objectGet(sunriseData, 'dataCity')
     dataToday = objectGet(sunriseData, 'dataToday')
     cityName = objectGet(sunriseData, 'cityName')
     today = objectGet(sunriseData, 'today')
 
     # Render the city menu
-    sunriseCityMenu(pageName, cityName)
+    sunriseCityMenu(args)
 
     # Render the current sunrise/sunset
     dataCalculatedField(dataToday, 'TwilightRise', 'sunriseTime(TwilightRise)', sunriseTimeFunctions)
@@ -156,16 +173,16 @@ async function sunriseSunrise(pageName):
 endfunction
 
 
-async function sunriseDaylight(pageName):
+async function sunriseDaylight(args):
     # Load the city's sunrise data
-    sunriseData = sunriseLoadData()
+    sunriseData = sunriseLoadData(args)
     dataCity = objectGet(sunriseData, 'dataCity')
     dataToday = objectGet(sunriseData, 'dataToday')
     cityName = objectGet(sunriseData, 'cityName')
     today = objectGet(sunriseData, 'today')
 
     # Render the city menu
-    sunriseCityMenu(pageName, cityName)
+    sunriseCityMenu(args)
 
     # Render the current daylight
     dataTable(dataToday, objectNew(\
@@ -250,14 +267,13 @@ async function sunriseDaylight(pageName):
 endfunction
 
 
-async function sunriseDaylightTable(pageName):
+async function sunriseDaylightTable(args):
     # Load the city's sunrise data
-    sunriseData = sunriseLoadData()
+    sunriseData = sunriseLoadData(args)
     dataCity = objectGet(sunriseData, 'dataCity')
-    cityName = objectGet(sunriseData, 'cityName')
 
     # Render the city menu
-    sunriseCityMenu(pageName, cityName)
+    sunriseCityMenu(args)
 
     # Render the monthly daylight average table
     dataStats = dataAggregate(dataCity, objectNew( \
@@ -282,15 +298,15 @@ async function sunriseDaylightTable(pageName):
 endfunction
 
 
-async function sunriseComparison(pageName):
+async function sunriseComparison(args):
     # Load the city's sunrise data
-    sunriseData = sunriseLoadData('Honolulu', 'Juneau')
+    sunriseData = sunriseLoadData(args, 'Honolulu', 'Juneau')
     dataCity = objectGet(sunriseData, 'dataCity')
     cityName = objectGet(sunriseData, 'cityName')
     today = objectGet(sunriseData, 'today')
 
     # Render the city menu
-    sunriseCityMenu(pageName, cityName)
+    sunriseCityMenu(args)
 
     # Render the daylight comparison stats table
     dataStats = dataAggregate(dataCity, objectNew( \
@@ -394,15 +410,15 @@ async function sunriseRankings():
 endfunction
 
 
-async function sunriseQuestions(pageName):
+async function sunriseQuestions(args):
     # Load the city's sunrise data
     otherName = 'Juneau'
-    sunriseData = sunriseLoadData(otherName)
+    sunriseData = sunriseLoadData(args, otherName)
     dataCity = objectGet(sunriseData, 'dataCity')
     cityName = objectGet(sunriseData, 'cityName')
 
     # Render the city menu
-    sunriseCityMenu(pageName, cityName)
+    sunriseCityMenu(args)
 
     # Compute this city's longest and shortest days
     dataMinMax = dataAggregate( \
@@ -440,20 +456,20 @@ async function sunriseQuestions(pageName):
 endfunction
 
 
-function sunriseCityMenu(pageName, cityName):
+function sunriseCityMenu(args):
     markdownPrint( \
-        '', '**Location:** ' + cityName, \
-        "([Change](#var.vPage='Cities'&var.vReturnPage='" + urlEncodeComponent(pageName) + "'))" \
+        '', '**Location:** ' + markdownEscape(objectGet(args, 'city')), \
+        '(' + argsLink(sunriseArguments, 'Change', objectNew('page', 'Cities', 'returnPage', objectGet(args, 'page'))) + ')' \
     )
 endfunction
 
 
-async function sunriseLoadData(cityName2, cityName3):
+async function sunriseLoadData(args, cityName2, cityName3):
     # Load the sunrise data
     data = dataParseCSV(systemFetch('sunrise.csv', null, true))
 
     # Filter to the selected city
-    cityName = if(vCity != null, vCity, 'Seattle')
+    cityName = objectGet(args, 'city')
     dataCity = dataFilter(data, 'City == CITY || City == CITY2 || City == CITY3', \
         objectNew('CITY', cityName, 'CITY2', cityName2, 'CITY3', cityName3))
 
