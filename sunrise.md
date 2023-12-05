@@ -43,7 +43,7 @@ async function sunriseMain():
             ))) \
         ) \
     )
-    pagerMain(pagerModel, sunriseArguments)
+    pagerMain(pagerModel, objectNew('arguments', sunriseArguments, 'hideNav', true))
 endfunction
 
 
