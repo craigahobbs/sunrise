@@ -10,8 +10,8 @@ async function sunriseMain():
     # Render the menu
     pagerModel = objectNew( \
         'pages', arrayNew( \
-            objectNew('name', 'Home', 'type', objectNew('link', objectNew( \
-                'url', '#url=README.md&var='))), \
+            objectNew('name', 'Home', 'type', objectNew('markdown', objectNew( \
+                'url', 'README.md'))), \
             objectNew('name', 'Sunrise', 'type', objectNew('function', objectNew( \
                 'function', sunriseSunrise, \
                 'title', 'Sunrise / Sunset' \
@@ -43,7 +43,7 @@ async function sunriseMain():
             ))) \
         ) \
     )
-    pagerMain(pagerModel, objectNew('arguments', sunriseArguments, 'hideNav', true))
+    pagerMain(pagerModel, objectNew('arguments', sunriseArguments, 'start', 'Sunrise', 'hideNav', true))
 endfunction
 
 
