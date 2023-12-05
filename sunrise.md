@@ -3,51 +3,47 @@
 # https://github.com/craigahobbs/sunrise/blob/main/LICENSE
 
 include <args.mds>
+include <pager.mds>
 
 
 async function sunriseMain():
-    # Parse arguments
-    args = argsParse(sunriseArguments)
-    curPageName = objectGet(args, 'page')
-
     # Render the menu
-    markdownPrint('[Home](#url=README.md&var=)')
-    pages = arrayNew( \
-        objectNew('fn', sunriseSunrise, 'name', 'Sunrise', 'title', 'Sunrise / Sunset'), \
-        objectNew('fn', sunriseDaylight, 'name', 'Daylight', 'title', 'Daylight'), \
-        objectNew('fn', sunriseDaylightTable, 'name', 'Daylight Table', 'title', 'Daylight Table'), \
-        objectNew('fn', sunriseComparison, 'name', 'Comparison', 'title', 'Daylight Comparison'), \
-        objectNew('fn', sunriseRankings, 'name', 'Rankings', 'title', 'Daylight Rankings'), \
-        objectNew('fn', sunriseQuestions, 'name', 'Questions', 'title', 'Questions'), \
-        objectNew('fn', sunriseCities, 'name', 'Cities', 'title', 'Select a City', 'hidden', true) \
+    pagerModel = objectNew( \
+        'pages', arrayNew( \
+            objectNew('name', 'Home', 'type', objectNew('link', objectNew( \
+                'url', '#url=README.md&var='))), \
+            objectNew('name', 'Sunrise', 'type', objectNew('function', objectNew( \
+                'function', sunriseSunrise, \
+                'title', 'Sunrise / Sunset' \
+            ))), \
+            objectNew('name', 'Daylight', 'type', objectNew('function', objectNew( \
+                'function', sunriseDaylight, \
+                'title', 'Daylight' \
+            ))), \
+            objectNew('name', 'Daylight Table', 'type', objectNew('function', objectNew( \
+                'function', sunriseDaylightTable, \
+                'title', 'Daylight Table' \
+            ))), \
+            objectNew('name', 'Comparison', 'type', objectNew('function', objectNew( \
+                'function', sunriseComparison, \
+                'title', 'Daylight Comparison' \
+            ))), \
+            objectNew('name', 'Rankings', 'type', objectNew('function', objectNew( \
+                'function', sunriseRankings, \
+                'title', 'Daylight Rankings' \
+            ))), \
+            objectNew('name', 'Questions', 'type', objectNew('function', objectNew( \
+                'function', sunriseQuestions, \
+                'title', 'Questions' \
+            ))), \
+            objectNew('name', 'Cities', 'type', objectNew('function', objectNew( \
+                'function', sunriseCities, \
+                'title', 'Select a City', \
+                'hidden', true \
+            ))) \
+        ) \
     )
-    curPage = null
-    for page, ixPage in pages:
-        pageName = objectGet(page, 'name')
-        pageHidden = objectGet(page, 'hidden')
-        if pageName == curPageName:
-            curPage = page
-            if !pageHidden:
-                markdownPrint('| ' + markdownEscape(pageName))
-            endif
-        else:
-            if !pageHidden:
-                markdownPrint('| ' + argsLink(sunriseArguments, pageName, objectNew('page', pageName)))
-            endif
-        endif
-    endfor
-    if curPage == null:
-        curPage = arrayGet(pages, 0)
-    endif
-
-    # Set the title
-    curPageTitle = objectGet(curPage, 'title')
-    markdownPrint('', '# ' + curPageTitle, '')
-    documentSetTitle(curPageTitle)
-
-    # Render the page
-    curPageFn = objectGet(curPage, 'fn')
-    curPageFn(args)
+    pagerMain(pagerModel, sunriseArguments)
 endfunction
 
 
