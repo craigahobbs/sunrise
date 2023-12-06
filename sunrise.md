@@ -36,10 +36,9 @@ async function sunriseMain():
                 'function', sunriseQuestions, \
                 'title', 'Questions' \
             ))), \
-            objectNew('name', 'Cities', 'type', objectNew('function', objectNew( \
+            objectNew('name', 'Cities', 'hidden', true, 'type', objectNew('function', objectNew( \
                 'function', sunriseCities, \
-                'title', 'Select a City', \
-                'hidden', true \
+                'title', 'Select a City' \
             ))) \
         ) \
     )
