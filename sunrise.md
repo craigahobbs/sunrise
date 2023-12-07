@@ -7,7 +7,6 @@ include <pager.mds>
 
 
 async function sunriseMain():
-    # Render the menu
     pagerModel = objectNew( \
         'pages', arrayNew( \
             objectNew('name', 'Home', 'type', objectNew('markdown', objectNew( \
@@ -508,7 +507,7 @@ function sunriseTime(time):
 endfunction
 
 
-sunriseTimeFunctions = objectNew('sunriseTime', sunriseTime, 'mathFloor', mathFloor)
+sunriseTimeFunctions = objectNew('sunriseTime', sunriseTime)
 
 
 sunriseMain()
