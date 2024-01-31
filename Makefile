@@ -15,12 +15,25 @@ WGET_CMD = if which wget; then wget -q -c $(1); else curl -f -Os $(1); fi
 $(eval $(call WGET, https://raw.githubusercontent.com/craigahobbs/python-build/main/pylintrc))
 
 
+# Windows support
+VENV_BIN := bin
+VENV_PYTHON := python3
+ifneq '$(NO_DOCKER)' ''
+ifeq '$(OS)' 'Windows_NT'
+ifeq ($(shell python3 -c "import sysconfig; print(sysconfig.get_preferred_scheme('user'))"),nt_user)
+VENV_BIN := Scripts
+VENV_PYTHON := python.exe
+endif
+endif
+endif
+
+
 # Python image
 PYTHON_IMAGE ?= python:3
 ifeq '$(NO_DOCKER)' ''
 PYTHON_RUN := docker run -i --rm -u `id -g`:`id -g` -v `pwd`:`pwd` -w `pwd` $(PYTHON_IMAGE)
 endif
-PYTHON_ENV := $(PYTHON_RUN) build/venv/bin/python3
+PYTHON_ENV := $(PYTHON_RUN) build/venv/$(VENV_BIN)/$(VENV_PYTHON)
 
 
 # By default generate two years, this year and next year
@@ -64,7 +77,6 @@ lint: build/venv.build
 
 build/venv.build:
 	mkdir -p build
-	$(PYTHON_RUN) python3 -m venv build/venv
-	$(PYTHON_ENV) -m pip install -U pip setuptools
+	$(PYTHON_RUN) python3 -m venv --upgrade-deps build/venv
 	$(PYTHON_ENV) -m pip install ephem pylint pytz
 	touch $@
