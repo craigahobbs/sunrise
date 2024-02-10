@@ -36,10 +36,6 @@ endif
 PYTHON_ENV := $(PYTHON_RUN) build/venv/$(VENV_BIN)/$(VENV_PYTHON)
 
 
-# By default generate two years, this year and next year
-NYEARS ?= 1
-
-
 .PHONY: help
 help:
 	@echo "usage: make [clean|commit|data|lint|superclean]"
@@ -67,7 +63,7 @@ gh-pages:
 
 .PHONY: data
 data: build/venv.build
-	$(PYTHON_ENV) sunrise.py$(if $(YEAR), -y $(YEAR))$(if $(NYEARS), -n $(NYEARS)) > sunrise.csv
+	$(PYTHON_ENV) sunrise.py -o sunrise.csv$(if $(YEAR), -y $(YEAR))$(if $(NYEARS), -n $(NYEARS))
 
 
 .PHONY: lint

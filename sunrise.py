@@ -6,7 +6,6 @@
 import argparse
 import csv
 from datetime import datetime, timedelta, timezone
-import sys
 
 import ephem
 import pytz
@@ -33,8 +32,12 @@ CITIES = [
 def main():
     # Command line arguments
     parser = argparse.ArgumentParser(description='Generate sunrise data')
-    parser.add_argument('-y', '--year', type=int, nargs='?', default=datetime.now().year, help='The year to start generating sunrise data')
-    parser.add_argument('-n', '--years', type=int, nargs='?', default=1, help='The number of years of sunrise data to generate')
+    parser.add_argument('-o', '--output', default='sunrise.csv',
+                        help='The output CSV file (default is "sunrise.csv")')
+    parser.add_argument('-y', '--year', type=int, default=datetime.now().year,
+                        help='The year to start generating sunrise data (default is current year')
+    parser.add_argument('-n', '--years', type=int, default=1,
+                        help='The number of years of sunrise data to generate (default is 1)')
     args = parser.parse_args()
 
     # Initialize the ephem observer
@@ -93,19 +96,20 @@ def main():
             daylight_yesterday = daylight
 
     # Write the CSV
-    writer = csv.DictWriter(sys.stdout, [
-        'City',
-        'Date',
-        'Sunrise',
-        'Sunset',
-        'TwilightRise',
-        'TwilightSet',
-        'Daylight',
-        'DaylightChange'
-    ])
-    writer.writeheader()
-    for row in data:
-        writer.writerow(row)
+    with open(args.output, 'w', encoding='utf-8', newline='\n') as fh:
+        writer = csv.DictWriter(fh, [
+            'City',
+            'Date',
+            'Sunrise',
+            'Sunset',
+            'TwilightRise',
+            'TwilightSet',
+            'Daylight',
+            'DaylightChange'
+        ])
+        writer.writeheader()
+        for row in data:
+            writer.writerow(row)
 
 
 # Helper function to compute the local time in hours (0-24)
