@@ -62,7 +62,7 @@ sunriseChartHeightTall = 500
 
 async function sunriseCities(args):
     # Load the sunrise data
-    data = dataParseCSV(systemFetch('sunrise.csv', null, true))
+    data = dataParseCSV(systemFetch('sunrise.csv'))
 
     # Aggregate by city to get the city list
     dataCities = dataAggregate(data, objectNew( \
@@ -378,7 +378,7 @@ endfunction
 
 async function sunriseRankings():
     # Load the sunrise data
-    data = dataParseCSV(systemFetch('sunrise.csv', null, true))
+    data = dataParseCSV(systemFetch('sunrise.csv'))
 
     # Render the daylight comparison stats table
     dataStats = dataAggregate(data, objectNew( \
@@ -460,7 +460,7 @@ endfunction
 
 async function sunriseLoadData(args, cityName2, cityName3):
     # Load the sunrise data
-    data = dataParseCSV(systemFetch('sunrise.csv', null, true))
+    data = dataParseCSV(systemFetch('sunrise.csv'))
 
     # Filter to the selected city
     cityName = objectGet(args, 'city')
