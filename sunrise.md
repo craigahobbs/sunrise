@@ -102,10 +102,10 @@ async function sunriseSunrise(args):
     sunriseCityMenu(args)
 
     # Render the current sunrise/sunset
-    dataCalculatedField(dataToday, 'TwilightRise', 'sunriseTime(TwilightRise)', sunriseTimeFunctions)
-    dataCalculatedField(dataToday, 'Sunrise', 'sunriseTime(Sunrise)', sunriseTimeFunctions)
-    dataCalculatedField(dataToday, 'Sunset', 'sunriseTime(Sunset)', sunriseTimeFunctions)
-    dataCalculatedField(dataToday, 'TwilightSet', 'sunriseTime(TwilightSet)', sunriseTimeFunctions)
+    dataCalculatedField(dataToday, 'TwilightRise', 'sunriseTime(TwilightRise)')
+    dataCalculatedField(dataToday, 'Sunrise', 'sunriseTime(Sunrise)')
+    dataCalculatedField(dataToday, 'Sunset', 'sunriseTime(Sunset)')
+    dataCalculatedField(dataToday, 'TwilightSet', 'sunriseTime(TwilightSet)')
     dataTable(dataToday, objectNew(\
         'fields', arrayNew( \
             'Date', \
@@ -127,10 +127,10 @@ async function sunriseSunrise(args):
             objectNew('name', 'Max Sunset', 'field', 'Sunset', 'function', 'max') \
         ) \
     ))
-    dataCalculatedField(dataMinMax, 'Min Sunrise', 'sunriseTime([Min Sunrise])', sunriseTimeFunctions)
-    dataCalculatedField(dataMinMax, 'Max Sunrise', 'sunriseTime([Max Sunrise])', sunriseTimeFunctions)
-    dataCalculatedField(dataMinMax, 'Min Sunset', 'sunriseTime([Min Sunset])', sunriseTimeFunctions)
-    dataCalculatedField(dataMinMax, 'Max Sunset', 'sunriseTime([Max Sunset])', sunriseTimeFunctions)
+    dataCalculatedField(dataMinMax, 'Min Sunrise', 'sunriseTime([Min Sunrise])')
+    dataCalculatedField(dataMinMax, 'Max Sunrise', 'sunriseTime([Max Sunrise])')
+    dataCalculatedField(dataMinMax, 'Min Sunset', 'sunriseTime([Min Sunset])')
+    dataCalculatedField(dataMinMax, 'Max Sunset', 'sunriseTime([Max Sunset])')
     dataTable(dataMinMax, objectNew(\
         'fields', arrayNew( \
             'Min Sunrise', \
@@ -278,8 +278,8 @@ async function sunriseDaylightTable(args):
             objectNew('name', 'Avg TwilightSet', 'field', 'TwilightSet', 'function', 'average') \
         ) \
     ))
-    dataCalculatedField(dataStats, 'Avg TwilightRise', 'sunriseTime([Avg TwilightRise])', sunriseTimeFunctions)
-    dataCalculatedField(dataStats, 'Avg TwilightSet', 'sunriseTime([Avg TwilightSet])', sunriseTimeFunctions)
+    dataCalculatedField(dataStats, 'Avg TwilightRise', 'sunriseTime([Avg TwilightRise])')
+    dataCalculatedField(dataStats, 'Avg TwilightSet', 'sunriseTime([Avg TwilightSet])')
     dataTable(dataStats, objectNew( \
         'categories', arrayNew('Month'), \
         'fields', arrayNew( \
@@ -505,9 +505,6 @@ function sunriseTime(time):
     minute = mathFloor(minuteRatio * 60, 0)
     return if(hour < 12, hour, hour - 12) + ':' + if(minute < 10, '0', '') + minute + if(hour < 12, ' am', ' pm')
 endfunction
-
-
-sunriseTimeFunctions = objectNew('sunriseTime', sunriseTime)
 
 
 sunriseMain()
