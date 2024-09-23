@@ -500,9 +500,9 @@ endfunction
 
 
 function sunriseTime(time):
-    hour = mathFloor(time, 0)
+    hour = mathFloor(time)
     minuteRatio = time - hour
-    minute = mathFloor(minuteRatio * 60, 0)
+    minute = mathFloor(minuteRatio * 60)
     return if(hour < 12, hour, hour - 12) + ':' + if(minute < 10, '0', '') + minute + if(hour < 12, ' am', ' pm')
 endfunction
 
