@@ -6,6 +6,7 @@
 import argparse
 import csv
 from datetime import datetime, timedelta, timezone
+import sys
 
 import ephem
 import pytz
@@ -31,7 +32,10 @@ CITIES = [
 
 def main():
     # Command line arguments
-    parser = argparse.ArgumentParser(description='Generate sunrise data', color=False)
+    argument_parser_args = {'description': 'Generate sunrise data'}
+    if sys.version_info >= (3, 14): # pragma: no cover
+        argument_parser_args['color'] = False
+    parser = argparse.ArgumentParser(**argument_parser_args)
     parser.add_argument('-o', '--output', default='sunrise.csv',
                         help='The output CSV file (default is "sunrise.csv")')
     parser.add_argument('-y', '--year', type=int, default=datetime.now().year,
