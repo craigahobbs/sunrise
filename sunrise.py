@@ -31,7 +31,7 @@ CITIES = [
 
 def main():
     # Command line arguments
-    parser = argparse.ArgumentParser(description='Generate sunrise data')
+    parser = argparse.ArgumentParser(description='Generate sunrise data', color=False)
     parser.add_argument('-o', '--output', default='sunrise.csv',
                         help='The output CSV file (default is "sunrise.csv")')
     parser.add_argument('-y', '--year', type=int, default=datetime.now().year,
