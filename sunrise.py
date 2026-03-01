@@ -1,8 +1,6 @@
 # Licensed under the MIT License
 # https://github.com/craigahobbs/sunrise/blob/main/LICENSE
 
-# pylint: disable=no-member
-
 import argparse
 import csv
 from datetime import datetime, timedelta, timezone
