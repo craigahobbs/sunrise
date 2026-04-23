@@ -3,6 +3,10 @@
 # https://github.com/craigahobbs/sunrise/blob/main/LICENSE
 
 include <args.bare>
+include <data.bare>
+include <dataUtil.bare>
+include <dataLineChart.bare>
+include <dataTable.bare>
 include <pager.bare>
 
 
