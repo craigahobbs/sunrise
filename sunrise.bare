@@ -151,21 +151,9 @@ async function sunriseSunrise(args):
         'height': sunriseChartHeightTall, \
         'x': 'Date', \
         'y': ['Sunset', 'Sunrise'], \
-        'xTicks': { \
-            'count': 13, \
-            'skip': 2 \
-        }, \
-        'yTicks': { \
-            'count': 25, \
-            'start': 0, \
-            'end': 24, \
-            'skip': 1 \
-        }, \
         'xLines': [ \
             {'value': today, 'label': datetimeISOFormat(today, true)} \
-        ], \
-        'precision': 1, \
-        'datetime': 'month' \
+        ] \
     })
 endfunction
 
@@ -218,21 +206,9 @@ async function sunriseDaylight(args):
         'height': sunriseChartHeight, \
         'x': 'Date', \
         'y': ['Daylight'], \
-        'xTicks': { \
-            'count': 13, \
-            'skip': 2 \
-        }, \
-        'yTicks': { \
-            'count': 15, \
-            'start': 6, \
-            'end': 20, \
-            'skip': 1 \
-        }, \
         'xLines': [ \
             {'value': today, 'label': datetimeISOFormat(today, true)} \
-        ], \
-        'precision': 1, \
-        'datetime': 'month' \
+        ] \
     })
 
     # Draw the daylight change line chart
@@ -242,24 +218,12 @@ async function sunriseDaylight(args):
         'height': sunriseChartHeight, \
         'x': 'Date', \
         'y': ['DaylightChange'], \
-        'xTicks': { \
-            'count': 13, \
-            'skip': 2 \
-        }, \
-        'yTicks': { \
-            'count': 13, \
-            'start': -6, \
-            'end': 6, \
-            'skip': 1 \
-        }, \
         'xLines': [ \
             {'value': today, 'label': datetimeISOFormat(today, true)} \
         ], \
         'yLines': [ \
             {'value': 0, 'label': ''} \
-        ], \
-        'precision': 1, \
-        'datetime': 'month' \
+        ] \
     })
 endfunction
 
@@ -335,21 +299,9 @@ async function sunriseComparison(args):
         'x': 'Date', \
         'y': ['Daylight'], \
         'color': 'City', \
-        'xTicks': { \
-            'count': 13, \
-            'skip': 2 \
-        }, \
-        'yTicks': { \
-            'count': 15, \
-            'start': 6, \
-            'end': 20, \
-            'skip': 1 \
-        }, \
         'xLines': [ \
             {'value': today, 'label': datetimeISOFormat(today, true)} \
-        ], \
-        'precision': 1, \
-        'datetime': 'month' \
+        ] \
     })
 
     # Draw the sunrise/sunset comparison line chart
@@ -360,21 +312,9 @@ async function sunriseComparison(args):
         'x': 'Date', \
         'y': ['Sunrise', 'Sunset'], \
         'color': 'City', \
-        'xTicks': { \
-            'count': 13, \
-            'skip': 2 \
-        }, \
-        'yTicks': { \
-            'count': 23, \
-            'start': 2, \
-            'end': 24, \
-            'skip': 1 \
-        }, \
         'xLines': [ \
             {'value': today, 'label': datetimeISOFormat(today, true)} \
-        ], \
-        'precision': 1, \
-        'datetime': 'month' \
+        ] \
     })
 endfunction
 
