@@ -220,9 +220,6 @@ async function sunriseDaylight(args):
         'y': ['DaylightChange'], \
         'xLines': [ \
             {'value': today, 'label': datetimeISOFormat(today, true)} \
-        ], \
-        'yLines': [ \
-            {'value': 0, 'label': ''} \
         ] \
     })
 endfunction
